@@ -1,0 +1,172 @@
+package com.example.polar
+
+import android.Manifest
+import android.os.Build
+import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.activity_main.*
+import polar.com.sdk.api.PolarBleApi
+import polar.com.sdk.api.PolarBleApiCallback
+import polar.com.sdk.api.PolarBleApiDefaultImpl
+import polar.com.sdk.api.errors.PolarInvalidArgument
+import polar.com.sdk.api.model.PolarDeviceInfo
+import polar.com.sdk.api.model.PolarHrData
+import java.util.*
+
+class MainActivity : AppCompatActivity() {
+    private val TAG = MainActivity::class.java.simpleName
+    lateinit var api: PolarBleApi
+    var DEVICE_ID = "218DDA23" // or bt address like F5:A7:B8:EF:7A:D1 //
+    var broadcastDisposable: Disposable? = null
+    var ecgDisposable: Disposable? = null
+    var accDisposable: Disposable? = null
+    var ppgDisposable: Disposable? = null
+    var ppiDisposable: Disposable? = null
+    var scanDisposable: Disposable? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        // Notice PolarBleApi.ALL_FEATURES are enabled
+        api = PolarBleApiDefaultImpl.defaultImplementation(this, PolarBleApi.ALL_FEATURES)
+        api.setPolarFilter(false)
+        api.setApiLogger { s -> Log.d(TAG, s) }
+        Log.d(TAG, "version: " + PolarBleApiDefaultImpl.versionInfo())
+        api.setApiCallback(object : PolarBleApiCallback() {
+            override fun blePowerStateChanged(powered: Boolean) {
+                Log.d(TAG, "BLE power: $powered")
+            }
+
+            override fun deviceConnected(polarDeviceInfo: PolarDeviceInfo) {
+                Log.d(TAG, "CONNECTED: " + polarDeviceInfo.deviceId)
+                DEVICE_ID = polarDeviceInfo.deviceId
+            }
+
+            override fun deviceConnecting(polarDeviceInfo: PolarDeviceInfo) {
+                Log.d(TAG, "CONNECTING: " + polarDeviceInfo.deviceId)
+                DEVICE_ID = polarDeviceInfo.deviceId
+            }
+
+            override fun deviceDisconnected(polarDeviceInfo: PolarDeviceInfo) {
+                Log.d(TAG, "DISCONNECTED: " + polarDeviceInfo.deviceId)
+                ecgDisposable = null
+                accDisposable = null
+                ppgDisposable = null
+                ppiDisposable = null
+            }
+
+            override fun ecgFeatureReady(identifier: String) {
+                Log.d(TAG, "ECG READY: $identifier")
+                // ecg streaming can be started now if needed
+            }
+
+            override fun accelerometerFeatureReady(identifier: String) {
+                Log.d(TAG, "ACC READY: $identifier")
+                // acc streaming can be started now if needed
+            }
+
+            override fun ppgFeatureReady(identifier: String) {
+                Log.d(TAG, "PPG READY: $identifier")
+                // ohr ppg can be started
+            }
+
+            override fun ppiFeatureReady(identifier: String) {
+                Log.d(TAG, "PPI READY: $identifier")
+                // ohr ppi can be started
+            }
+
+            override fun biozFeatureReady(identifier: String) {
+                Log.d(TAG, "BIOZ READY: $identifier")
+                // ohr ppi can be started
+            }
+
+            override fun hrFeatureReady(identifier: String) {
+                Log.d(TAG, "HR READY: $identifier")
+                // hr notifications are about to start
+            }
+
+            override fun disInformationReceived(identifier: String, uuid: UUID, value: String) {
+                Log.d(TAG, "uuid: $uuid value: $value")
+            }
+
+            override fun batteryLevelReceived(identifier: String, level: Int) {
+                Log.d(TAG, "BATTERY LEVEL: $level")
+            }
+
+            override fun hrNotificationReceived(identifier: String, data: PolarHrData) {
+                Log.d(TAG, "HR value: " + data.hr + " rrsMs: " + data.rrsMs + " rr: " + data.rrs + " contact: " + data.contactStatus + "," + data.contactStatusSupported)
+            }
+
+            override fun polarFtpFeatureReady(s: String) {
+                Log.d(TAG, "FTP ready")
+            }
+        })
+
+        connect_button.setOnClickListener{
+            try {
+                api.connectToDevice(DEVICE_ID)
+                broadcastDisposable =
+                    if (broadcastDisposable == null) {
+                        api.startListenForPolarHrBroadcasts(null).subscribe(
+                            { polarBroadcastData ->
+                                txt_device.text = polarBroadcastData.polarDeviceInfo.deviceId
+                                txt_bpm.text = polarBroadcastData.hr.toString()
+                                Log.d(TAG, "HR BROADCAST " + polarBroadcastData.polarDeviceInfo.deviceId + " HR: " + polarBroadcastData.hr + " batt: " + polarBroadcastData.batteryStatus)
+                            }, { throwable -> Log.e(TAG, "" + throwable.localizedMessage) }
+                        ) { Log.d(TAG, "complete") }
+                    } else {
+//                        Toast.makeText(this, "Hidupkan Bluetooth Terlebih Dahulu", Toast.LENGTH_LONG).show()
+                        broadcastDisposable!!.dispose()
+                        null
+                    }
+            } catch (polarInvalidArgument: PolarInvalidArgument) {
+                polarInvalidArgument.printStackTrace()
+                Toast.makeText(this, "Gagal Menyambungkan Device", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        disconnect_button.setOnClickListener(View.OnClickListener {
+            try {
+                api.disconnectFromDevice(txt_device.text.toString())
+                txt_device.text = "Device"
+                txt_bpm.text = "0"
+            } catch (polarInvalidArgument: PolarInvalidArgument) {
+                polarInvalidArgument.printStackTrace()
+            }
+        })
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && savedInstanceState == null) {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ), 1
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == 1) {
+            Log.d(TAG, "bt ready")
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        api.backgroundEntered()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        api.foregroundEntered()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        api.shutDown()
+    }
+}

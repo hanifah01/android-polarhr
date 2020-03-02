@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "77205313812",
+    "firebase_url": "https://polarhr-b352b.firebaseio.com",
+    "project_id": "polarhr-b352b",
+    "storage_bucket": "polarhr-b352b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77205313812:android:2ba6751d020738e9a88a01",
+        "android_client_info": {
+          "package_name": "com.example.polar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77205313812-bpl71m83dqm5dk13f267iiol3vsej7qq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.polar",
+            "certificate_hash": "bd2ed64efb03a37372ad3ec04bc29e49d7d14b84"
+          }
+        },
+        {
+          "client_id": "77205313812-edb9ffjpif5ivdie32nc3ccmiqjjd5ts.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArSC11k_XfgXmO6xBHv75fFcOAWMQVFu8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77205313812-edb9ffjpif5ivdie32nc3ccmiqjjd5ts.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

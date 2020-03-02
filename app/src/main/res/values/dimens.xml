@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Font Size -->
+    <dimen name="font_vvverysmall">7sp</dimen>
+    <dimen name="font_vverysmall">10sp</dimen>
+    <dimen name="font_verysmall">12sp</dimen>
+    <dimen name="font_small">14sp</dimen>
+    <dimen name="font_medium">16sp</dimen>
+    <dimen name="font_semi_medium">15sp</dimen>
+    <dimen name="font_large">20sp</dimen>
+    <dimen name="font_extra_large">24sp</dimen>
+    <dimen name="font_xx_large">28sp</dimen>
+    <dimen name="font_xxx_large">36sp</dimen>
+
+    <!-- Margin or Padding -->
+    <dimen name="v_tiny">2dp</dimen>
+    <dimen name="tiny">4dp</dimen>
+    <dimen name="small">8dp</dimen>
+    <dimen name="semi_small">12dp</dimen>
+    <dimen name="medium">16dp</dimen>
+    <dimen name="large">24dp</dimen>
+    <dimen name="semi_large">28dp</dimen>
+    <dimen name="xlarge">32dp</dimen>
+    <dimen name="xxlarge">40dp</dimen>
+    <dimen name="xxklarge">52dp</dimen>
+    <dimen name="xxxklarge">64dp</dimen>
+    <dimen name="standard_height">48dp</dimen>
+    <dimen name="mortal_height">90dp</dimen>
+</resources>
