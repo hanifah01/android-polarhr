@@ -3,17 +3,15 @@ package com.example.polar.view.login
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.polar.R
-import com.example.polar.module.login
-import com.example.polar.module.msg
 import com.example.polar.support.LOGIN_BERHASIL
 import com.example.polar.support.LOGIN_GAGAL
 import com.example.polar.view.Home
 import com.example.polar.view.register.Register
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import kotlinx.android.synthetic.main.activity_login.*
 import maes.tech.intentanim.CustomIntent
 import kotlin.system.exitProcess
@@ -26,19 +24,32 @@ class Login : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         auth = FirebaseAuth.getInstance()
 
+
+
         btn_daftar.setOnClickListener {
             startActivity(Intent(this, Register::class.java))
             CustomIntent.customType(this, "left-to-right")
         }
 
         btn_login.setOnClickListener {
-            auth.signInWithEmailAndPassword(edt_email.text.toString(), edt_pass.text.toString()).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    startActivity(Intent(this, Home::class.java))
-                    CustomIntent.customType(this, "left-to-right")
-                    Toast.makeText(this, LOGIN_BERHASIL, Toast.LENGTH_LONG).show()
-                } else {
-                    Toast.makeText(this, LOGIN_GAGAL, Toast.LENGTH_LONG).show()
+            loading.visibility = View.VISIBLE
+            val email = edt_email.text.toString()
+            val pass = edt_pass.text.toString()
+            if (pass.equals("") || email.equals("")){
+                Toast.makeText(this, "Email/Password Kosong!", Toast.LENGTH_LONG).show()
+                loading.visibility = View.GONE
+            }
+            else {
+                auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        startActivity(Intent(this, Home::class.java))
+                        CustomIntent.customType(this, "left-to-right")
+                        Toast.makeText(this, LOGIN_BERHASIL, Toast.LENGTH_LONG).show()
+                        loading.visibility = View.GONE
+                    } else {
+                        Toast.makeText(this, LOGIN_GAGAL, Toast.LENGTH_LONG).show()
+                        loading.visibility = View.GONE
+                    }
                 }
             }
         }
