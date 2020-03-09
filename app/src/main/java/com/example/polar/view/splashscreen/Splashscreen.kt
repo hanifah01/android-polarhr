@@ -20,6 +20,6 @@ class Splashscreen : AppCompatActivity() {
             val intent = Intent(this@Splashscreen, Login::class.java)
             startActivity(intent)
             finish()
-        }, 5000)
+        }, 2000)
     }
 }

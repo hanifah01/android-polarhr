@@ -1,8 +1,11 @@
 package com.example.polar.view.register
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.DatePicker
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -16,23 +19,32 @@ import kotlinx.android.synthetic.main.activity_register.*
 import maes.tech.intentanim.CustomIntent
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class Register : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     var msg = ""
+
+    var cal = Calendar.getInstance()
+    //var edt_birthdate: EditText? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         auth = FirebaseAuth.getInstance()
 
-        btn_register.setOnClickListener {
+        /*btn_register.setOnClickListener {
             loading.visibility = View.VISIBLE
             daftar()
-        }
+        }*/
+
     }
 
-    fun daftar(){
+    
+
+    /*fun daftar(){
         val email = edt_email.text.toString()
         val pass = edt_pass.text.toString()
         val name = edt_nama.text.toString()
@@ -60,7 +72,7 @@ class Register : AppCompatActivity() {
     override fun onBackPressed() {
         startActivity(Intent(this, Login::class.java))
         CustomIntent.customType(this, "right-to-left")
-    }
+    }*/
 }
 
 

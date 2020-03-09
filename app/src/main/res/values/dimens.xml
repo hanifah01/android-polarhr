@@ -22,7 +22,7 @@
     <dimen name="semi_large">28dp</dimen>
     <dimen name="xlarge">32dp</dimen>
     <dimen name="xxlarge">40dp</dimen>
-    <dimen name="xxklarge">52dp</dimen>
+    <dimen name="xxklarge">48dp</dimen>
     <dimen name="xxxklarge">64dp</dimen>
     <dimen name="standard_height">48dp</dimen>
     <dimen name="mortal_height">90dp</dimen>
