@@ -6,4 +6,8 @@
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="blue">#0096fe</color>
+    <color name="sky_blue">#3badfc</color>
+    <color name="light_blue">#59d4ff</color>
 </resources>

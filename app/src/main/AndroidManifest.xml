@@ -14,10 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.Home"></activity>
+        <activity android:name=".view.login.Login"></activity>
+        <activity android:name=".view.Home" />
         <activity android:name=".view.register.Register" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".view.login.Login">
+        <activity android:name=".view.splashscreen.Splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

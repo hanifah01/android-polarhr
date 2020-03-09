@@ -1,6 +1,7 @@
 package com.example.polar.view.login
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -22,6 +23,14 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        // Custom font
+        val typeface1 = Typeface.createFromAsset(assets, "Montserrat-Regular.ttf")
+        val typeface2 = Typeface.createFromAsset(assets, "Montserrat-Bold.ttf")
+        txt_login.typeface = typeface2
+        txt_subjudul.typeface= typeface1
+
+
         auth = FirebaseAuth.getInstance()
 
 

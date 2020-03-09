@@ -4,4 +4,5 @@
     <string name="login_gagal">Login Gagal</string>
     <string name="register_succes">Register Behasil</string>
     <string name="register_gagal">Register Gagal</string>
+    <string name="login_message">Please log in to your account to continue with IOD</string>
 </resources>
