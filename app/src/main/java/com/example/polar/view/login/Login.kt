@@ -35,10 +35,10 @@ class Login : AppCompatActivity() {
 
 
 
-        /*btn_daftar.setOnClickListener {
+        btn_daftar.setOnClickListener {
             startActivity(Intent(this, Register::class.java))
             CustomIntent.customType(this, "left-to-right")
-        }*/
+        }
 
         btn_login.setOnClickListener {
             loading.visibility = View.VISIBLE

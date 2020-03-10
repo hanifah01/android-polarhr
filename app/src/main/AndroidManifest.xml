@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher2_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeBlue">
-        <activity android:name=".view.landingpage.LandingPage"></activity>
+        <activity android:name=".view.register.TrainerName"></activity>
+        <activity android:name=".view.landingpage.LandingPage" />
         <activity android:name=".view.login.Login" />
         <activity android:name=".view.Home" />
         <activity android:name=".view.register.Register" />

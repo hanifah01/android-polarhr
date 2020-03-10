@@ -7,6 +7,7 @@ import android.os.Handler
 import com.example.polar.MainActivity
 import com.example.polar.R
 import com.example.polar.view.login.Login
+import com.example.polar.view.register.Register
 
 class Splashscreen : AppCompatActivity() {
     lateinit var handler: Handler
