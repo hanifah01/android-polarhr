@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.polar">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -14,13 +15,35 @@
         android:roundIcon="@mipmap/ic_launcher2_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeBlue">
-        <activity android:name=".view.register.TrainerName"></activity>
-        <activity android:name=".view.landingpage.LandingPage" />
-        <activity android:name=".view.login.Login" />
-        <activity android:name=".view.home.Home" />
-        <activity android:name=".view.register.Register" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".view.splashscreen.Splashscreen">
+        <activity
+            android:name=".view.landing_page.LandingPage"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"></activity>
+
+        <activity
+            android:name=".view.login.Login"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".view.home.Home"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".view.register.Register"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".view.splashscreen.Splashscreen"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

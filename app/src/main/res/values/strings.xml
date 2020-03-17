@@ -6,5 +6,9 @@
     <string name="register_gagal">Register Gagal</string>
     <string name="login_message">Please log in to your account to continue with IOD</string>
     <string name="register_message">Please register to your account to continue with IOD</string>
+    <string name="landing_page">Selamat datang di IOD</string>
+    <string name="sub_landing_page">Catat dan lihat hasil olahraga di IOD</string>
+    <string name="login">masuk</string>
+    <string name="register">daftar</string>
 
 </resources>
