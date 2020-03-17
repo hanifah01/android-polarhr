@@ -14,6 +14,7 @@ import com.dev.materialspinner.MaterialSpinner
 import com.example.polar.R
 import com.example.polar.support.REGISTER_BERHASIL
 import com.example.polar.support.REGISTER_GAGAL
+import com.example.polar.support.dateDialog
 import com.example.polar.view.login.Login
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -39,49 +40,65 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setContentView(R.layout.activity_register)
         auth = FirebaseAuth.getInstance()
 
-
-        btn_register.setOnClickListener {
-            loading.visibility = View.VISIBLE
-            daftar()
-        }
-
         img_calendar.setOnClickListener{
-            getCalendar()
+            dateDialog(edt_birthdate, this)
         }
 
         spinner = findViewById(R.id.material_spinner)
         spinner.getSpinner().onItemSelectedListener = this
-
-        // Create an ArrayAdapter using a simple spinner layout and languages array
         val aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, list_of_items)
-        // Set layout to use when the list of choices appear
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        // Set Adapter to Spinner
         spinner!!.setAdapter(aa)
 
-
+        setupButton()
     }
 
+    private fun setupButton() {
+        btn_register.setOnClickListener {
+            loading.visibility = View.VISIBLE
+            val name = edt_nama.text.toString()
+            val birthdate = edt_birthdate.text.toString()
+            val height = edt_height.text.toString()
+            val weight = edt_weight.text.toString()
 
-    fun getCalendar(){
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
+            //val spinnerSport ambilnya gimana //lah kamu yg buat spinner masak gk tau wkwkwkwkw, belajar
 
-        val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            // Display Selected date in TextView
-            edt_birthdate.setText("" + dayOfMonth + " " + month + ", " + year)
-        }, year, month, day)
-        dpd.show()
+            val email = edt_email.text.toString()
+            val pass = edt_pass.text.toString()
 
+            val namaDb = FirebaseDatabase.getInstance().reference.child(name).child("Atlit")
+            val tglLahirDb = FirebaseDatabase.getInstance().reference.child(name).child("TglLahir")
+            val heightDb = FirebaseDatabase.getInstance().reference.child(name).child("Height")
+            val weightDb = FirebaseDatabase.getInstance().reference.child(name).child("Weight")
+            val sportDb = FirebaseDatabase.getInstance().reference.child(name).child("Sport")
+
+            if (pass.equals("") || email.equals("") || name.equals("")){
+                Toast.makeText(this, "Field ada yang kosong!", Toast.LENGTH_LONG).show()
+                loading.visibility = View.GONE
+            }
+            else {
+                auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        namaDb.setValue(name)
+                        tglLahirDb.setValue(birthdate)
+                        heightDb.setValue(height)
+                        weightDb.setValue(weight)
+
+                        startActivity(Intent(this, Login::class.java))
+                        CustomIntent.customType(this, "right-to-left")
+                        Toast.makeText(this, REGISTER_BERHASIL, Toast.LENGTH_LONG).show()
+                        loading.visibility = View.GONE
+                    } else {
+                        Toast.makeText(this, REGISTER_GAGAL, Toast.LENGTH_LONG).show()
+                        loading.visibility = View.GONE
+                    }
+                }
+            }
+        }
     }
 
-     override  fun onItemSelected(arg0: AdapterView<*>, arg1: View, position: Int, id: Long) {
-
-         val spinnerSport = arg0.getItemAtPosition(position).toString()
-
-         // use position to know the selected item
+    override  fun onItemSelected(arg0: AdapterView<*>, arg1: View, position: Int, id: Long) {
+        val spinnerSport = arg0.getItemAtPosition(position).toString()
         if(position == 0)
         {
             spinner.setError("Please select Country")
@@ -93,40 +110,7 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
     }
 
-     override fun onNothingSelected(arg0: AdapterView<*>) {
-
-    }
-
-    fun daftar(){
-        val name = edt_nama.text.toString()
-        val birthdate = edt_birthdate.text.toString()
-        val height = edt_height.text.toString()
-        val weight = edt_weight.text.toString()
-
-        //val spinnerSport ambilnya gimana
-
-        val email = edt_email.text.toString()
-        val pass = edt_pass.text.toString()
-
-        val current_user_db = FirebaseDatabase.getInstance().reference.child(name)
-        if (pass.equals("") || email.equals("") || name.equals("")){
-            Toast.makeText(this, "Field ada yang kosong!", Toast.LENGTH_LONG).show()
-            loading.visibility = View.GONE
-        }
-        else {
-            auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    current_user_db.setValue(name)
-                    startActivity(Intent(this, Login::class.java))
-                    CustomIntent.customType(this, "right-to-left")
-                    Toast.makeText(this, REGISTER_BERHASIL, Toast.LENGTH_LONG).show()
-                    loading.visibility = View.GONE
-                } else {
-                    Toast.makeText(this, REGISTER_GAGAL, Toast.LENGTH_LONG).show()
-                    loading.visibility = View.GONE
-                }
-            }
-        }
+    override fun onNothingSelected(arg0: AdapterView<*>) {
     }
 
     override fun onBackPressed() {

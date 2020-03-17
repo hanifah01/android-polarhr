@@ -10,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.polar.R
 import com.example.polar.support.LOGIN_BERHASIL
 import com.example.polar.support.LOGIN_GAGAL
-import com.example.polar.view.Home
+import com.example.polar.support.TinyDB
+import com.example.polar.view.home.Home
 import com.example.polar.view.register.Register
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
@@ -20,9 +21,17 @@ import kotlin.system.exitProcess
 
 class Login : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    lateinit var tinydb: TinyDB
+    var statLogin: Boolean? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        tinydb = TinyDB(this)
+        statLogin = tinydb.getBoolean("login")
+        if (statLogin as Boolean) {
+            startActivity(Intent(this@Login, Home::class.java))
+            CustomIntent.customType(this, "left-to-right")
+        }
 
         // Custom font
         val typeface1 = Typeface.createFromAsset(assets, "Montserrat-Regular.ttf")
@@ -51,6 +60,8 @@ class Login : AppCompatActivity() {
             else {
                 auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
+                        statLogin = true
+                        tinydb.putBoolean("login", true)
                         startActivity(Intent(this, Home::class.java))
                         CustomIntent.customType(this, "left-to-right")
                         Toast.makeText(this, LOGIN_BERHASIL, Toast.LENGTH_LONG).show()

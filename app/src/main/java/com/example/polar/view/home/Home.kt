@@ -1,4 +1,4 @@
-package com.example.polar.view
+package com.example.polar.view.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
