@@ -33,7 +33,7 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private var list_of_items = arrayOf("Select Sport","USA", "Japan", "India")
     private lateinit var spinner : MaterialSpinner
 
-
+    var sportValue : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +61,8 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val height = edt_height.text.toString()
             val weight = edt_weight.text.toString()
 
-            //val spinnerSport ambilnya gimana //lah kamu yg buat spinner masak gk tau wkwkwkwkw, belajar
+            //val spinnerSport ambilnya gimana
+            // lah kamu yg buat spinner masak gk tau wkwkwkwkw, belajar
 
             val email = edt_email.text.toString()
             val pass = edt_pass.text.toString()
@@ -83,6 +84,7 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         tglLahirDb.setValue(birthdate)
                         heightDb.setValue(height)
                         weightDb.setValue(weight)
+                        sportDb.setValue(sportValue)
 
                         startActivity(Intent(this, Login::class.java))
                         CustomIntent.customType(this, "right-to-left")
@@ -99,6 +101,7 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     override  fun onItemSelected(arg0: AdapterView<*>, arg1: View, position: Int, id: Long) {
         val spinnerSport = arg0.getItemAtPosition(position).toString()
+        sportValue = spinnerSport
         if(position == 0)
         {
             spinner.setError("Please select Country")
