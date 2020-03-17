@@ -12,6 +12,7 @@ import com.example.polar.support.LOGIN_BERHASIL
 import com.example.polar.support.LOGIN_GAGAL
 import com.example.polar.support.TinyDB
 import com.example.polar.view.home.Home
+import com.example.polar.view.landing_page.LandingPage
 import com.example.polar.view.register.Register
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
@@ -39,15 +40,7 @@ class Login : AppCompatActivity() {
         txt_login.typeface = typeface2
         txt_subjudul.typeface= typeface1
 
-
         auth = FirebaseAuth.getInstance()
-
-
-
-        btn_daftar.setOnClickListener {
-            startActivity(Intent(this, Register::class.java))
-            CustomIntent.customType(this, "left-to-right")
-        }
 
         btn_login.setOnClickListener {
             loading.visibility = View.VISIBLE
@@ -77,7 +70,10 @@ class Login : AppCompatActivity() {
 
     private var doubleBackToExitPressedOnce = false
     override fun onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
+        val intent = Intent(this@Login, LandingPage::class.java)
+        startActivity(intent)
+        finish()
+        /*if (doubleBackToExitPressedOnce) {
             super.onBackPressed()
             moveTaskToBack(true)
             exitProcess(-1)
@@ -90,7 +86,7 @@ class Login : AppCompatActivity() {
 
         Handler().postDelayed(Runnable {
             doubleBackToExitPressedOnce = false
-        }, 2000)
+        }, 2000)*/
     }
 
 }
