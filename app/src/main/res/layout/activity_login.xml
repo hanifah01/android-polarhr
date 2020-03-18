@@ -72,9 +72,10 @@
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/xxxklarge"
-                android:hint="Username"
+                android:hint="Email"
                 android:textColor="@color/black"
-                android:textSize="@dimen/font_medium" />
+                android:textSize="@dimen/font_medium"
+                android:inputType="textEmailAddress"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -5,7 +5,7 @@
     <string name="register_succes">Register Behasil</string>
     <string name="register_gagal">Register Gagal</string>
     <string name="login_message">Silahkan masuk menggunakan akun yang anda miliki untuk menggunakan IOD </string>
-    <string name="register_message">Silahkan masuk menggunakan akun yang anda miliki untuk menggunakan IOD</string>
+    <string name="register_message">Silahkan daftar untuk menggunakan IOD</string>
     <string name="landing_page">Selamat datang di IOD</string>
     <string name="sub_landing_page">Catat dan lihat hasil olahraga di IOD</string>
     <string name="login">Masuk</string>

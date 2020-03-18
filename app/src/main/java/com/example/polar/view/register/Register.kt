@@ -15,6 +15,7 @@ import com.example.polar.R
 import com.example.polar.support.REGISTER_BERHASIL
 import com.example.polar.support.REGISTER_GAGAL
 import com.example.polar.support.dateDialog
+import com.example.polar.view.landing_page.LandingPage
 import com.example.polar.view.login.Login
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -30,7 +31,12 @@ import java.util.*
 class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private lateinit var auth: FirebaseAuth
 
-    private var list_of_items = arrayOf("Select Sport","USA", "Japan", "India")
+    private var list_of_items = arrayOf("Pilih jenis olahraga",
+        "Lari",
+        "Lari Jarak Pendek",
+        "Lari Jarak Menengah",
+        "Lari Jarak Jauh",
+        "Lari Estafet")
     private lateinit var spinner : MaterialSpinner
 
     var sportValue : String? = null
@@ -73,7 +79,8 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val weightDb = FirebaseDatabase.getInstance().reference.child(name).child("Weight")
             val sportDb = FirebaseDatabase.getInstance().reference.child(name).child("Sport")
 
-            if (pass.equals("") || email.equals("") || name.equals("")){
+            if (pass.equals("") || email.equals("") || name.equals("") || height.equals("")||
+                weight.equals("")||birthdate.equals("")||sportValue.equals("Pilih jenis olahraga")){
                 Toast.makeText(this, "Field ada yang kosong!", Toast.LENGTH_LONG).show()
                 loading.visibility = View.GONE
             }
@@ -104,12 +111,12 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         sportValue = spinnerSport
         if(position == 0)
         {
-            spinner.setError("Please select Country")
+            spinner.setError("Pilih jenis olahraga")
         }
         else
         {
             spinner.setErrorEnabled(false)
-            spinner.setLabel("Sport")
+            spinner.setLabel("Olahraga")
         }
     }
 
@@ -117,7 +124,7 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onBackPressed() {
-        startActivity(Intent(this, Login::class.java))
+        startActivity(Intent(this, LandingPage::class.java))
         CustomIntent.customType(this, "right-to-left")
     }
 
