@@ -20,6 +20,7 @@ import com.example.polar.view.login.Login
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_landing_page.*
 import kotlinx.android.synthetic.main.activity_register.*
 import maes.tech.intentanim.CustomIntent
 import org.jetbrains.anko.doAsync
@@ -46,6 +47,19 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setContentView(R.layout.activity_register)
         auth = FirebaseAuth.getInstance()
 
+        btn_lanjut.setOnClickListener{
+            val namapelatih = edt_namapelatih.text.toString()
+            if(namapelatih.equals("")){
+                Toast.makeText(this, "Nama pelatih kosong!", Toast.LENGTH_LONG).show()
+            }
+            else{
+                lyt_form.visibility = View.VISIBLE
+                lyt_btn_register.visibility = View.VISIBLE
+
+                lyt_namapelatih.visibility= View.GONE
+                lyt_btn_pelatih.visibility= View.GONE
+            }
+        }
         img_calendar.setOnClickListener{
             dateDialog(edt_birthdate, this)
         }
@@ -66,7 +80,7 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val birthdate = edt_birthdate.text.toString()
             val height = edt_height.text.toString()
             val weight = edt_weight.text.toString()
-
+            val coach = edt_namapelatih.text.toString()
             //val spinnerSport ambilnya gimana
             // lah kamu yg buat spinner masak gk tau wkwkwkwkw, belajar
 
@@ -78,6 +92,7 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val heightDb = FirebaseDatabase.getInstance().reference.child(name).child("Height")
             val weightDb = FirebaseDatabase.getInstance().reference.child(name).child("Weight")
             val sportDb = FirebaseDatabase.getInstance().reference.child(name).child("Sport")
+            val coachDb = FirebaseDatabase.getInstance().reference.child(name).child("Coach")
 
             if (pass.equals("") || email.equals("") || name.equals("") || height.equals("")||
                 weight.equals("")||birthdate.equals("")||sportValue.equals("Pilih jenis olahraga")){
@@ -92,6 +107,7 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         heightDb.setValue(height)
                         weightDb.setValue(weight)
                         sportDb.setValue(sportValue)
+                        coachDb.setValue(coach)
 
                         startActivity(Intent(this, Login::class.java))
                         CustomIntent.customType(this, "right-to-left")

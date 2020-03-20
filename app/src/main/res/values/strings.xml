@@ -10,5 +10,7 @@
     <string name="sub_landing_page">Catat dan lihat hasil olahraga di IOD</string>
     <string name="login">Masuk</string>
     <string name="register">Daftar</string>
+    <string name="lanjut">Lanjut</string>
+    <string name="entry_pelatih">Masukkan nama pelatih :</string>
 
 </resources>

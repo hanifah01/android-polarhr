@@ -65,7 +65,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lyt_judul"
             android:orientation="vertical"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:visibility="gone">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout1"
@@ -201,12 +202,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lyt_btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lyt_form">
+            app:layout_constraintTop_toBottomOf="@+id/lyt_form"
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/btn_register"
@@ -215,6 +218,60 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/bg_blue_button"
                 android:text="@string/register"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyt_namapelatih"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lyt_judul"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp">
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/entry_pelatih"
+                android:textSize="@dimen/font_medium"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_namapelatih"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/xxxklarge"
+                    android:hint="Nama Pelatih"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_medium" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyt_btn_pelatih"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lyt_namapelatih">
+
+            <Button
+                android:id="@+id/btn_lanjut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_blue_button"
+                android:text="@string/lanjut"
                 android:textColor="@color/white" />
 
         </LinearLayout>
