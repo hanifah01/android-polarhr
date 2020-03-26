@@ -4,7 +4,18 @@
     <string name="login_gagal">Login Gagal</string>
     <string name="register_succes">Register Behasil</string>
     <string name="register_gagal">Register Gagal</string>
-    <string name="login_message">Please log in to your account to continue with IOD</string>
-    <string name="register_message">Please register to your account to continue with IOD</string>
+    <string name="login_message">Silahkan masuk menggunakan akun yang anda miliki untuk menggunakan IOD </string>
+    <string name="register_message">Silahkan daftar untuk menggunakan IOD</string>
+    <string name="landing_page">Selamat datang di IOD</string>
+    <string name="sub_landing_page">Catat dan lihat hasil olahraga di IOD</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="lanjut">Lanjut</string>
+    <string name="entry_pelatih">Masukkan nama pelatih :</string>
+
+    <string name="intruksi1">Kenakan sensor denyut nadi anda.</string>
+    <string name="intruksi2">Mulai mendeteksi denyut nadi istirahat (HRR) selama 1 menit.</string>
+    <string name="intruksi3">Pastikan posisi tubuh anda dalam posisi rileks.</string>
+    <string name="intruksi4">Hasil dari deteksi nadi istirahat akan menjadi batas minimum performa fisik anda, apabila denyut nadi berada setara atau dibawah denyut nadi istirahat maka akan terhitung sebagai aktifitas istirahat.</string>
 
 </resources>

@@ -1,14 +1,20 @@
-package com.example.polar
+package com.example.polar.view.latihan
 
 import android.Manifest
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import com.example.polar.R
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.*
+import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.connect_button
+import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.txt_bpm
+import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.txt_device
 import polar.com.sdk.api.PolarBleApi
 import polar.com.sdk.api.PolarBleApiCallback
 import polar.com.sdk.api.PolarBleApiDefaultImpl
@@ -17,8 +23,9 @@ import polar.com.sdk.api.model.PolarDeviceInfo
 import polar.com.sdk.api.model.PolarHrData
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
-    private val TAG = MainActivity::class.java.simpleName
+class PetunjukPemanasan : AppCompatActivity() {
+
+    private val TAG = PetunjukPemanasan::class.java.simpleName
     lateinit var api: PolarBleApi
     var DEVICE_ID = "218DDA23" // or bt address like F5:A7:B8:EF:7A:D1 //
     var broadcastDisposable: Disposable? = null
@@ -26,11 +33,29 @@ class MainActivity : AppCompatActivity() {
     var accDisposable: Disposable? = null
     var ppgDisposable: Disposable? = null
     var ppiDisposable: Disposable? = null
+    var arrayHrData = ArrayList<Long>()
+
+
+    var startTime: Long = 0
+    var timerHandler: Handler = Handler()
+    var timerRunnable: Runnable = object : Runnable {
+        override fun run() {
+            val millis = System.currentTimeMillis() - startTime
+            val seconds = (millis / 1000)  % 60
+            if (seconds in 1..10){
+                txt_detik.setText(String.format("%02d", seconds))
+                arrayHrData.add(seconds)
+            }
+            if (seconds > 10){
+                btn_mulai.setText(arrayHrData.average().toString())
+            }
+            timerHandler.postDelayed(this, 500)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        // Notice PolarBleApi.ALL_FEATURES are enabled
+        setContentView(R.layout.activity_petunjuk_pemanasan)
         api = PolarBleApiDefaultImpl.defaultImplementation(this, PolarBleApi.ALL_FEATURES)
         api.setPolarFilter(false)
         api.setApiLogger { s -> Log.d(TAG, s) }
@@ -128,26 +153,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        disconnect_button.setOnClickListener(View.OnClickListener {
-            try {
-                api.disconnectFromDevice(txt_device.text.toString())
-                txt_device.text = "Device"
-                txt_bpm.text = "0"
-            } catch (polarInvalidArgument: PolarInvalidArgument) {
-                polarInvalidArgument.printStackTrace()
-            }
-        })
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && savedInstanceState == null) {
             requestPermissions(
                 arrayOf(
                     Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.BLUETOOTH
+                    Manifest.permission.ACCESS_FINE_LOCATION
                 ), 1
             )
         }
+
+        btn_mulai.setOnClickListener {
+            startTime = System.currentTimeMillis()
+            timerHandler.postDelayed(timerRunnable, 0)
+        }
     }
+
+
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == 1) {

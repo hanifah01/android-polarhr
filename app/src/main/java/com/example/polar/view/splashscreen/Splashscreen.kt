@@ -4,10 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.example.polar.MainActivity
 import com.example.polar.R
-import com.example.polar.view.login.Login
-import com.example.polar.view.register.Register
+import com.example.polar.view.landingpage.LandingPage
 
 class Splashscreen : AppCompatActivity() {
     lateinit var handler: Handler
@@ -18,7 +16,7 @@ class Splashscreen : AppCompatActivity() {
 
         handler = Handler()
         handler.postDelayed({
-            val intent = Intent(this@Splashscreen, Login::class.java)
+            val intent = Intent(this@Splashscreen, LandingPage::class.java)
             startActivity(intent)
             finish()
         }, 2000)

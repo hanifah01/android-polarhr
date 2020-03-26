@@ -7,4 +7,158 @@
     android:layout_height="match_parent"
     tools:context=".view.latihan.PetunjukLatihan">
 
+    <LinearLayout
+        android:id="@+id/lyt_latihan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/large"
+        android:layout_marginTop="@dimen/xlarge"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium"
+            android:textSize="@dimen/medium"
+            android:fontFamily="@font/montserrat"
+            android:text="Latihan"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lyt_petunjuk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xlarge"
+        android:layout_marginLeft="@dimen/large"
+        android:fontFamily="@font/montserrat"
+        android:textSize="@dimen/medium"
+        android:text="Petunjuk"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyt_latihan" />
+
+    <LinearLayout
+        android:id="@+id/lyt_intruksi1"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium"
+        android:layout_marginLeft="@dimen/large"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyt_petunjuk">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_group_1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/intruksi1"
+            android:textColor="@color/grey" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyt_intruksi2"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium"
+        android:layout_marginLeft="@dimen/large"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyt_intruksi1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_group_2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/intruksi2"
+            android:textColor="@color/grey" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyt_intruksi3"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium"
+        android:layout_marginLeft="@dimen/large"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyt_intruksi2">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_group_3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/intruksi3"
+            android:textColor="@color/grey" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyt_intruksi4"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium"
+        android:layout_marginLeft="@dimen/large"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyt_intruksi3">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_group_4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/intruksi4"
+            android:textColor="@color/grey" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/large"
+        android:layout_marginRight="@dimen/large"
+        android:layout_marginBottom="@dimen/large"
+        android:background="@drawable/bg_blue_button"
+        android:text="lanjut"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

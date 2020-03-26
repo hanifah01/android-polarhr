@@ -3,9 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="ic_launcher2_background">#0096FE</color>
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="grey">#969393</color>
 
     <color name="blue">#0096fe</color>
     <color name="sky_blue">#3badfc</color>
