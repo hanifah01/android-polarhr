@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeBlue">
         <activity
-            android:name=".view.splashscreen.Splashscreen"
+            android:name=".view.home.Home"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
         <activity
@@ -28,7 +28,7 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".view.home.Home"
+            android:name=".view.latihan.PetunjukLatihan"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
@@ -40,7 +40,7 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".view.latihan.PetunjukPemanasan"
+            android:name=".view.splashscreen.Splashscreen"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>

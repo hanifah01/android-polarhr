@@ -13,6 +13,7 @@ import com.example.polar.support.dateDialog
 import com.example.polar.view.landingpage.LandingPage
 import com.example.polar.view.login.Login
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_register.*
 import maes.tech.intentanim.CustomIntent
@@ -76,7 +77,7 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val email = edt_email.text.toString()
             val pass = edt_pass.text.toString()
 
-            val namaDb = FirebaseDatabase.getInstance().reference.child(name).child("Atlit")
+            val namaDb = FirebaseDatabase.getInstance().reference.child(name).child("Nama")
             val tglLahirDb = FirebaseDatabase.getInstance().reference.child(name).child("TglLahir")
             val heightDb = FirebaseDatabase.getInstance().reference.child(name).child("Height")
             val weightDb = FirebaseDatabase.getInstance().reference.child(name).child("Weight")

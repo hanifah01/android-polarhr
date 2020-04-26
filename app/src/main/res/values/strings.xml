@@ -12,6 +12,12 @@
     <string name="register">Daftar</string>
     <string name="lanjut">Lanjut</string>
     <string name="entry_pelatih">Masukkan nama pelatih :</string>
+    <string name="welcome">Selamat datang di IOD</string>
+    <string name="connect">Connect \n Polar</string>
+    <string name="profil">Profil</string>
+    <string name="tinggi_badan">Tinggi badan</string>
+    <string name="berat_badan">Berat badan</string>
+    <string name="hrmax">Heart rate max</string>
 
     <string name="intruksi1">Kenakan sensor denyut nadi anda.</string>
     <string name="intruksi2">Mulai mendeteksi denyut nadi istirahat (HRR) selama 1 menit.</string>
