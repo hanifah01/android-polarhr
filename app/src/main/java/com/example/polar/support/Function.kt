@@ -6,7 +6,8 @@ import android.widget.EditText
 import java.text.SimpleDateFormat
 import java.util.*
 
-val mdformat = SimpleDateFormat("yyyy/MM/dd")
+//val mdformat = SimpleDateFormat("yyyy/MM/dd")
+val mdformat = SimpleDateFormat("yyyy-MM-dd")
 
 fun dateDialog(editText: EditText, context: Context) {
     val newCalendar = Calendar.getInstance()

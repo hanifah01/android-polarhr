@@ -99,7 +99,7 @@
                         android:id="@+id/edt_birthdate"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/xxxklarge"
-                        android:hint="Tanggal Lahir(YYYY/mm/dd)"
+                        android:hint="Tanggal Lahir(YYYY-mm-dd)"
                         android:textColor="@color/black"
                         android:textSize="@dimen/font_medium" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -129,7 +129,7 @@
                     android:layout_marginRight="5dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edt_weight"
+                        android:id="@+id/edt_height"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/xxxklarge"
                         android:hint="Tinggi Badan(cm)"
@@ -148,7 +148,7 @@
                     android:layout_marginLeft="5dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edt_height"
+                        android:id="@+id/edt_weight"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/xxxklarge"
                         android:hint="Berat Badan(kg)"
