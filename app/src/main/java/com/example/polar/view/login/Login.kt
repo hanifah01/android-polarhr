@@ -10,6 +10,7 @@ import com.example.polar.R
 import com.example.polar.support.LOGIN_BERHASIL
 import com.example.polar.support.LOGIN_GAGAL
 import com.example.polar.support.TinyDB
+import com.example.polar.support.dialog.DialogLoading
 import com.example.polar.view.home.Home
 import com.example.polar.view.landingpage.LandingPage
 import com.google.firebase.auth.FirebaseAuth
@@ -18,6 +19,7 @@ import maes.tech.intentanim.CustomIntent
 
 
 class Login : AppCompatActivity() {
+    private val dialogLoading  by lazy { DialogLoading(this) }
     private lateinit var auth: FirebaseAuth
     lateinit var tinydb: TinyDB
     var statLogin: Boolean? = null
@@ -40,12 +42,12 @@ class Login : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         btn_login.setOnClickListener {
-            loading.visibility = View.VISIBLE
+            dialogLoading.showDialog(true)
             val email = edt_email.text.toString()
             val pass = edt_pass.text.toString()
             if (pass.equals("") || email.equals("")){
                 Toast.makeText(this, "Email/Password Kosong!", Toast.LENGTH_LONG).show()
-                loading.visibility = View.GONE
+                dialogLoading.showDialog(false)
             }
             else {
                 auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
@@ -55,10 +57,10 @@ class Login : AppCompatActivity() {
                         startActivity(Intent(this, Home::class.java))
                         CustomIntent.customType(this, "left-to-right")
                         Toast.makeText(this, LOGIN_BERHASIL, Toast.LENGTH_LONG).show()
-                        loading.visibility = View.GONE
+                        dialogLoading.showDialog(false)
                     } else {
                         Toast.makeText(this, LOGIN_GAGAL, Toast.LENGTH_LONG).show()
-                        loading.visibility = View.GONE
+                        dialogLoading.showDialog(false)
                     }
                 }
             }

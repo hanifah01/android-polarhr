@@ -6,18 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import com.example.polar.R
 import com.example.polar.support.dialog.DialogLoading
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.*
-import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.connect_button
-import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.txt_bpm
-import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.txt_device
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import kotlinx.android.synthetic.main.activity_latihan.*
 import polar.com.sdk.api.PolarBleApi
 import polar.com.sdk.api.PolarBleApiCallback
 import polar.com.sdk.api.PolarBleApiDefaultImpl
@@ -25,8 +18,9 @@ import polar.com.sdk.api.errors.PolarInvalidArgument
 import polar.com.sdk.api.model.PolarDeviceInfo
 import polar.com.sdk.api.model.PolarHrData
 import java.util.*
+import kotlin.collections.ArrayList
 
-class PetunjukPemanasan : AppCompatActivity() {
+class Latihan : AppCompatActivity() {
 
     private val dialogLoading  by lazy { DialogLoading(this) }
 
@@ -48,8 +42,8 @@ class PetunjukPemanasan : AppCompatActivity() {
             val millis = System.currentTimeMillis() - startTime
             val seconds = (millis / 1000)  % 60
             if (seconds in 1..10){
-                txt_detik.setText(String.format("%02d", seconds))
-                arrayHrData.add(seconds)
+//                txt_detik.setText(String.format("%02d", seconds))
+//                arrayHrData.add(seconds)
             }
             if (seconds > 10){
                 btn_mulai.setText(arrayHrData.average().toString())
@@ -60,7 +54,7 @@ class PetunjukPemanasan : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_petunjuk_pemanasan)
+        setContentView(R.layout.activity_latihan)
         api = PolarBleApiDefaultImpl.defaultImplementation(this, PolarBleApi.ALL_FEATURES)
         api.setPolarFilter(false)
         api.setApiLogger { s -> Log.d(TAG, s) }

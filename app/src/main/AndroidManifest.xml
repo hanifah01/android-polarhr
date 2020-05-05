@@ -15,10 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher2_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeBlue">
+        <activity android:name=".view.latihan.Latihan"></activity>
         <activity
             android:name=".view.splashscreen.Splashscreen"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".view.landingpage.LandingPage"
             android:screenOrientation="portrait"
