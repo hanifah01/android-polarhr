@@ -1,19 +1,26 @@
 package com.example.polar.view.latihan
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.polar.R
 import com.example.polar.support.dialog.DialogLoading
 import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_petunjuk_latihan.*
 import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.*
-import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.connect_button
+//import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.connect_button
 import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.txt_bpm
 import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.txt_device
 import org.jetbrains.anko.doAsync
@@ -48,8 +55,9 @@ class PetunjukPemanasan : AppCompatActivity() {
             val millis = System.currentTimeMillis() - startTime
             val seconds = (millis / 1000)  % 60
             if (seconds in 1..10){
-                txt_detik.setText(String.format("%02d", seconds))
+                txt_detik.setText(String.format("00:%02d", seconds))
                 arrayHrData.add(seconds)
+                markButtonDisable(btn_mulai)
             }
             if (seconds > 10){
                 btn_mulai.setText(arrayHrData.average().toString())
@@ -135,9 +143,9 @@ class PetunjukPemanasan : AppCompatActivity() {
             }
         })
 
-        connect_button.setOnClickListener{
+        /*connect_button.setOnClickListener{
             connect()
-        }
+        }*/
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && savedInstanceState == null) {
             requestPermissions(
@@ -151,6 +159,13 @@ class PetunjukPemanasan : AppCompatActivity() {
         btn_mulai.setOnClickListener {
             startTime = System.currentTimeMillis()
             timerHandler.postDelayed(timerRunnable, 0)
+        }
+
+        setSupportActionBar(toolbar_petunjukpemanasan)
+        if (supportActionBar != null) {
+            supportActionBar!!.setTitle("Latihan")
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowHomeEnabled(true)
         }
     }
 
@@ -198,4 +213,29 @@ class PetunjukPemanasan : AppCompatActivity() {
         super.onDestroy()
         api.shutDown()
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_connect, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.connect_polar -> {
+            connect()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
+    }
+
+    fun markButtonDisable(button: Button) {
+        button.isEnabled = false
+        //button.setTextColor(R.color.white)
+        button.setBackgroundColor(R.color.grey)
+    }
+
 }

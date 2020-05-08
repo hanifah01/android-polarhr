@@ -15,7 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher2_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeBlue">
-        <activity android:name=".view.latihan.Latihan"></activity>
+        <activity
+            android:name=".view.latihan.Latihan"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity
+            android:name=".view.latihan.PetunjukPemanasan"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".view.home.Home"
             android:screenOrientation="portrait"
@@ -29,7 +36,7 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".view.latihan.PetunjukLatihan"
+            android:name=".view.splashscreen.Splashscreen"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
@@ -41,7 +48,7 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".view.splashscreen.Splashscreen"
+            android:name=".view.latihan.PetunjukLatihan"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
