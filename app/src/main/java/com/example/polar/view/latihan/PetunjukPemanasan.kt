@@ -2,6 +2,7 @@ package com.example.polar.view.latihan
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.*
 //import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.connect_button
 import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.txt_bpm
 import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.txt_device
+import maes.tech.intentanim.CustomIntent
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import polar.com.sdk.api.PolarBleApi
@@ -167,6 +169,10 @@ class PetunjukPemanasan : AppCompatActivity() {
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             supportActionBar!!.setDisplayShowHomeEnabled(true)
         }
+
+        txt_lanjut.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this, Latihan::class.java))
+            CustomIntent.customType(this, "left-to-right") })
     }
 
     private fun connect(){

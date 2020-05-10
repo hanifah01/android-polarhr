@@ -6,11 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.example.polar.R
 import com.example.polar.support.dialog.DialogLoading
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_latihan.*
+import kotlinx.android.synthetic.main.activity_latihan.btn_mulai
+import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.*
 import polar.com.sdk.api.PolarBleApi
 import polar.com.sdk.api.PolarBleApiCallback
 import polar.com.sdk.api.PolarBleApiDefaultImpl
@@ -129,9 +133,9 @@ class Latihan : AppCompatActivity() {
             }
         })
 
-        connect_button.setOnClickListener{
+        /*connect_button.setOnClickListener{
             connect()
-        }
+        }*/
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && savedInstanceState == null) {
             requestPermissions(
@@ -146,6 +150,13 @@ class Latihan : AppCompatActivity() {
             startTime = System.currentTimeMillis()
             timerHandler.postDelayed(timerRunnable, 0)
         }
+
+        setSupportActionBar(toolbar_latihan)
+        if (supportActionBar != null) {
+            supportActionBar!!.setTitle("Latihan")
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowHomeEnabled(true)
+        }
     }
 
     private fun connect(){
@@ -155,8 +166,8 @@ class Latihan : AppCompatActivity() {
                 if (broadcastDisposable == null) {
                     api.startListenForPolarHrBroadcasts(null).subscribe(
                         { polarBroadcastData ->
-                            txt_device.text = polarBroadcastData.polarDeviceInfo.deviceId
-                            txt_bpm.text = polarBroadcastData.hr.toString()
+                            //txt_device.text = polarBroadcastData.polarDeviceInfo.deviceId
+                            //txt_bpm.text = polarBroadcastData.hr.toString()
                             Log.d(TAG, "HR BROADCAST " + polarBroadcastData.polarDeviceInfo.deviceId + " HR: " + polarBroadcastData.hr + " batt: " + polarBroadcastData.batteryStatus)
                         }, { throwable -> Log.e(TAG, "" + throwable.localizedMessage) }
                     ) { Log.d(TAG, "complete") }
@@ -191,5 +202,18 @@ class Latihan : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         api.shutDown()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_connect, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.connect_polar -> {
+            connect()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 }

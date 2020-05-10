@@ -12,5 +12,7 @@
     <color name="blue">#0096fe</color>
     <color name="sky_blue">#3badfc</color>
     <color name="light_blue">#59d4ff</color>
+    <color name="light2_blue">#d0f5fc</color>
+    <color name="medium_blue">#9debff</color>
     <color name="dark_blue">#0079CC</color>
 </resources>

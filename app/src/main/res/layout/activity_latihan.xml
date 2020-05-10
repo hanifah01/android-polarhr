@@ -4,10 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".view.latihan.Latihan">
 
-    <Button
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_latihan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--<Button
         android:id="@+id/connect_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,130 +23,250 @@
         android:text="connect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/relativeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_latihan" />-->
+    <TextView
+        android:id="@+id/txt_deviceinfo"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Informasi perangkat :"
+        android:textColor="@color/grey"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_device">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Latihan"
-            android:textColor="@color/black"
-            android:fontFamily="@font/montserrat"
-            android:textSize="60dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txt_waktu_latihan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="0"
-            android:textColor="@color/black"
-            android:fontFamily="@font/montserrat"
-            android:textSize="60dp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/relativeLayout">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="BPM"
-            android:textColor="@color/black"
-            android:fontFamily="@font/montserrat"
-            android:textSize="60dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txt_bpm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="0"
-            android:textColor="@color/black"
-            android:fontFamily="@font/montserrat"
-            android:textSize="60dp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/relativeLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/relativeLayout2">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Istirahat"
-            android:textColor="@color/black"
-            android:fontFamily="@font/montserrat"
-            android:textSize="60dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txt_waktu_istirahat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="0"
-            android:textColor="@color/black"
-            android:fontFamily="@font/montserrat"
-            android:textSize="60dp"
-            android:textStyle="bold" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_latihan" />
 
     <TextView
         android:id="@+id/txt_device"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="16dp"
-        android:text="Device"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
         android:fontFamily="@font/montserrat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:text="Device"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/txt_deviceinfo"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_latihan" />
+
+    <LinearLayout
+        android:id="@+id/lyt_dimulai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="25dp"
+        app:layout_constraintEnd_toStartOf="@+id/lyt_berakhir"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/connect_button" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_deviceinfo">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_light"
+            android:text="Dimulai pukul"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_jam_mulai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="10:00"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyt_berakhir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/lyt_dimulai"
+        app:layout_constraintTop_toBottomOf="@+id/txt_deviceinfo">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_light"
+            android:text="Berakhir pukul"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_jam_selesai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="10:00"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyt_waktu_latihan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_verylight_blue"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="25dp"
+        app:layout_constraintEnd_toStartOf="@+id/lyt_waktu_istirahat"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyt_dimulai">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_light"
+            android:text="Durasi latihan"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_durasi_latihan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="10:00:00"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyt_waktu_istirahat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_verylight_blue"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/lyt_waktu_latihan"
+        app:layout_constraintTop_toBottomOf="@+id/lyt_berakhir">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_light"
+            android:text="Durasi istirahat"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_durasi_istirahat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="10:00:00"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyt_durasi_pelatihan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:padding="15dp"
+        android:background="@drawable/bg_mediumlight_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyt_waktu_latihan">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_light"
+            android:text="Total durasi pelatihan"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_total_durasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="10:00:00"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lyt_grafik"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:padding="15dp"
+        android:background="@drawable/bg_white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lyt_durasi_pelatihan">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_light"
+            android:text="Nanti dibuat grafik"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_mulai"
-        android:layout_width="180dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/bg_blue_button"
         android:text="Mulai"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:layout_marginTop="@dimen/xxklarge"
+        app:layout_constraintBottom_toTopOf="@+id/btn_selesai"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_selesai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xxklarge"
+        android:background="@color/grey"
+        android:text="Selesai"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
