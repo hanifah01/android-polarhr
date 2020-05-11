@@ -15,15 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--<Button
-        android:id="@+id/connect_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="connect"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_latihan" />-->
     <TextView
         android:id="@+id/txt_deviceinfo"
         android:layout_width="wrap_content"
@@ -50,6 +41,16 @@
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/txt_deviceinfo"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_latihan" />
+
+    <ImageView
+        android:id="@+id/img_cek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/small"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_device"
+        app:layout_constraintStart_toEndOf="@+id/txt_device"
+        app:layout_constraintTop_toTopOf="@+id/txt_device" />
 
     <LinearLayout
         android:id="@+id/lyt_dimulai"
@@ -79,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="10:00"
+            android:text="00:00"
             android:textColor="@color/black"
             android:textSize="18dp" />
     </LinearLayout>
@@ -112,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="10:00"
+            android:text="00:00"
             android:textColor="@color/black"
             android:textSize="18dp" />
     </LinearLayout>
@@ -145,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="10:00:00"
+            android:text="00:00"
             android:textColor="@color/black"
             android:textSize="18dp" />
     </LinearLayout>
@@ -178,7 +179,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="10:00:00"
+            android:text="00:00"
             android:textColor="@color/black"
             android:textSize="18dp" />
     </LinearLayout>
@@ -210,7 +211,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="10:00:00"
+            android:text="00:00"
             android:textColor="@color/black"
             android:textSize="18dp" />
     </LinearLayout>
@@ -218,7 +219,7 @@
         android:id="@+id/lyt_grafik"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
@@ -228,10 +229,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lyt_durasi_pelatihan">
         <TextView
+            android:id="@+id/txt_batas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
-            android:text="Nanti dibuat grafik"
+            android:text="Batas : "
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_light"
+            android:layout_marginLeft="@dimen/semi_large"
+            android:text="Detak jantung : "
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_bpm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_light"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_light"
+            android:text=" bpm"
             android:textColor="@color/black"
             android:textSize="15dp" />
 

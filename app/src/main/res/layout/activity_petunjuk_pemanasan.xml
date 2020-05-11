@@ -13,16 +13,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--<Button
-        android:id="@+id/connect_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="connect"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_petunjukpemanasan" />-->
-
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
@@ -33,8 +23,12 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_device">
 
         <ProgressBar
+            android:id="@+id/pg_detik"
             android:layout_width="250dp"
-            android:layout_height="250dp" />
+            android:layout_height="250dp"
+            style="?android:progressBarStyleHorizontal"
+            android:max="60"
+            android:progressDrawable="@drawable/bg_progres"/>
 
         <TextView
             android:id="@+id/txt_detik"
@@ -72,23 +66,65 @@
             android:textColor="@color/grey"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/txt_bpm"
+        <LinearLayout
+            android:id="@+id/lyt_rata"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:text="0 bpm"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/txt_bpm_rt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginLeft="@dimen/medium"
+                android:text="bpm"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lyt_prog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/txt_bpm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginLeft="@dimen/medium"
+                android:text="bpm"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
         android:id="@+id/txt_deviceinfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginTop="@dimen/large"
+        android:layout_marginLeft="@dimen/xlarge"
         android:text="Informasi perangkat"
         android:textSize="18sp"
         android:textColor="@color/grey"
@@ -100,15 +136,24 @@
         android:id="@+id/txt_device"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginTop="@dimen/medium"
+        android:layout_marginLeft="@dimen/xlarge"
         android:fontFamily="@font/montserrat"
         android:text="Device"
         android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textSize="@dimen/font_large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_deviceinfo" />
+
+    <ImageView
+        android:id="@+id/img_cek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/small"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_device"
+        app:layout_constraintStart_toEndOf="@+id/txt_device"
+        app:layout_constraintTop_toTopOf="@+id/txt_device" />
 
     <Button
         android:id="@+id/btn_mulai"

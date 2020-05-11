@@ -2,6 +2,7 @@ package com.example.polar.view.register
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -10,18 +11,24 @@ import com.example.polar.R
 import com.example.polar.support.REGISTER_BERHASIL
 import com.example.polar.support.REGISTER_GAGAL
 import com.example.polar.support.dateDialog
+import com.example.polar.support.dialog.DialogLoading
 import com.example.polar.view.landingpage.LandingPage
 import com.example.polar.view.login.Login
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
 import maes.tech.intentanim.CustomIntent
 
 
 class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+    private val dialogLoading  by lazy { DialogLoading(this) }
     private lateinit var auth: FirebaseAuth
-
+    var uid: String? = null
+    lateinit var user : FirebaseUser
     private var list_of_items = arrayOf("Pilih jenis olahraga",
         "Lari",
         "Lari Jarak Pendek",
@@ -65,47 +72,60 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private fun setupButton() {
         btn_register.setOnClickListener {
-            loading.visibility = View.VISIBLE
+            dialogLoading.showDialog(true)
             val name = edt_nama.text.toString()
             val birthdate = edt_birthdate.text.toString()
             val height = edt_height.text.toString()
             val weight = edt_weight.text.toString()
             val coach = edt_namapelatih.text.toString()
-            //val spinnerSport ambilnya gimana
-            // lah kamu yg buat spinner masak gk tau wkwkwkwkw, belajar
 
             val email = edt_email.text.toString()
             val pass = edt_pass.text.toString()
 
-            val namaDb = FirebaseDatabase.getInstance().reference.child(name).child("Nama")
-            val tglLahirDb = FirebaseDatabase.getInstance().reference.child(name).child("TglLahir")
-            val heightDb = FirebaseDatabase.getInstance().reference.child(name).child("Height")
-            val weightDb = FirebaseDatabase.getInstance().reference.child(name).child("Weight")
-            val sportDb = FirebaseDatabase.getInstance().reference.child(name).child("Sport")
-            val coachDb = FirebaseDatabase.getInstance().reference.child(name).child("Coach")
-
             if (pass.equals("") || email.equals("") || name.equals("") || height.equals("")||
                 weight.equals("")||birthdate.equals("")||sportValue.equals("Pilih jenis olahraga")){
                 Toast.makeText(this, "Field ada yang kosong!", Toast.LENGTH_LONG).show()
-                loading.visibility = View.GONE
+                dialogLoading.showDialog(false)
             }
             else {
                 auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        namaDb.setValue(name)
-                        tglLahirDb.setValue(birthdate)
-                        heightDb.setValue(height)
-                        weightDb.setValue(weight)
-                        sportDb.setValue(sportValue)
-                        coachDb.setValue(coach)
+
+                        user = FirebaseAuth.getInstance().currentUser!!
+                        uid = user.uid
+
+                        val profile = hashMapOf(
+                            "nama" to name,
+                            "tinggi" to height,
+                            "berat" to weight,
+                            "ttl" to birthdate,
+                            "jenis_olahraga" to sportValue
+                        )
+
+                        val db = FirebaseFirestore.getInstance()
+
+                        db.collection(uid!!).document("profile")
+                            .set(profile)
+                            .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
+                            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+
+                        val muridnya_pelatih = hashMapOf(
+                            "murid" to uid
+                        )
+                        db.collection(coach).document("murid")
+                            .set(muridnya_pelatih)
+                            .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
+                            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+
 
                         startActivity(Intent(this, Login::class.java))
                         CustomIntent.customType(this, "right-to-left")
                         Toast.makeText(this, REGISTER_BERHASIL, Toast.LENGTH_LONG).show()
-                        loading.visibility = View.GONE
+                        dialogLoading.showDialog(false)
+
                     } else {
                         Toast.makeText(this, REGISTER_GAGAL, Toast.LENGTH_LONG).show()
-                        loading.visibility = View.GONE
+                        dialogLoading.showDialog(false)
                     }
                 }
             }
@@ -135,40 +155,3 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
 }
-
-    
-
-    /*fun daftar(){
-        val email = edt_email.text.toString()
-        val pass = edt_pass.text.toString()
-        val name = edt_nama.text.toString()
-        val current_user_db = FirebaseDatabase.getInstance().reference.child(name)
-        if (pass.equals("") || email.equals("") || name.equals("")){
-            Toast.makeText(this, "Field ada yang kosong!", Toast.LENGTH_LONG).show()
-            loading.visibility = View.GONE
-        }
-        else {
-            auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    current_user_db.setValue(name)
-                    startActivity(Intent(this, Login::class.java))
-                    CustomIntent.customType(this, "right-to-left")
-                    Toast.makeText(this, REGISTER_BERHASIL, Toast.LENGTH_LONG).show()
-                    loading.visibility = View.GONE
-                } else {
-                    Toast.makeText(this, REGISTER_GAGAL, Toast.LENGTH_LONG).show()
-                    loading.visibility = View.GONE
-                }
-            }
-        }
-    }
-
-    override fun onBackPressed() {
-        startActivity(Intent(this, Login::class.java))
-        CustomIntent.customType(this, "right-to-left")
-    }*/
-
-
-
-
-

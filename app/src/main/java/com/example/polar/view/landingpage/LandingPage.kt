@@ -21,14 +21,6 @@ class LandingPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landing_page)
 
-        // Custom font
-        val typeface1 = Typeface.createFromAsset(assets, "Montserrat-Regular.ttf")
-        txt_judul1.typeface=typeface1
-        txt_judul2.typeface=typeface1
-        atau.typeface= typeface1
-        //btn_login.typeface=typeface1
-        //btn_daftar.typeface=typeface1
-
         btn_daftar.setOnClickListener {
             startActivity(Intent(this, Register::class.java))
             CustomIntent.customType(this, "left-to-right")

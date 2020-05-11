@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login"
+            android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/black"
             android:textSize="@dimen/font_xx_large" />
 
@@ -47,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat"
             android:text="@string/login_message"
             android:textSize="@dimen/font_small" />
     </LinearLayout>
@@ -73,6 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/xxxklarge"
                 android:hint="Email"
+                android:fontFamily="@font/montserrat"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_medium"
                 android:inputType="textEmailAddress"/>
@@ -92,6 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/xxxklarge"
                 android:hint="Password"
+                android:fontFamily="@font/montserrat"
                 android:inputType="textPassword"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_medium" />
@@ -111,6 +115,8 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_blue_button"
             android:text="@string/login"
+            android:textAllCaps="false"
+            android:fontFamily="@font/montserrat"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

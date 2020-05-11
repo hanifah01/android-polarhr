@@ -37,6 +37,7 @@
             android:layout_marginTop="80dp"
             android:text="@string/landing_page"
             android:textAlignment="center"
+            android:fontFamily="@font/montserrat"
             android:textColor="@color/black"
             android:textSize="@dimen/font_large"
             android:visibility="visible" />
@@ -46,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:fontFamily="@font/montserrat"
             android:text="@string/sub_landing_page"
             android:textAlignment="center"
             android:textSize="@dimen/font_small"
@@ -102,6 +104,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_blue_button"
             android:text="@string/login"
+            android:textAllCaps="false"
+            android:fontFamily="@font/montserrat"
             android:textColor="@color/white" />
 
         <TextView
@@ -112,6 +116,7 @@
             android:layout_marginBottom="15dp"
             android:text="atau"
             android:textSize="@dimen/font_small"
+            android:fontFamily="@font/montserrat"
             android:textColor="@color/black" />
 
         <Button
@@ -119,6 +124,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_blue_line"
+            android:textAllCaps="false"
+            android:fontFamily="@font/montserrat"
             android:text="@string/register"
             android:textColor="@color/blue" />
     </LinearLayout>

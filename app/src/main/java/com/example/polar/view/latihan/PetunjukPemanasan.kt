@@ -2,11 +2,16 @@ package com.example.polar.view.latihan
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.bluetooth.BluetoothAdapter
+import android.content.Context
 import android.content.Intent
+import android.location.LocationManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
+import android.provider.Settings
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -16,14 +21,9 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.polar.R
 import com.example.polar.support.dialog.DialogLoading
+import com.google.firebase.database.FirebaseDatabase
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_petunjuk_latihan.*
 import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.*
-//import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.connect_button
-import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.txt_bpm
-import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.txt_device
 import maes.tech.intentanim.CustomIntent
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -38,6 +38,7 @@ import java.util.*
 class PetunjukPemanasan : AppCompatActivity() {
 
     private val dialogLoading  by lazy { DialogLoading(this) }
+    val bAdapter = BluetoothAdapter.getDefaultAdapter();
 
     private val TAG = PetunjukPemanasan::class.java.simpleName
     lateinit var api: PolarBleApi
@@ -49,22 +50,20 @@ class PetunjukPemanasan : AppCompatActivity() {
     var ppiDisposable: Disposable? = null
     var arrayHrData = ArrayList<Long>()
 
+    val timer = object: CountDownTimer(60000, 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            txt_detik.setText(String.format("00:%02d", millisUntilFinished/1000 ))
+            arrayHrData.add(txt_bpm.text.toString().toLong())
+            markButtonDisable(btn_mulai)
+            pg_detik.progress = (millisUntilFinished/1000).toInt()
+            txt_infobpm.text = "Detak jantung"
+        }
 
-    var startTime: Long = 0
-    var timerHandler: Handler = Handler()
-    var timerRunnable: Runnable = object : Runnable {
-        override fun run() {
-            val millis = System.currentTimeMillis() - startTime
-            val seconds = (millis / 1000)  % 60
-            if (seconds in 1..10){
-                txt_detik.setText(String.format("00:%02d", seconds))
-                arrayHrData.add(seconds)
-                markButtonDisable(btn_mulai)
-            }
-            if (seconds > 10){
-                btn_mulai.setText(arrayHrData.average().toString())
-            }
-            timerHandler.postDelayed(this, 500)
+        override fun onFinish() {
+            lyt_rata.visibility = View.VISIBLE
+            lyt_prog.visibility = View.GONE
+            txt_infobpm.text = "Rata-rata detak jantung"
+            txt_bpm_rt.text = arrayHrData.average().toInt().toString()
         }
     }
 
@@ -159,8 +158,7 @@ class PetunjukPemanasan : AppCompatActivity() {
         }
 
         btn_mulai.setOnClickListener {
-            startTime = System.currentTimeMillis()
-            timerHandler.postDelayed(timerRunnable, 0)
+            timer.start()
         }
 
         setSupportActionBar(toolbar_petunjukpemanasan)
@@ -170,9 +168,11 @@ class PetunjukPemanasan : AppCompatActivity() {
             supportActionBar!!.setDisplayShowHomeEnabled(true)
         }
 
-        txt_lanjut.setOnClickListener(View.OnClickListener {
+        txt_lanjut.setOnClickListener{
+//            val namaDb = FirebaseDatabase.getInstance().reference.child(name).child("Nama")
             startActivity(Intent(this, Latihan::class.java))
-            CustomIntent.customType(this, "left-to-right") })
+            CustomIntent.customType(this, "left-to-right")
+        }
     }
 
     private fun connect(){
@@ -184,16 +184,20 @@ class PetunjukPemanasan : AppCompatActivity() {
                         { polarBroadcastData ->
                             txt_device.text = polarBroadcastData.polarDeviceInfo.deviceId
                             txt_bpm.text = polarBroadcastData.hr.toString()
+                            dialogLoading.showDialog(false)
+                            img_cek.setImageDrawable(getDrawable(R.drawable.ic_check))
                             Log.d(TAG, "HR BROADCAST " + polarBroadcastData.polarDeviceInfo.deviceId + " HR: " + polarBroadcastData.hr + " batt: " + polarBroadcastData.batteryStatus)
                         }, { throwable -> Log.e(TAG, "" + throwable.localizedMessage) }
                     ) { Log.d(TAG, "complete") }
                 } else {
 //                        Toast.makeText(this, "Hidupkan Bluetooth Terlebih Dahulu", Toast.LENGTH_LONG).show()
+                    dialogLoading.showDialog(false)
                     broadcastDisposable!!.dispose()
                     null
                 }
         } catch (polarInvalidArgument: PolarInvalidArgument) {
             polarInvalidArgument.printStackTrace()
+            dialogLoading.showDialog(false)
             Toast.makeText(this, "Gagal Menyambungkan Device", Toast.LENGTH_LONG).show()
         }
     }
@@ -232,16 +236,49 @@ class PetunjukPemanasan : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.connect_polar -> {
-            connect()
+            if(bAdapter == null)
+            {
+                Toast.makeText(getApplicationContext(),"Bluetooth Not Supported",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                if(!bAdapter.isEnabled()){
+                    startActivityForResult(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),1)
+                    cekGps()
+                }else{
+                    cekGps()
+                }
+            }
             true
         }
         else -> super.onOptionsItemSelected(item)
     }
 
+    private fun cekGps(){
+        if (isLocationEnabled()){
+            dialogLoading.showDialog(true)
+            connect()
+        }else{
+            Toast.makeText(this, "Turn on location", Toast.LENGTH_LONG).show()
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            startActivity(intent)
+            dialogLoading.showDialog(true)
+            connect()
+        }
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+
+    @SuppressLint("NewApi")
     fun markButtonDisable(button: Button) {
         button.isEnabled = false
         //button.setTextColor(R.color.white)
-        button.setBackgroundColor(R.color.grey)
+        button.setBackgroundColor(getColor(R.color.grey))
     }
 
 }

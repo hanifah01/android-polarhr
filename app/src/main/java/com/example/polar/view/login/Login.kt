@@ -38,12 +38,6 @@ class Login : AppCompatActivity() {
             CustomIntent.customType(this, "left-to-right")
         }
 
-        // Custom font
-        val typeface1 = Typeface.createFromAsset(assets, "Montserrat-Regular.ttf")
-        val typeface2 = Typeface.createFromAsset(assets, "Montserrat-Bold.ttf")
-        txt_login.typeface = typeface2
-        txt_subjudul.typeface= typeface1
-
         auth = FirebaseAuth.getInstance()
 
         btn_login.setOnClickListener {
@@ -60,11 +54,7 @@ class Login : AppCompatActivity() {
                         statLogin = true
                         tinydb.putBoolean("login", true)
 
-                        user = FirebaseAuth.getInstance().currentUser!!
-                        uid = user.uid
-                        Log.d("uidddddd ", uid)
-
-                        //startActivity(Intent(this, Home::class.java))
+                        startActivity(Intent(this, Home::class.java))
                         CustomIntent.customType(this, "left-to-right")
                         Toast.makeText(this, LOGIN_BERHASIL, Toast.LENGTH_LONG).show()
                         dialogLoading.showDialog(false)

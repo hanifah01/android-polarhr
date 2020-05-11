@@ -1,5 +1,7 @@
 package com.example.polar.view.home
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -10,20 +12,30 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.polar.R
+import com.example.polar.model.Profil
+import com.example.polar.support.TinyDB
+import com.example.polar.support.toObject
+import com.example.polar.view.landingpage.LandingPage
 import com.example.polar.view.latihan.PetunjukLatihan
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_home.*
 import maes.tech.intentanim.CustomIntent
+import org.json.JSONObject
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
 class Home : AppCompatActivity() {
     private lateinit var database: DatabaseReference
+    lateinit var tinydb: TinyDB
+    var statLogin: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        tinydb = TinyDB(this)
 
         setSupportActionBar(toolbar_home)
         if (supportActionBar != null) {
@@ -39,27 +51,23 @@ class Home : AppCompatActivity() {
         getData()
     }
 
+    @SuppressLint("NewApi")
     fun getData(){
-
-        val uidRef = database.child("Samsud")
-        val valueEventListener = object : ValueEventListener {
-            @RequiresApi(Build.VERSION_CODES.O)
-            override fun onDataChange(p0: DataSnapshot) {
-                val nama = p0.child("Nama").getValue().toString()
-                val tinggi = p0.child("Height").getValue().toString()
-                val berat = p0.child("Weight").getValue().toString()
-                val ttl = p0.child("TglLahir").getValue().toString()
-                Log.d("Hasil", nama + "\n" + tinggi + "\n" + berat + "\n" + ttl)
-                atlit_name.text = "Halo, "+ nama
-                tv_tb.text = tinggi + " cm"
-                tv_bb.text = berat + " kg"
-                calculateAge(ttl)
+        val user = FirebaseAuth.getInstance().currentUser!!
+        val uid = user.uid
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection(uid).document("profile")
+        docRef.get().addOnSuccessListener { document ->
+            if (document != null) {
+                val data = JSONObject(document.data).toObject(Profil::class.java)
+                atlit_name.text = "Halo, "+ data.nama
+                tv_tb.text = data.tinggi + " cm"
+                tv_bb.text = data.berat + " kg"
+                calculateAge(data.ttl)
+            } else {
+                Log.d("TAG", "No such document")
             }
-
-            override fun onCancelled(p0: DatabaseError) {
-            }
-        }
-        uidRef.addListenerForSingleValueEvent(valueEventListener)
+        }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -92,6 +100,3 @@ class Home : AppCompatActivity() {
         else -> super.onOptionsItemSelected(item)
     }
 }
-
-
-

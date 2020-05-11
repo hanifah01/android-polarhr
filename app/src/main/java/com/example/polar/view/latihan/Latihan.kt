@@ -1,20 +1,26 @@
 package com.example.polar.view.latihan
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.bluetooth.BluetoothAdapter
+import android.content.Context
+import android.content.Intent
+import android.location.LocationManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
+import android.os.CountDownTimer
+import android.provider.Settings
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.polar.R
 import com.example.polar.support.dialog.DialogLoading
+import com.example.polar.support.mtformat
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_latihan.*
-import kotlinx.android.synthetic.main.activity_latihan.btn_mulai
-import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.*
 import polar.com.sdk.api.PolarBleApi
 import polar.com.sdk.api.PolarBleApiCallback
 import polar.com.sdk.api.PolarBleApiDefaultImpl
@@ -23,12 +29,15 @@ import polar.com.sdk.api.model.PolarDeviceInfo
 import polar.com.sdk.api.model.PolarHrData
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.concurrent.timer
+
 
 class Latihan : AppCompatActivity() {
 
     private val dialogLoading  by lazy { DialogLoading(this) }
+    val bAdapter = BluetoothAdapter.getDefaultAdapter();
 
-    private val TAG = PetunjukPemanasan::class.java.simpleName
+    private val TAG = Latihan::class.java.simpleName
     lateinit var api: PolarBleApi
     var DEVICE_ID = "218DDA23" // or bt address like F5:A7:B8:EF:7A:D1 //
     var broadcastDisposable: Disposable? = null
@@ -37,28 +46,47 @@ class Latihan : AppCompatActivity() {
     var ppgDisposable: Disposable? = null
     var ppiDisposable: Disposable? = null
     var arrayHrData = ArrayList<Long>()
+    var timeBuffBreak = 0L
+    var timeBuffLat = 0L
 
+    val batas = 110
+    var totalSeconds = 3600000L
 
-    var startTime: Long = 0
-    var timerHandler: Handler = Handler()
-    var timerRunnable: Runnable = object : Runnable {
-        override fun run() {
-            val millis = System.currentTimeMillis() - startTime
-            val seconds = (millis / 1000)  % 60
-            if (seconds in 1..10){
-//                txt_detik.setText(String.format("%02d", seconds))
-//                arrayHrData.add(seconds)
+    val timerAll= object: CountDownTimer(3600000, 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            val waktu = String.format("%02d:%02d", ((totalSeconds - millisUntilFinished)/(1000*60))%60, ((totalSeconds - millisUntilFinished)/1000)%60)
+            txt_total_durasi.text = waktu
+            markButtonDisable(btn_mulai)
+            if (txt_bpm.text.toString().toInt() < batas){
+                if (timeBuffLat != 0L){
+                    timeBuffBreak = (millisUntilFinished - timeBuffLat)
+                }else{
+                    timeBuffBreak = millisUntilFinished
+                }
+                val waktu = String.format("%02d:%02d", ((totalSeconds - timeBuffBreak)/(1000*60))%60, ((totalSeconds - timeBuffBreak)/1000)%60)
+                txt_durasi_istirahat.text = waktu
+            }else{
+                if (timeBuffBreak != 0L){
+                    timeBuffLat = (millisUntilFinished - timeBuffBreak)
+                }else{
+                    timeBuffLat = millisUntilFinished
+                }
+                val waktu = String.format("%02d:%02d", ((totalSeconds - timeBuffLat)/(1000*60))%60, ((totalSeconds - timeBuffLat)/1000)%60)
+                txt_durasi_latihan.text = waktu
             }
-            if (seconds > 10){
-                btn_mulai.setText(arrayHrData.average().toString())
-            }
-            timerHandler.postDelayed(this, 500)
+        }
+
+        override fun onFinish() {
+
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latihan)
+
+        txt_batas.text = "Batas : " + batas.toString()
+
         api = PolarBleApiDefaultImpl.defaultImplementation(this, PolarBleApi.ALL_FEATURES)
         api.setPolarFilter(false)
         api.setApiLogger { s -> Log.d(TAG, s) }
@@ -133,10 +161,6 @@ class Latihan : AppCompatActivity() {
             }
         })
 
-        /*connect_button.setOnClickListener{
-            connect()
-        }*/
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && savedInstanceState == null) {
             requestPermissions(
                 arrayOf(
@@ -147,8 +171,19 @@ class Latihan : AppCompatActivity() {
         }
 
         btn_mulai.setOnClickListener {
-            startTime = System.currentTimeMillis()
-            timerHandler.postDelayed(timerRunnable, 0)
+            timerAll.start()
+//            timerBreak.onTick(60000)
+//            timerBreak.start()
+            val tempDate = Calendar.getInstance().time as Date
+            val jam = mtformat.format(tempDate)
+            txt_jam_mulai.text = jam
+        }
+
+        btn_selesai.setOnClickListener {
+            timerAll.cancel()
+            val tempDate = Calendar.getInstance().time as Date
+            val jam = mtformat.format(tempDate)
+            txt_jam_selesai.text = jam
         }
 
         setSupportActionBar(toolbar_latihan)
@@ -166,8 +201,10 @@ class Latihan : AppCompatActivity() {
                 if (broadcastDisposable == null) {
                     api.startListenForPolarHrBroadcasts(null).subscribe(
                         { polarBroadcastData ->
-                            //txt_device.text = polarBroadcastData.polarDeviceInfo.deviceId
-                            //txt_bpm.text = polarBroadcastData.hr.toString()
+                            txt_device.text = polarBroadcastData.polarDeviceInfo.deviceId
+                            txt_bpm.text = polarBroadcastData.hr.toString()
+                            dialogLoading.showDialog(false)
+                            img_cek.setImageDrawable(getDrawable(R.drawable.ic_check))
                             Log.d(TAG, "HR BROADCAST " + polarBroadcastData.polarDeviceInfo.deviceId + " HR: " + polarBroadcastData.hr + " batt: " + polarBroadcastData.batteryStatus)
                         }, { throwable -> Log.e(TAG, "" + throwable.localizedMessage) }
                     ) { Log.d(TAG, "complete") }
@@ -211,9 +248,48 @@ class Latihan : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.connect_polar -> {
-            connect()
+            if(bAdapter == null)
+            {
+                Toast.makeText(getApplicationContext(),"Bluetooth Not Supported",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                if(!bAdapter.isEnabled()){
+                    startActivityForResult(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),1)
+                    cekGps()
+                }else{
+                    cekGps()
+                }
+            }
             true
         }
         else -> super.onOptionsItemSelected(item)
+    }
+
+    private fun cekGps(){
+        if (isLocationEnabled()){
+            dialogLoading.showDialog(true)
+            connect()
+        }else{
+            Toast.makeText(this, "Turn on location", Toast.LENGTH_LONG).show()
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            startActivity(intent)
+            dialogLoading.showDialog(true)
+            connect()
+        }
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+
+    @SuppressLint("NewApi")
+    fun markButtonDisable(button: Button) {
+        button.isEnabled = false
+        //button.setTextColor(R.color.white)
+        button.setBackgroundColor(getColor(R.color.grey))
     }
 }

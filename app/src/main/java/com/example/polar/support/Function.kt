@@ -3,10 +3,12 @@ package com.example.polar.support
 import android.app.DatePickerDialog
 import android.content.Context
 import android.widget.EditText
+import com.google.gson.Gson
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
-//val mdformat = SimpleDateFormat("yyyy/MM/dd")
+val mtformat = SimpleDateFormat("HH:mm")
 val mdformat = SimpleDateFormat("yyyy-MM-dd")
 
 fun dateDialog(editText: EditText, context: Context) {
@@ -24,3 +26,6 @@ fun dateDialog(editText: EditText, context: Context) {
     )
     datePickerDialog!!.show()
 }
+
+fun <T> JSONObject.toObject(classOfT: Class<T>): T = Gson().fromJson(this.toString(), classOfT)
+
