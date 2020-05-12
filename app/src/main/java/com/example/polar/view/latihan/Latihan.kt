@@ -172,8 +172,6 @@ class Latihan : AppCompatActivity() {
 
         btn_mulai.setOnClickListener {
             timerAll.start()
-//            timerBreak.onTick(60000)
-//            timerBreak.start()
             val tempDate = Calendar.getInstance().time as Date
             val jam = mtformat.format(tempDate)
             txt_jam_mulai.text = jam

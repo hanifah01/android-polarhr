@@ -144,10 +144,6 @@ class PetunjukPemanasan : AppCompatActivity() {
             }
         })
 
-        /*connect_button.setOnClickListener{
-            connect()
-        }*/
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && savedInstanceState == null) {
             requestPermissions(
                 arrayOf(
