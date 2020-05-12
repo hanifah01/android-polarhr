@@ -236,7 +236,8 @@ class PetunjukPemanasan : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.connect_polar -> {
-            if(bAdapter == null)
+            dialogLoading.showDialog(true)
+            /*if(bAdapter == null)
             {
                 Toast.makeText(getApplicationContext(),"Bluetooth Not Supported",Toast.LENGTH_SHORT).show()
             }
@@ -247,7 +248,7 @@ class PetunjukPemanasan : AppCompatActivity() {
                 }else{
                     cekGps()
                 }
-            }
+            }*/
             true
         }
         else -> super.onOptionsItemSelected(item)
@@ -255,7 +256,6 @@ class PetunjukPemanasan : AppCompatActivity() {
 
     private fun cekGps(){
         if (isLocationEnabled()){
-            dialogLoading.showDialog(true)
             connect()
         }else{
             Toast.makeText(this, "Turn on location", Toast.LENGTH_LONG).show()
