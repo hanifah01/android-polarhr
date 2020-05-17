@@ -216,6 +216,7 @@
             android:clipChildren="false"
             app:cardPreventCornerOverlap="false">
             <LinearLayout
+                android:id="@+id/menu_hasil_latihan"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"

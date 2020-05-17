@@ -15,6 +15,7 @@ import com.example.polar.R
 import com.example.polar.model.Profil
 import com.example.polar.support.TinyDB
 import com.example.polar.support.toObject
+import com.example.polar.view.hasillatihan.HasilLatihan
 import com.example.polar.view.landingpage.LandingPage
 import com.example.polar.view.latihan.PetunjukLatihan
 import com.google.firebase.auth.FirebaseAuth
@@ -44,6 +45,10 @@ class Home : AppCompatActivity() {
 
         latihan.setOnClickListener {
             startActivity(Intent(this, PetunjukLatihan::class.java))
+            CustomIntent.customType(this, "left-to-right")
+        }
+        menu_hasil_latihan.setOnClickListener {
+            startActivity(Intent(this, HasilLatihan::class.java))
             CustomIntent.customType(this, "left-to-right")
         }
 
