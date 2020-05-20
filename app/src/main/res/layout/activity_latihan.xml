@@ -53,69 +53,75 @@
         app:layout_constraintTop_toTopOf="@+id/txt_device" />
 
     <LinearLayout
-        android:id="@+id/lyt_dimulai"
-        android:layout_width="wrap_content"
+        android:id="@+id/lyt_jam_latihan"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_white"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="25dp"
-        app:layout_constraintEnd_toStartOf="@+id/lyt_berakhir"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_deviceinfo">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_light"
-            android:text="Dimulai pukul"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/txt_jam_mulai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="00:00"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lyt_berakhir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_white"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/lyt_dimulai"
-        app:layout_constraintTop_toBottomOf="@+id/txt_deviceinfo">
-
-        <TextView
-            android:layout_width="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_deviceinfo"
+        android:background="@drawable/bg_white"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:weightSum="2">
+        <LinearLayout
+            android:id="@+id/lyt_dimulai"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_light"
-            android:text="Berakhir pukul"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginRight="15dp">
 
-        <TextView
-            android:id="@+id/txt_jam_selesai"
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_light"
+                android:text="Dimulai pukul"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/txt_jam_mulai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="00:00"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyt_berakhir"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="00:00"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginLeft="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_light"
+                android:text="Berakhir pukul"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/txt_jam_selesai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="00:00"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -130,7 +136,7 @@
         app:layout_constraintEnd_toStartOf="@+id/lyt_waktu_istirahat"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lyt_dimulai">
+        app:layout_constraintTop_toBottomOf="@+id/lyt_jam_latihan">
 
         <TextView
             android:layout_width="wrap_content"
@@ -163,7 +169,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/lyt_waktu_latihan"
-        app:layout_constraintTop_toBottomOf="@+id/lyt_berakhir">
+        app:layout_constraintTop_toBottomOf="@+id/lyt_jam_latihan">
 
         <TextView
             android:layout_width="wrap_content"
