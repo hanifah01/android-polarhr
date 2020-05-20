@@ -97,10 +97,6 @@ class Home : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.connect_polar -> {
-            Toast.makeText(this, "COnnect", Toast.LENGTH_LONG).show()
-            true
-        }
         R.id.logout -> {
             Toast.makeText(this, "Keluar", Toast.LENGTH_LONG).show()
             true
