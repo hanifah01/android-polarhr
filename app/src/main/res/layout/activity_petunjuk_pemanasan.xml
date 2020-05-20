@@ -178,11 +178,10 @@
         android:layout_marginRight="25dp"
         android:layout_marginBottom="@dimen/xxklarge"
         android:text="Lanjut"
-        android:textSize="18dp"
+        android:textSize="16sp"
         android:gravity="center"
         android:fontFamily="@font/montserrat_bold"
         android:textAllCaps="false"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

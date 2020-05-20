@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.location.LocationManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.polar.R
+import com.example.polar.R.color.grey
 import com.example.polar.support.dialog.DialogLoading
 import com.example.polar.view.Router
 import com.google.firebase.database.FirebaseDatabase
@@ -59,6 +61,7 @@ class PetunjukPemanasan : AppCompatActivity() {
             pg_detik.progress = (millisUntilFinished/1000).toInt()
             txt_infobpm.text = "Detak jantung"
             txt_lanjut.isEnabled = false
+            txt_lanjut.setTextColor(Color.GRAY)
         }
 
         override fun onFinish() {
@@ -67,6 +70,7 @@ class PetunjukPemanasan : AppCompatActivity() {
             txt_infobpm.text = "Rata-rata detak jantung"
             txt_bpm_rt.text = arrayHrData.average().toInt().toString()
             txt_lanjut.isEnabled = true
+            txt_lanjut.setTextColor(Color.BLACK)
             btn_mulai.background = ContextCompat.getDrawable(applicationContext, R.drawable.bg_blue_button)
         }
     }
@@ -283,7 +287,7 @@ class PetunjukPemanasan : AppCompatActivity() {
 
     fun markButtonDisable(button: Button) {
         button.isEnabled = false
-        button.background = getDrawable(R.color.grey)
+        button.background = getDrawable(grey)
     }
 
 }
