@@ -21,6 +21,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.polar.R
 import com.example.polar.support.dialog.DialogLoading
+import com.example.polar.view.Router
 import com.google.firebase.database.FirebaseDatabase
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.*
@@ -36,7 +37,7 @@ import polar.com.sdk.api.model.PolarHrData
 import java.util.*
 
 class PetunjukPemanasan : AppCompatActivity() {
-
+    private val router by lazy { Router() }
     private val dialogLoading  by lazy { DialogLoading(this) }
     val bAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -50,13 +51,14 @@ class PetunjukPemanasan : AppCompatActivity() {
     var ppiDisposable: Disposable? = null
     var arrayHrData = ArrayList<Long>()
 
-    val timer = object: CountDownTimer(60000, 1000) {
+    val timer = object: CountDownTimer(5000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             txt_detik.setText(String.format("00:%02d", millisUntilFinished/1000 ))
             arrayHrData.add(txt_bpm.text.toString().toLong())
             markButtonDisable(btn_mulai)
             pg_detik.progress = (millisUntilFinished/1000).toInt()
             txt_infobpm.text = "Detak jantung"
+            txt_lanjut.isEnabled = false
         }
 
         override fun onFinish() {
@@ -64,12 +66,27 @@ class PetunjukPemanasan : AppCompatActivity() {
             lyt_prog.visibility = View.GONE
             txt_infobpm.text = "Rata-rata detak jantung"
             txt_bpm_rt.text = arrayHrData.average().toInt().toString()
+            txt_lanjut.isEnabled = true
+            btn_mulai.background = ContextCompat.getDrawable(applicationContext, R.drawable.bg_blue_button)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_petunjuk_pemanasan)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && savedInstanceState == null) {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ), 1
+            )
+        }
+        setupView()
+    }
+
+    private fun setupView() {
         api = PolarBleApiDefaultImpl.defaultImplementation(this, PolarBleApi.ALL_FEATURES)
         api.setPolarFilter(false)
         api.setApiLogger { s -> Log.d(TAG, s) }
@@ -144,17 +161,14 @@ class PetunjukPemanasan : AppCompatActivity() {
             }
         })
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && savedInstanceState == null) {
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ), 1
-            )
-        }
+
 
         btn_mulai.setOnClickListener {
-            timer.start()
+            if (txt_device.text.toString().equals("Device")){
+                Toast.makeText(this, "Koneksikan dengan perangkat terlebih dahulu!", Toast.LENGTH_SHORT).show()
+            }else{
+                timer.start()
+            }
         }
 
         setSupportActionBar(toolbar_petunjukpemanasan)
@@ -165,9 +179,7 @@ class PetunjukPemanasan : AppCompatActivity() {
         }
 
         txt_lanjut.setOnClickListener{
-//            val namaDb = FirebaseDatabase.getInstance().reference.child(name).child("Nama")
-            startActivity(Intent(this, Latihan::class.java))
-            CustomIntent.customType(this, "left-to-right")
+            router.toLatihan(this, txt_bpm_rt.text.toString())
         }
     }
 
@@ -269,12 +281,9 @@ class PetunjukPemanasan : AppCompatActivity() {
         )
     }
 
-
-    @SuppressLint("NewApi")
     fun markButtonDisable(button: Button) {
         button.isEnabled = false
-        //button.setTextColor(R.color.white)
-        button.setBackgroundColor(getColor(R.color.grey))
+        button.background = getDrawable(R.color.grey)
     }
 
 }

@@ -17,8 +17,11 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.polar.R
+import com.example.polar.model.DataLatihan
+import com.example.polar.support.KEY_DATA
 import com.example.polar.support.dialog.DialogLoading
 import com.example.polar.support.mtformat
+import com.example.polar.view.Router
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_latihan.*
 import polar.com.sdk.api.PolarBleApi
@@ -29,14 +32,12 @@ import polar.com.sdk.api.model.PolarDeviceInfo
 import polar.com.sdk.api.model.PolarHrData
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.concurrent.timer
 
 
 class Latihan : AppCompatActivity() {
-
+    private val router by lazy { Router() }
     private val dialogLoading  by lazy { DialogLoading(this) }
-    val bAdapter = BluetoothAdapter.getDefaultAdapter();
-
+    private val bAdapter = BluetoothAdapter.getDefaultAdapter();
     private val TAG = Latihan::class.java.simpleName
     lateinit var api: PolarBleApi
     var DEVICE_ID = "218DDA23" // or bt address like F5:A7:B8:EF:7A:D1 //
@@ -49,15 +50,13 @@ class Latihan : AppCompatActivity() {
     var timeBuffBreak = 0L
     var timeBuffLat = 0L
 
-    val batas = 110
     var totalSeconds = 3600000L
 
     val timerAll= object: CountDownTimer(3600000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             val waktu = String.format("%02d:%02d", ((totalSeconds - millisUntilFinished)/(1000*60))%60, ((totalSeconds - millisUntilFinished)/1000)%60)
             txt_total_durasi.text = waktu
-            markButtonDisable(btn_mulai)
-            if (txt_bpm.text.toString().toInt() < batas){
+            if (txt_bpm.text.toString().toInt() < txt_batas.text.toString().toInt()){
                 if (timeBuffLat != 0L){
                     timeBuffBreak = (millisUntilFinished - timeBuffLat)
                 }else{
@@ -85,8 +84,19 @@ class Latihan : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latihan)
 
-        txt_batas.text = "Batas : " + batas.toString()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && savedInstanceState == null) {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ), 1
+            )
+        }
+        setupView()
+    }
 
+    private fun setupView() {
+        txt_batas.text = intent?.extras?.getString(KEY_DATA)!!
         api = PolarBleApiDefaultImpl.defaultImplementation(this, PolarBleApi.ALL_FEATURES)
         api.setPolarFilter(false)
         api.setApiLogger { s -> Log.d(TAG, s) }
@@ -161,27 +171,38 @@ class Latihan : AppCompatActivity() {
             }
         })
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && savedInstanceState == null) {
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ), 1
-            )
-        }
-
         btn_mulai.setOnClickListener {
-            timerAll.start()
-            val tempDate = Calendar.getInstance().time as Date
-            val jam = mtformat.format(tempDate)
-            txt_jam_mulai.text = jam
+            if (btn_mulai.text.toString().equals("Mulai")){
+                if (txt_device.text.toString().equals("Device")){
+                    Toast.makeText(this, "Koneksikan dengan perangkat terlebih dahulu!", Toast.LENGTH_SHORT).show()
+                }else{
+                    timerAll.start()
+                    markButtonDisable(btn_mulai)
+                    markButtonEnable(btn_selesai)
+                    val tempDate = Calendar.getInstance().time as Date
+                    val jam = mtformat.format(tempDate)
+                    txt_jam_mulai.text = jam
+                }
+            }else{
+                val hasilData = DataLatihan().apply {
+                    jam_mulai = txt_jam_mulai.text.toString()
+                    jam_selesai = txt_jam_selesai.text.toString()
+                    durasi_istirahat = txt_durasi_istirahat.text.toString()
+                    durasi_aktif = txt_durasi_latihan.text.toString()
+                    durasi_total = txt_total_durasi.text.toString()
+                }
+                router.toHasil(this, hasilData)
+            }
         }
 
         btn_selesai.setOnClickListener {
             timerAll.cancel()
+            markButtonEnable(btn_mulai)
+            markButtonDisable(btn_selesai)
             val tempDate = Calendar.getInstance().time as Date
             val jam = mtformat.format(tempDate)
             txt_jam_selesai.text = jam
+            btn_mulai.text = "Lanjut"
         }
 
         setSupportActionBar(toolbar_latihan)
@@ -284,10 +305,13 @@ class Latihan : AppCompatActivity() {
     }
 
 
-    @SuppressLint("NewApi")
     fun markButtonDisable(button: Button) {
         button.isEnabled = false
-        //button.setTextColor(R.color.white)
-        button.setBackgroundColor(getColor(R.color.grey))
+        button.background = getDrawable(R.color.grey)
+    }
+
+    fun markButtonEnable(button: Button) {
+        button.isEnabled = true
+        button.background = getDrawable(R.drawable.bg_blue_button)
     }
 }

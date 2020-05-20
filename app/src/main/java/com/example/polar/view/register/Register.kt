@@ -8,6 +8,8 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.dev.materialspinner.MaterialSpinner
 import com.example.polar.R
+import com.example.polar.model.Profil
+import com.example.polar.support.PATH_PROFILE
 import com.example.polar.support.REGISTER_BERHASIL
 import com.example.polar.support.REGISTER_GAGAL
 import com.example.polar.support.dateDialog
@@ -16,9 +18,6 @@ import com.example.polar.view.landingpage.LandingPage
 import com.example.polar.view.login.Login
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
 import maes.tech.intentanim.CustomIntent
@@ -27,8 +26,6 @@ import maes.tech.intentanim.CustomIntent
 class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private val dialogLoading  by lazy { DialogLoading(this) }
     private lateinit var auth: FirebaseAuth
-    var uid: String? = null
-    lateinit var user : FirebaseUser
     private var list_of_items = arrayOf("Pilih jenis olahraga",
         "Lari",
         "Lari Jarak Pendek",
@@ -42,6 +39,12 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        setupView()
+    }
+
+    private fun setupView() {
+
         auth = FirebaseAuth.getInstance()
 
         btn_lanjut.setOnClickListener{
@@ -67,10 +70,6 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner!!.setAdapter(aa)
 
-        setupButton()
-    }
-
-    private fun setupButton() {
         btn_register.setOnClickListener {
             dialogLoading.showDialog(true)
             val name = edt_nama.text.toString()
@@ -91,31 +90,27 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
 
-                        user = FirebaseAuth.getInstance().currentUser!!
-                        uid = user.uid
-
-                        val profile = hashMapOf(
-                            "nama" to name,
-                            "tinggi" to height,
-                            "berat" to weight,
-                            "ttl" to birthdate,
-                            "jenis_olahraga" to sportValue
-                        )
-
+                        val uid = FirebaseAuth.getInstance().currentUser!!.uid
                         val db = FirebaseFirestore.getInstance()
-
-                        db.collection(uid!!).document("profile")
-                            .set(profile)
+                        val docRef = db.collection(uid).document(PATH_PROFILE)
+                        val profile = Profil().apply {
+                            nama = name
+                            tinggi = height
+                            berat = weight
+                            ttl = birthdate
+                            jenis_olahraga = sportValue
+                        }
+                        docRef.set(profile)
                             .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                             .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
 
-                        val muridnya_pelatih = hashMapOf(
-                            "murid" to uid
-                        )
-                        db.collection(coach).document("murid")
-                            .set(muridnya_pelatih)
-                            .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+//                        val muridnya_pelatih = hashMapOf(
+//                            "murid" to uid
+//                        )
+//                        db.collection(coach).document("murid")
+//                            .set(muridnya_pelatih)
+//                            .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
+//                            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
 
 
                         startActivity(Intent(this, Login::class.java))

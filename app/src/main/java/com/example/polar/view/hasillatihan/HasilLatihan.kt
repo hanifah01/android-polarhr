@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.polar.R
+import com.example.polar.support.adapter.HasilLatihanAdapter
 
 class HasilLatihan : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView

@@ -8,9 +8,25 @@ import kotlinx.android.parcel.Parcelize
 @Keep
 @Parcelize
 data class Profil(
-    @SerializedName("berat") var berat: String= "",
-    @SerializedName("jenis_olahraga") var jenis_olahraga: String= "",
-    @SerializedName("nama") var nama: String= "",
-    @SerializedName("tinggi") var tinggi: String= "",
-    @SerializedName("ttl") var ttl : String= ""
+    @SerializedName("berat") var berat: String?= "",
+    @SerializedName("jenis_olahraga") var jenis_olahraga: String?= "",
+    @SerializedName("nama") var nama: String?= "",
+    @SerializedName("tinggi") var tinggi: String?= "",
+    @SerializedName("ttl") var ttl : String?= ""
+) : Parcelable
+
+@Keep
+@Parcelize
+data class DataLatihan(
+    @SerializedName("tanggal_latihan") var tanggal_latihan: String?= "",
+    @SerializedName("jam_mulai") var jam_mulai: String?= "",
+    @SerializedName("jam_selesai") var jam_selesai: String?= "",
+    @SerializedName("durasi_aktif") var durasi_aktif: String?= "",
+    @SerializedName("durasi_istirahat") var durasi_istirahat : String?= "",
+    @SerializedName("durasi_total") var durasi_total: String?= "",
+    @SerializedName("intensitas") var intensitas : String?= "",
+    @SerializedName("peak_hrp") var peak_hrp: String?= "",
+    @SerializedName("heart_rate_reserve") var heart_rate_reserve: String?= "",
+    @SerializedName("dosis_latihan") var dosis_latihan : String?= "",
+    @SerializedName("kualitas_pelatihan") var kualitas_pelatihan: String?= ""
 ) : Parcelable

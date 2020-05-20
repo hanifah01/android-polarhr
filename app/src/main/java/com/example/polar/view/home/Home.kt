@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.polar.R
 import com.example.polar.model.Profil
+import com.example.polar.support.PATH_PROFILE
 import com.example.polar.support.TinyDB
 import com.example.polar.support.toObject
 import com.example.polar.view.hasillatihan.HasilLatihan
@@ -36,6 +37,10 @@ class Home : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        setupView()
+    }
+
+    private fun setupView() {
         tinydb = TinyDB(this)
 
         setSupportActionBar(toolbar_home)
@@ -56,14 +61,12 @@ class Home : AppCompatActivity() {
         getData()
     }
 
-    @SuppressLint("NewApi")
     fun getData(){
-        val user = FirebaseAuth.getInstance().currentUser!!
-        val uid = user.uid
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
         val db = FirebaseFirestore.getInstance()
-        val docRef = db.collection(uid).document("profile")
+        val docRef = db.collection(uid).document(PATH_PROFILE)
         docRef.get().addOnSuccessListener { document ->
-            if (document != null) {
+            if (document.exists()) {
                 val data = JSONObject(document.data).toObject(Profil::class.java)
                 atlit_name.text = "Halo, "+ data.nama
                 tv_tb.text = data.tinggi + " cm"
@@ -75,8 +78,8 @@ class Home : AppCompatActivity() {
         }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun calculateAge(strdate : String){
+    @SuppressLint("NewApi")
+    fun calculateAge(strdate : String?){
         val ttl = LocalDate.parse(strdate)
         val currentDateTime = LocalDateTime.now()
         val difference = ChronoUnit.YEARS.between(ttl, currentDateTime)

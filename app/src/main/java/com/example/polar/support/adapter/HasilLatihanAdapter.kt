@@ -1,4 +1,4 @@
-package com.example.polar.view.hasillatihan
+package com.example.polar.support.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

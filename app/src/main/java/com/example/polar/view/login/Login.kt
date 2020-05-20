@@ -31,6 +31,11 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        setupView()
+    }
+
+    private fun setupView() {
         tinydb = TinyDB(this)
         statLogin = tinydb.getBoolean("login")
         if (statLogin as Boolean) {
@@ -65,8 +70,6 @@ class Login : AppCompatActivity() {
                 }
             }
         }
-
-
     }
 
     private var doubleBackToExitPressedOnce = false
