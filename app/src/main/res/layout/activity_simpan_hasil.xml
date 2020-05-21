@@ -298,7 +298,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
+                android:fontFamily="@font/montserrat_light"
                 android:gravity="center"
                 android:text="Dosis Latihan"
                 android:textColor="@color/blue"
@@ -308,9 +308,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
+                android:fontFamily="@font/montserrat_light"
                 android:gravity="center"
                 android:text="Kualitas Pelatihan"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_medium" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat_light"
+                android:gravity="center"
+                android:text="Parsial Intensitas"
                 android:textColor="@color/blue"
                 android:textSize="@dimen/font_medium" />
         </TableRow>
@@ -333,6 +342,16 @@
 
             <TextView
                 android:id="@+id/tv_kualitas_pelatihan2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center"
+                android:text="65%"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_large" />
+            <TextView
+                android:id="@+id/tv_parsial_intensitas"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
