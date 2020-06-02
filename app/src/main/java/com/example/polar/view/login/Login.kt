@@ -72,25 +72,9 @@ class Login : AppCompatActivity() {
         }
     }
 
-    private var doubleBackToExitPressedOnce = false
     override fun onBackPressed() {
-        val intent = Intent(this@Login, LandingPage::class.java)
-        startActivity(intent)
-        finish()
-        /*if (doubleBackToExitPressedOnce) {
-            super.onBackPressed()
-            moveTaskToBack(true)
-            exitProcess(-1)
-            finish()
-            return
-        }
-
-        this.doubleBackToExitPressedOnce = true
-        Toast.makeText(this, "Press back button again to exit", Toast.LENGTH_SHORT).show()
-
-        Handler().postDelayed(Runnable {
-            doubleBackToExitPressedOnce = false
-        }, 2000)*/
+        startActivity(Intent(this, LandingPage::class.java))
+        CustomIntent.customType(this, "right-to-left")
     }
 
 }

@@ -51,7 +51,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/profil"
             android:textColor="@color/white"
@@ -73,17 +73,17 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
-                    android:text="@string/tinggi_badan"
+                    android:text="@string/pelatih"
                     android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tv_tb"
+                    android:id="@+id/tv_pelatih"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
@@ -92,10 +92,31 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:layout_marginTop="@dimen/small"
+                    android:text="@string/tinggi_badan"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView1" />
+
+                <TextView
+                    android:id="@+id/tv_tb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:layout_marginTop="@dimen/small"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView1" />
+
+                <TextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/small"
                     android:fontFamily="@font/montserrat"
                     android:text="@string/berat_badan"
                     android:textColor="@color/white"
@@ -106,7 +127,7 @@
                     android:id="@+id/tv_bb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/small"
                     android:fontFamily="@font/montserrat"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +137,7 @@
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/small"
                     android:fontFamily="@font/montserrat"
                     android:text="@string/hrmax"
                     android:textColor="@color/white"
@@ -128,7 +149,7 @@
                     android:id="@+id/tv_hrmax"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/small"
                     android:fontFamily="@font/montserrat"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -154,7 +175,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/small"
         android:layout_marginBottom="20dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
@@ -167,11 +188,9 @@
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="@dimen/medium"
             app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
+            app:cardElevation="@dimen/tiny"
             android:layout_weight="1"
             android:dividerHeight="0.0px"
             android:clipToPadding="false"
@@ -205,11 +224,9 @@
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="@dimen/medium"
             app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
+            app:cardElevation="@dimen/tiny"
             android:layout_weight="1"
             android:dividerHeight="0.0px"
             android:clipToPadding="false"

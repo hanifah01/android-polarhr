@@ -9,3 +9,5 @@ const val KEY_DATA = "data"
 
 const val PATH_PROFILE = "profile"
 const val PATH_LATIHAN = "latihan"
+const val PATH_PELATIH = "Pelatih"
+const val PATH_ATLIT = "Atlit"

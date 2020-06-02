@@ -38,26 +38,46 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="horizontal"
+           android:gravity="center_vertical"
            android:layout_marginTop="10dp"
            android:layout_marginLeft="30dp"
            android:layout_marginRight="30dp">
            <ImageView
                android:id="@+id/img_calendar_latihan"
-               android:layout_width="35dp"
-               android:layout_height="35dp"
-               android:src="@drawable/ic_date_white_24dp"/>
-           <EditText
-               android:id="@+id/edt_calendar"
+               android:layout_width="@dimen/xxklarge"
+               android:layout_height="@dimen/xxklarge"
+               android:background="@drawable/bg_blue_line"
+               android:elevation="@dimen/small"
+               android:src="@drawable/ic_calendar"
+               android:padding="@dimen/semi_small"
+               android:layout_gravity="center"/>
+           <LinearLayout
                android:layout_width="match_parent"
-               android:layout_height="35dp"
-               android:textSize="15sp"
-               android:hint="yyyy-MM-dd"
-               android:textColor="@color/white"
-               android:fontFamily="@font/montserrat_medium"
+               android:layout_height="match_parent"
                android:background="@drawable/bg_transparent"
-               android:gravity="center_vertical"
-               android:paddingLeft="15dp"
-               android:layout_marginLeft="5dp" />
+               android:layout_marginLeft="@dimen/semi_small"
+               android:orientation="horizontal">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:textSize="15sp"
+                   android:text="Pilih tanggal : "
+                   android:textColor="@color/white"
+                   android:fontFamily="@font/montserrat_medium"
+                   android:gravity="center_vertical"
+                   android:paddingLeft="15dp" />
+
+               <TextView
+                   android:id="@+id/edt_calendar"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:textSize="15sp"
+                   android:text="-"
+                   android:textColor="@color/white"
+                   android:fontFamily="@font/montserrat_medium"
+                   android:gravity="center_vertical"
+                   android:layout_marginLeft="@dimen/tiny"/>
+           </LinearLayout>
 
        </LinearLayout>
         <TextView
@@ -92,7 +112,7 @@
             android:layout_gravity="top|center"
             android:orientation="vertical"
             android:fillViewport="true">
-            <!--<TextView
+            <TextView
                 android:id="@+id/data_kosong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,7 +122,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:visibility="gone"/>-->
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:id="@+id/lyt_cardview"
@@ -130,9 +150,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
+                                android:id="@+id/txt_resume_tanggal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Resume latihan 25 Maret 2020"
+                                android:text="Resume latihan -"
                                 android:textSize="15sp"
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_bold"/>
@@ -585,6 +606,7 @@
                     android:id="@+id/cardview5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/medium"
                     android:layout_marginRight="30dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="15dp">

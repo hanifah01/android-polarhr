@@ -15,14 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher2_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeBlue">
+        <activity android:name=".view.hasillatihan.DetailLatihan"></activity>
         <activity
             android:name=".view.home.Home"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".view.hasillatihan.HasilLatihan"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".view.latihan.PetunjukPemanasan"
             android:screenOrientation="portrait"

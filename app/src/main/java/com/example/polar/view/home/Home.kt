@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.polar.R
 import com.example.polar.model.Profil
+import com.example.polar.support.PATH_PELATIH
 import com.example.polar.support.PATH_PROFILE
 import com.example.polar.support.TinyDB
 import com.example.polar.support.toObject
@@ -68,10 +69,15 @@ class Home : AppCompatActivity() {
         docRef.get().addOnSuccessListener { document ->
             if (document.exists()) {
                 val data = JSONObject(document.data).toObject(Profil::class.java)
-                atlit_name.text = "Halo, "+ data.nama
-                tv_tb.text = data.tinggi + " cm"
-                tv_bb.text = data.berat + " kg"
-                calculateAge(data.ttl)
+                if (data.pengguna == PATH_PELATIH){
+
+                }
+                else {
+                    atlit_name.text = "Halo, " + data.nama
+                    tv_tb.text = data.tinggi + " cm"
+                    tv_bb.text = data.berat + " kg"
+                    calculateAge(data.ttl)
+                }
             } else {
                 Log.d("TAG", "No such document")
             }

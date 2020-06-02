@@ -3,23 +3,24 @@ package com.example.polar.view.hasillatihan
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.util.Log.d
 import android.view.View
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.polar.R
 import com.example.polar.model.DataLatihan
-import com.example.polar.support.adapter.HasilLatihanAdapter
+import com.example.polar.model.Profil
 import com.example.polar.support.dateDialog
+import com.example.polar.support.dateDialogHasil
+import com.example.polar.support.dialog.DialogLoading
 import com.example.polar.support.requestDate
+import com.example.polar.support.toObject
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_hasil_latihan.*
+import org.json.JSONObject
 
 class HasilLatihan : AppCompatActivity() {
-    private lateinit var data : DataLatihan
 
+    private val dialogLoading  by lazy { DialogLoading(this) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hasil_latihan)
@@ -38,12 +39,16 @@ class HasilLatihan : AppCompatActivity() {
     private fun setupView() {
         edt_calendar.text = null
         img_calendar_latihan.setOnClickListener{
-            dateDialog(edt_calendar, this)
+            dateDialogHasil(edt_calendar, this)
         }
-
-        tampilkan.setOnClickListener(View.OnClickListener {
-            tampilData()
-        })
+        tampilData(requestDate())
+        tampilkan.setOnClickListener{
+            if (edt_calendar.text.toString().equals("")){
+                Toast.makeText(this, "Tanggal belum dipilih!", Toast.LENGTH_LONG).show()
+            }else{
+                tampilData(edt_calendar.text.toString())
+            }
+        }
 
     }
 
@@ -52,56 +57,22 @@ class HasilLatihan : AppCompatActivity() {
         return true
     }
 
-    fun tampilData(){
-        //val uid = FirebaseAuth.getInstance().currentUser!!.uid
-        val uid =  "wvFDqnsg0ncgAJ6ILDg7Sxz6ncL2"
+    fun tampilData(date: String){
+        dialogLoading.showDialog(true)
+        txt_resume_tanggal.text = "Resume latihan " +  date
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
         val db = FirebaseFirestore.getInstance()
-        val docRef = db.collection(uid).document("Rab-05-2020"+"_1")
+        val docRef = db.collection(uid).document(date+"_1")
         docRef.get().addOnSuccessListener { document ->
-            tv_hasil_durasi1.text = document.data?.get("durasi_total").toString()
-            tv_hasil_kualitas1.text = document.data?.get("kualitas_pelatihan").toString()
             if (document.exists()) {
-                val docRef = db.collection(uid).document("Rab-05-2020"+"_2")
-                docRef.get().addOnSuccessListener { document ->
-                    if (document.exists()) {
-                        val docRef = db.collection(uid).document("Rab-05-2020"+"_3")
-                        docRef.get().addOnSuccessListener { document ->
-                            if (document.exists()) {
-                                val docRef = db.collection(uid).document("Rab-05-2020"+"_4")
-                                docRef.get().addOnSuccessListener { document ->
-                                    if (document.exists()) {
-                                        val docRef = db.collection(uid).document("Rab-05-2020"+"_5")
-                                        docRef.get().addOnSuccessListener { document ->
-                                            if (document.exists()) {
-                                                Toast.makeText(this, "Latihan maksimal 5x sehari!", Toast.LENGTH_LONG).show()
-                                            } else {
-                                                docRef.set(data)
-                                                    .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                                                    .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                                            }
-                                        }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
-                                    } else {
-                                        docRef.set(data)
-                                            .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                                            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                                    }
-                                }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
-                            } else {
-                                docRef.set(data)
-                                    .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                                    .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                            }
-                        }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
-                    } else {
-                        docRef.set(data)
-                            .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-                    }
-                }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
+                val data = JSONObject(document.data).toObject(DataLatihan::class.java)
+                lyt_cardview.visibility = View.VISIBLE
+                data_kosong.visibility = View.GONE
+                dialogLoading.showDialog(false)
             } else {
-                docRef.set(data)
-                    .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                    .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+                lyt_cardview.visibility = View.GONE
+                data_kosong.visibility = View.VISIBLE
+                dialogLoading.showDialog(false)
             }
         }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
     }

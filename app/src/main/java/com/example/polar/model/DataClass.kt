@@ -8,11 +8,20 @@ import kotlinx.android.parcel.Parcelize
 @Keep
 @Parcelize
 data class Profil(
+    @SerializedName("penggunga") var pengguna : String?= "",
     @SerializedName("berat") var berat: String?= "",
     @SerializedName("jenis_olahraga") var jenis_olahraga: String?= "",
     @SerializedName("nama") var nama: String?= "",
     @SerializedName("tinggi") var tinggi: String?= "",
     @SerializedName("ttl") var ttl : String?= ""
+) : Parcelable
+
+@Keep
+@Parcelize
+data class Murid(
+    @SerializedName("Atlit_1") var atlit1 : String?= "",
+    @SerializedName("Atlit_2") var atlit2: String?= "",
+    @SerializedName("Atlit_3") var atlit3: String?= ""
 ) : Parcelable
 
 @Keep

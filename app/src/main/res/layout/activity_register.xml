@@ -66,110 +66,152 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lyt_judul"
             android:orientation="vertical"
-            android:layout_marginTop="30dp"
-            android:visibility="gone">
+            android:layout_marginTop="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:background="@drawable/border">
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/xxxklarge"
+                    android:id="@+id/spinner_pelatih_atlit"
+                    android:paddingStart="3dp">
+                </androidx.appcompat.widget.AppCompatSpinner>
+            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout1"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_nama"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/xxxklarge"
-                    android:hint="Nama"
                     android:fontFamily="@font/montserrat"
+                    android:hint="Nama"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_medium" />
             </com.google.android.material.textfield.TextInputLayout>
-            <LinearLayout
-                android:id="@+id/lyt_birthdate"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="4"
-                android:layout_marginTop="10dp">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout2"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4">
-                    <com.google.android.material.textfield.TextInputEditText
+            <LinearLayout
+                android:id="@+id/lyt_regis_atlit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/lyt_birthdate"
+                    android:layout_height="@dimen/xxxklarge"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/border"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/img_calendar"
+                        android:layout_width="@dimen/xxklarge"
+                        android:layout_height="@dimen/xxklarge"
+                        android:background="@drawable/bg_blue_line"
+                        android:elevation="@dimen/small"
+                        android:src="@drawable/ic_calendar"
+                        android:padding="@dimen/semi_small"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/small" />
+
+                    <TextView
+                        android:id="@+id/txt_edt_birthdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/medium"
+                        android:text="Tanggal lahir : "
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_medium"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/edt_birthdate"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/xxxklarge"
-                        android:fontFamily="@font/montserrat"
-                        android:hint="Tanggal Lahir(YYYY-mm-dd)"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/font_medium" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:text=""
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_medium"/>
+                </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/img_calendar"
-                    android:layout_width="@dimen/xxlarge"
-                    android:layout_height="@dimen/xxlarge"
-                    android:src="@drawable/ic_calendar"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="8dp" />
-            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lyt_weight_height"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="10dp">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout3"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp">
 
-            <LinearLayout
-                android:id="@+id/lyt_weight_height"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginTop="10dp">
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout3"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="wrap_content"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_height"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/xxxklarge"
+                            android:hint="Tinggi(cm)"
+                            android:imeOptions="actionNext"
+                            android:fontFamily="@font/montserrat"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/font_medium"
+                            android:inputType="number"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout4"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_weight"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/xxxklarge"
+                            android:hint="Berat Badan(kg)"
+                            android:imeOptions="actionNext"
+                            android:fontFamily="@font/montserrat"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/font_medium"
+                            android:inputType="number"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edt_height"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:background="@drawable/border">
+                    <androidx.appcompat.widget.AppCompatSpinner
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/xxxklarge"
-                        android:hint="Tinggi Badan(cm)"
-                        android:fontFamily="@font/montserrat"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/font_medium"
-                        android:inputType="number"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout4"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edt_weight"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/xxxklarge"
-                        android:hint="Berat Badan(kg)"
-                        android:fontFamily="@font/montserrat"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/font_medium"
-                        android:inputType="number"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:id="@+id/spinner_olahraga"
+                        android:paddingStart="3dp">
+                    </androidx.appcompat.widget.AppCompatSpinner>
+                </LinearLayout>
             </LinearLayout>
-
-            <com.dev.materialspinner.MaterialSpinner
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/xxxklarge"
-                android:id="@+id/material_spinner"
-                android:layout_marginTop="10dp">
-            </com.dev.materialspinner.MaterialSpinner>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -214,8 +256,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lyt_form"
-            android:visibility="gone">
+            app:layout_constraintTop_toBottomOf="@+id/lyt_form">
 
             <Button
                 android:id="@+id/btn_register"
@@ -229,65 +270,6 @@
                 android:textColor="@color/white" />
 
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lyt_namapelatih"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lyt_judul"
-            android:orientation="vertical"
-            android:layout_marginTop="30dp">
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/entry_pelatih"
-                android:textSize="@dimen/font_medium"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/montserrat"
-                android:layout_marginBottom="10dp"
-                android:textColor="@color/black"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_namapelatih"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/xxxklarge"
-                    android:hint="Nama Pelatih"
-                    android:imeOptions="actionDone"
-                    android:fontFamily="@font/montserrat"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/font_medium" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lyt_btn_pelatih"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lyt_namapelatih">
-
-            <Button
-                android:id="@+id/btn_lanjut"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/bg_blue_button"
-                android:text="@string/lanjut"
-                android:textAllCaps="false"
-                android:fontFamily="@font/montserrat"
-                android:textColor="@color/white" />
-
-        </LinearLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

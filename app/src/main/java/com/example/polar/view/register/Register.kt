@@ -4,37 +4,52 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.dev.materialspinner.MaterialSpinner
+import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import com.example.polar.R
+import com.example.polar.model.Murid
 import com.example.polar.model.Profil
-import com.example.polar.support.PATH_PROFILE
-import com.example.polar.support.REGISTER_BERHASIL
-import com.example.polar.support.REGISTER_GAGAL
-import com.example.polar.support.dateDialog
+import com.example.polar.support.*
 import com.example.polar.support.dialog.DialogLoading
 import com.example.polar.view.landingpage.LandingPage
 import com.example.polar.view.login.Login
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
 import maes.tech.intentanim.CustomIntent
+import org.json.JSONObject
+import java.util.List
 
 
-class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class Register : AppCompatActivity(){
     private val dialogLoading  by lazy { DialogLoading(this) }
     private lateinit var auth: FirebaseAuth
-    private var list_of_items = arrayOf("Pilih jenis olahraga",
+    private var item_olahraga = arrayOf(
         "Lari",
         "Lari Jarak Pendek",
         "Lari Jarak Menengah",
         "Lari Jarak Jauh",
-        "Lari Estafet")
-    private lateinit var spinner : MaterialSpinner
+        "Lari Estafet",
+        "Pilih jenis olahraga"
+    )
+
+    private var item_sebagai = arrayOf(
+        "Pelatih",
+        "Atlit",
+        "Pilih pengguna"
+    )
+
 
     var sportValue : String? = null
+    var userValue : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,29 +61,64 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private fun setupView() {
 
         auth = FirebaseAuth.getInstance()
-
-        btn_lanjut.setOnClickListener{
-            val namapelatih = edt_namapelatih.text.toString()
-            if(namapelatih.equals("")){
-                Toast.makeText(this, "Nama pelatih kosong!", Toast.LENGTH_LONG).show()
-            }
-            else{
-                lyt_form.visibility = View.VISIBLE
-                lyt_btn_register.visibility = View.VISIBLE
-
-                lyt_namapelatih.visibility= View.GONE
-                lyt_btn_pelatih.visibility= View.GONE
-            }
-        }
         img_calendar.setOnClickListener{
             dateDialog(edt_birthdate, this)
+            txt_edt_birthdate.setTextColor(ContextCompat.getColor(this, R.color.black))
+            edt_birthdate.setTextColor(ContextCompat.getColor(this, R.color.black))
         }
 
-        spinner = findViewById(R.id.material_spinner)
-        spinner.getSpinner().onItemSelectedListener = this
-        val aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, list_of_items)
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner!!.setAdapter(aa)
+        val adapterPengguna = object : ArrayAdapter<String?>(this, android.R.layout.simple_spinner_dropdown_item, item_sebagai) {
+            override fun getView(
+                position: Int,
+                convertView: View?,
+                parent: ViewGroup
+            ): View {
+                val v = super.getView(position, convertView, parent)
+                if (position == count) {
+                    (v.findViewById<View>(android.R.id.text1) as TextView).text = ""
+                    (v.findViewById<View>(android.R.id.text1) as TextView).hint = getItem(count) //"Hint to be displayed"
+                }
+                return v
+            }
+            override fun getCount(): Int {
+                return super.getCount() - 1
+            }
+        }
+        adapterPengguna.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_pelatih_atlit.adapter = adapterPengguna
+        spinner_pelatih_atlit.setSelection(adapterPengguna.count)
+        spinner_pelatih_atlit.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, i: Int, l: Long) {
+                when(i){
+                    0 -> lyt_regis_atlit.visibility = View.GONE
+                    else -> lyt_regis_atlit.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+        }
+
+        val adapterOlahraga = object : ArrayAdapter<String?>(this, android.R.layout.simple_spinner_dropdown_item, item_olahraga) {
+            override fun getView(
+                position: Int,
+                convertView: View?,
+                parent: ViewGroup
+            ): View {
+                val v = super.getView(position, convertView, parent)
+                if (position == count) {
+                    (v.findViewById<View>(android.R.id.text1) as TextView).text = ""
+                    (v.findViewById<View>(android.R.id.text1) as TextView).hint = getItem(count) //"Hint to be displayed"
+                }
+                return v
+            }
+            override fun getCount(): Int {
+                return super.getCount() - 1
+            }
+        }
+        adapterOlahraga.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_olahraga.adapter = adapterOlahraga
+        spinner_olahraga.setSelection(adapterOlahraga.count)
+
 
         btn_register.setOnClickListener {
             dialogLoading.showDialog(true)
@@ -76,14 +126,19 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val birthdate = edt_birthdate.text.toString()
             val height = edt_height.text.toString()
             val weight = edt_weight.text.toString()
-            val coach = edt_namapelatih.text.toString()
 
             val email = edt_email.text.toString()
             val pass = edt_pass.text.toString()
+            sportValue = spinner_olahraga.selectedItem.toString()
+            userValue = spinner_pelatih_atlit.selectedItem.toString()
 
-            if (pass.equals("") || email.equals("") || name.equals("") || height.equals("")||
-                weight.equals("")||birthdate.equals("")||sportValue.equals("Pilih jenis olahraga")){
-                Toast.makeText(this, "Field ada yang kosong!", Toast.LENGTH_LONG).show()
+            if (userValue == PATH_PELATIH && (pass.equals("") || email.equals("") || name.equals(""))){
+                Toast.makeText(this, getString(R.string.field_kosong), Toast.LENGTH_LONG).show()
+                dialogLoading.showDialog(false)
+            }
+            else if (userValue == PATH_ATLIT && (pass.equals("") || email.equals("") || name.equals("") || height.equals("")||
+                weight.equals("")||birthdate.equals("")||sportValue.equals(getString(R.string.pilih_jenis_olahraga)))){
+                Toast.makeText(this, getString(R.string.field_kosong), Toast.LENGTH_LONG).show()
                 dialogLoading.showDialog(false)
             }
             else {
@@ -94,6 +149,7 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         val db = FirebaseFirestore.getInstance()
                         val docRef = db.collection(uid).document(PATH_PROFILE)
                         val profile = Profil().apply {
+                            pengguna = userValue
                             nama = name
                             tinggi = height
                             berat = weight
@@ -104,14 +160,13 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                             .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                             .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
 
-//                        val muridnya_pelatih = hashMapOf(
-//                            "murid" to uid
-//                        )
-//                        db.collection(coach).document("murid")
-//                            .set(muridnya_pelatih)
-//                            .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-//                            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
-
+                        val murid = Murid()
+                        val docRefPelatih = db.collection(PATH_PELATIH).document(name)
+                        if (userValue == PATH_PELATIH){
+                            docRefPelatih.set(murid)
+                                .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully updated!") }
+                                .addOnFailureListener { e -> Log.w("TAG", "Error updating document", e) }
+                        }
 
                         startActivity(Intent(this, Login::class.java))
                         CustomIntent.customType(this, "right-to-left")
@@ -125,23 +180,6 @@ class Register : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 }
             }
         }
-    }
-
-    override  fun onItemSelected(arg0: AdapterView<*>, arg1: View, position: Int, id: Long) {
-        val spinnerSport = arg0.getItemAtPosition(position).toString()
-        sportValue = spinnerSport
-        if(position == 0)
-        {
-            spinner.setError("Pilih jenis olahraga")
-        }
-        else
-        {
-            spinner.setErrorEnabled(false)
-            spinner.setLabel("Olahraga")
-        }
-    }
-
-    override fun onNothingSelected(arg0: AdapterView<*>) {
     }
 
     override fun onBackPressed() {

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.widget.EditText
+import android.widget.TextView
 import com.google.gson.Gson
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -13,7 +14,7 @@ import java.util.*
 val mtformat = SimpleDateFormat("HH:mm")
 val mdformat = SimpleDateFormat("yyyy-MM-dd")
 
-fun dateDialog(editText: EditText, context: Context) {
+fun dateDialog(editText: TextView, context: Context) {
     val newCalendar = Calendar.getInstance()
     val datePickerDialog = DatePickerDialog(
         context,
@@ -26,12 +27,29 @@ fun dateDialog(editText: EditText, context: Context) {
         newCalendar[Calendar.MONTH],
         newCalendar[Calendar.DAY_OF_MONTH]
     )
-    datePickerDialog!!.show()
+    datePickerDialog.show()
+}
+
+val mdformatHasil = SimpleDateFormat("E,dd-MM-yyyy")
+fun dateDialogHasil(editText: TextView, context: Context) {
+    val newCalendar = Calendar.getInstance()
+    val datePickerDialog = DatePickerDialog(
+        context,
+        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val newDate = Calendar.getInstance()
+            newDate[year, monthOfYear] = dayOfMonth
+            editText.setText(mdformatHasil.format(newDate.time))
+        },
+        newCalendar[Calendar.YEAR],
+        newCalendar[Calendar.MONTH],
+        newCalendar[Calendar.DAY_OF_MONTH]
+    )
+    datePickerDialog.show()
 }
 
 fun requestDate(): String {
     val unixTime = System.currentTimeMillis()
-    val mdformat = SimpleDateFormat("E-MM-yyyy")
+    val mdformat = SimpleDateFormat("E,dd-MM-yyyy")
     return mdformat.format(Date(unixTime))
 }
 
