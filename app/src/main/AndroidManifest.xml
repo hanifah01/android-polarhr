@@ -17,6 +17,10 @@
         android:theme="@style/AppThemeBlue">
         <activity android:name=".view.hasillatihan.DetailLatihan"></activity>
         <activity
+            android:name=".view.pelatih.HomePelatih"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".view.home.Home"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
