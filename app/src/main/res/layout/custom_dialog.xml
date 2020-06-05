@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Latihan sudah 5 kali"
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat"
+            android:textSize="16dp"
+            android:textAlignment="center"/>
+
+        <!--<TextView
+            android:id="@+id/tvBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="body"
+            android:textColor="@color/black" />-->
+
+        <TextView
+            android:id="@+id/btn_yes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@android:color/white"
+            android:clickable="true"
+            android:text="OK"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat"
+            android:textSize="14dp"
+            android:textAlignment="center"/>
+    </LinearLayout>
+</FrameLayout>
