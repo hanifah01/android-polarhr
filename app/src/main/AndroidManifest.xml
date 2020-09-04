@@ -20,6 +20,10 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
+            android:name=".view.pelatih.HomePelatih"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".view.home.Home"
             android:theme="@style/AppThemeBlue"
             android:screenOrientation="portrait"

@@ -28,4 +28,14 @@
     <string name="field_kosong">Field ada yang kosong!</string>
     <string name="pelatih">Pelatih</string>
 
+    <string name="durasi_aktif">Durasi Aktif</string>
+    <string name="durasi_istirahat">Durasi Istirahat</string>
+    <string name="durasi_total">Durasi Total</string>
+    <string name="dosis_latihan">Dosis Latihan</string>
+    <string name="kualitas_latihan">Kualitas Latihan</string>
+    <string name="jam_mulai">Jam Mulai</string>
+    <string name="jam_selesai">Jam Selesai</string>
+    <string name="hrr">Heart Rate Reserve</string>
+    <string name="peak_hrp">Peak HRP</string>
+
 </resources>

@@ -1,8 +1,13 @@
 package com.example.polar.view.latihan
 
+import android.app.Dialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import com.example.polar.R
 import com.example.polar.model.DataLatihan
@@ -11,9 +16,11 @@ import com.example.polar.support.PATH_LATIHAN
 import com.example.polar.support.PATH_PROFILE
 import com.example.polar.support.requestDate
 import com.example.polar.view.hasillatihan.HasilLatihan
+import com.example.polar.view.home.Home
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_simpan_hasil.*
+import maes.tech.intentanim.CustomIntent
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -58,7 +65,8 @@ class SimpanHasil : AppCompatActivity() {
                                         val docRef = db.collection(uid).document(requestDate()+"_5")
                                         docRef.get().addOnSuccessListener { document ->
                                             if (document.exists()) {
-                                                Toast.makeText(this, "Latihan maksimal 5x sehari!", Toast.LENGTH_LONG).show()
+                                                showDialog()
+                                                //Toast.makeText(this, "Latihan maksimal 5x sehari!", Toast.LENGTH_LONG).show()
                                             } else {
                                                 docRef.set(data)
                                                     .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
@@ -94,5 +102,21 @@ class SimpanHasil : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+
+    fun showDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.custom_dialog)
+        val yesBtn = dialog.findViewById(R.id.btn_yes) as TextView
+        yesBtn.setOnClickListener {
+            //dialog.dismiss()
+            startActivity(Intent(this, Home::class.java))
+            CustomIntent.customType(this, "left-to-right")
+        }
+        dialog.show()
+
     }
 }
