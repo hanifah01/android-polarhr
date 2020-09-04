@@ -16,6 +16,7 @@ import com.example.polar.support.toObject
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_hasil_latihan.*
+import maes.tech.intentanim.CustomIntent
 import org.json.JSONObject
 
 class HasilLatihan : AppCompatActivity() {
@@ -54,11 +55,12 @@ class HasilLatihan : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
+//        CustomIntent.customType(this, "right-to-left")
         return true
     }
 
     fun tampilData(date: String){
-        dialogLoading.showDialog(true)
+        dialogLoading.show(true)
         txt_resume_tanggal.text = "Resume latihan " +  date
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
         val db = FirebaseFirestore.getInstance()
@@ -68,12 +70,17 @@ class HasilLatihan : AppCompatActivity() {
                 val data = JSONObject(document.data).toObject(DataLatihan::class.java)
                 lyt_cardview.visibility = View.VISIBLE
                 data_kosong.visibility = View.GONE
-                dialogLoading.showDialog(false)
+                dialogLoading.show(false)
             } else {
                 lyt_cardview.visibility = View.GONE
                 data_kosong.visibility = View.VISIBLE
-                dialogLoading.showDialog(false)
+                dialogLoading.show(false)
             }
         }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+//        CustomIntent.customType(this, "right-to-left")
     }
 }

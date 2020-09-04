@@ -8,17 +8,14 @@ import com.example.polar.R
 import com.example.polar.view.landingpage.LandingPage
 
 class Splashscreen : AppCompatActivity() {
-    lateinit var handler: Handler
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splashscreen)
+    }
 
-        handler = Handler()
-        handler.postDelayed({
-            val intent = Intent(this@Splashscreen, LandingPage::class.java)
-            startActivity(intent)
-            finish()
-        }, 2000)
+    override fun onStart() {
+        super.onStart()
+        startActivity(Intent(this, LandingPage::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }).also { finish() }
     }
 }

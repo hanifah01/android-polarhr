@@ -222,7 +222,7 @@ class Latihan : AppCompatActivity() {
                         { polarBroadcastData ->
                             txt_device.text = polarBroadcastData.polarDeviceInfo.deviceId
                             txt_bpm.text = polarBroadcastData.hr.toString()
-                            dialogLoading.showDialog(false)
+                            dialogLoading.show(false)
                             img_cek.setImageDrawable(getDrawable(R.drawable.ic_check))
                             Log.d(TAG, "HR BROADCAST " + polarBroadcastData.polarDeviceInfo.deviceId + " HR: " + polarBroadcastData.hr + " batt: " + polarBroadcastData.batteryStatus)
                         }, { throwable -> Log.e(TAG, "" + throwable.localizedMessage) }
@@ -267,7 +267,7 @@ class Latihan : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.connect_polar -> {
-            dialogLoading.showDialog(true)
+            dialogLoading.show(true)
             if(bAdapter == null)
             {
                 Toast.makeText(getApplicationContext(),"Bluetooth Not Supported",Toast.LENGTH_SHORT).show()
@@ -292,7 +292,7 @@ class Latihan : AppCompatActivity() {
             Toast.makeText(this, "Turn on location", Toast.LENGTH_LONG).show()
             val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
             startActivity(intent)
-            dialogLoading.showDialog(true)
+            dialogLoading.show(true)
             connect()
         }
     }

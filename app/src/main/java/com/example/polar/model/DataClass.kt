@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Keep
 @Parcelize
 data class Profil(
-    @SerializedName("penggunga") var pengguna : String?= "",
+    @SerializedName("pengguna") var pengguna : String?= "",
     @SerializedName("berat") var berat: String?= "",
     @SerializedName("jenis_olahraga") var jenis_olahraga: String?= "",
     @SerializedName("nama") var nama: String?= "",

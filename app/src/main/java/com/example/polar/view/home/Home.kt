@@ -20,6 +20,7 @@ import com.example.polar.support.toObject
 import com.example.polar.view.hasillatihan.HasilLatihan
 import com.example.polar.view.landingpage.LandingPage
 import com.example.polar.view.latihan.PetunjukLatihan
+import com.example.polar.view.login.Login
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
@@ -51,11 +52,11 @@ class Home : AppCompatActivity() {
 
         latihan.setOnClickListener {
             startActivity(Intent(this, PetunjukLatihan::class.java))
-            CustomIntent.customType(this, "left-to-right")
+//            CustomIntent.customType(this, "left-to-right")
         }
         menu_hasil_latihan.setOnClickListener {
             startActivity(Intent(this, HasilLatihan::class.java))
-            CustomIntent.customType(this, "left-to-right")
+//            CustomIntent.customType(this, "left-to-right")
         }
 
         database = FirebaseDatabase.getInstance().reference
@@ -104,7 +105,9 @@ class Home : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.logout -> {
+            startActivity(Intent(this, Login::class.java))
             Toast.makeText(this, "Keluar", Toast.LENGTH_LONG).show()
+            tinydb.putBoolean("login", true)
             true
         }
         else -> super.onOptionsItemSelected(item)

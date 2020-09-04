@@ -17,14 +17,15 @@ class PetunjukLatihan : AppCompatActivity() {
 
         setSupportActionBar(toolbar_petunjuklatihan)
         if (supportActionBar != null) {
-            supportActionBar!!.setTitle("Latihan")
+            supportActionBar!!.title = "Latihan"
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             supportActionBar!!.setDisplayShowHomeEnabled(true)
         }
 
-        btn_petunjuklanjut.setOnClickListener(View.OnClickListener {
+        btn_petunjuklanjut.setOnClickListener{
             startActivity(Intent(this, PetunjukPemanasan::class.java))
-            CustomIntent.customType(this, "left-to-right") })
+//            CustomIntent.customType(this, "left-to-right")
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

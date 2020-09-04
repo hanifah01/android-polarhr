@@ -121,7 +121,7 @@ class Register : AppCompatActivity(){
 
 
         btn_register.setOnClickListener {
-            dialogLoading.showDialog(true)
+            dialogLoading.show(true)
             val name = edt_nama.text.toString()
             val birthdate = edt_birthdate.text.toString()
             val height = edt_height.text.toString()
@@ -134,12 +134,12 @@ class Register : AppCompatActivity(){
 
             if (userValue == PATH_PELATIH && (pass.equals("") || email.equals("") || name.equals(""))){
                 Toast.makeText(this, getString(R.string.field_kosong), Toast.LENGTH_LONG).show()
-                dialogLoading.showDialog(false)
+                dialogLoading.show(false)
             }
             else if (userValue == PATH_ATLIT && (pass.equals("") || email.equals("") || name.equals("") || height.equals("")||
                 weight.equals("")||birthdate.equals("")||sportValue.equals(getString(R.string.pilih_jenis_olahraga)))){
                 Toast.makeText(this, getString(R.string.field_kosong), Toast.LENGTH_LONG).show()
-                dialogLoading.showDialog(false)
+                dialogLoading.show(false)
             }
             else {
                 auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
@@ -171,11 +171,11 @@ class Register : AppCompatActivity(){
                         startActivity(Intent(this, Login::class.java))
                         CustomIntent.customType(this, "right-to-left")
                         Toast.makeText(this, REGISTER_BERHASIL, Toast.LENGTH_LONG).show()
-                        dialogLoading.showDialog(false)
+                        dialogLoading.show(false)
 
                     } else {
                         Toast.makeText(this, REGISTER_GAGAL, Toast.LENGTH_LONG).show()
-                        dialogLoading.showDialog(false)
+                        dialogLoading.show(false)
                     }
                 }
             }

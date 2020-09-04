@@ -46,12 +46,12 @@ class Login : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         btn_login.setOnClickListener {
-            dialogLoading.showDialog(true)
+            dialogLoading.show(true)
             val email = edt_email.text.toString()
             val pass = edt_pass.text.toString()
             if (pass.equals("") || email.equals("")){
                 Toast.makeText(this, "Email/Password Kosong!", Toast.LENGTH_LONG).show()
-                dialogLoading.showDialog(false)
+                dialogLoading.show(false)
             }
             else {
                 auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
@@ -62,10 +62,10 @@ class Login : AppCompatActivity() {
                         startActivity(Intent(this, Home::class.java))
                         CustomIntent.customType(this, "left-to-right")
                         Toast.makeText(this, LOGIN_BERHASIL, Toast.LENGTH_LONG).show()
-                        dialogLoading.showDialog(false)
+                        dialogLoading.show(false)
                     } else {
                         Toast.makeText(this, LOGIN_GAGAL, Toast.LENGTH_LONG).show()
-                        dialogLoading.showDialog(false)
+                        dialogLoading.show(false)
                     }
                 }
             }

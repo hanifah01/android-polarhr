@@ -10,14 +10,18 @@ import kotlinx.android.synthetic.main.dialog_loading.*
 
 class DialogLoading(context: Context): Dialog(context) {
     init {
-        setContentView(LayoutInflater.from(context).inflate(R.layout.dialog_loading, null, false))
-        setCancelable(false)
-        setCanceledOnTouchOutside(false)
-        window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        window?.setBackgroundDrawableResource(android.R.color.transparent)
+        setContentView(R.layout.dialog_loading)
     }
 
-    fun showDialog(isLoading: Boolean ,message: String = "Loading") {
-        txt_message_loading.text = message
-        if (isLoading) show() else dismiss()
+    fun show(isShown: Boolean, isCancelable: Boolean = false) {
+        setCancelable(isCancelable)
+
+        if (isShown) super.show()
+        else super.dismiss()
+    }
+
+    override fun show() {
+        show(true)
     }
 }
