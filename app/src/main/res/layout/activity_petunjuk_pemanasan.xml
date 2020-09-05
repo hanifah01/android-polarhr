@@ -9,7 +9,6 @@
         android:id="@+id/toolbar_petunjukpemanasan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -118,6 +117,21 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_info_pemanasan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginLeft="@dimen/xlarge"
+        android:layout_marginRight="@dimen/xlarge"
+        android:text="Lakukan pemanasan terlebih dahulu selama 60 detik sebelum latihan"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_small"
+        app:layout_constraintBottom_toTopOf="@+id/btn_mulai"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearlayout_hr" />
 
     <TextView
         android:id="@+id/txt_deviceinfo"

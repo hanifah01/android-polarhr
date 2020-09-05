@@ -24,6 +24,7 @@ import com.example.polar.support.mtformat
 import com.example.polar.view.Router
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_latihan.*
+import maes.tech.intentanim.CustomIntent
 import polar.com.sdk.api.PolarBleApi
 import polar.com.sdk.api.PolarBleApiCallback
 import polar.com.sdk.api.PolarBleApiDefaultImpl
@@ -238,7 +239,10 @@ class Latihan : AppCompatActivity() {
         }
     }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        CustomIntent.customType(this, "left-to-right")
+    }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == 1) {
             Log.d(TAG, "bt ready")

@@ -133,6 +133,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:visibility="visible">
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardview_total"
                     android:layout_width="match_parent"
@@ -268,7 +269,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="30dp"
-                    android:layout_marginLeft="30dp">
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="15dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -303,14 +305,13 @@
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
+                                android:id="@+id/tv_hasil_dosis1"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                         </TableRow>
@@ -353,7 +354,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="15dp">
+                    android:layout_marginBottom="15dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -388,14 +389,13 @@
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
+                                android:id="@+id/tv_hasil_dosis2"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                         </TableRow>
@@ -438,7 +438,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="15dp">
+                    android:layout_marginBottom="15dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -473,14 +473,13 @@
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
+                                android:id="@+id/tv_hasil_dosis3"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                         </TableRow>
@@ -523,7 +522,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="15dp">
+                    android:layout_marginBottom="15dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -558,14 +557,13 @@
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
+                                android:id="@+id/tv_hasil_dosis4"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                         </TableRow>
@@ -608,8 +606,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/medium"
                     android:layout_marginRight="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="15dp">
+                    android:layout_marginLeft="30dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -645,14 +642,13 @@
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
+                                android:id="@+id/tv_hasil_dosis5"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                         </TableRow>

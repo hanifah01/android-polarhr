@@ -13,15 +13,16 @@ data class Profil(
     @SerializedName("jenis_olahraga") var jenis_olahraga: String?= "",
     @SerializedName("nama") var nama: String?= "",
     @SerializedName("tinggi") var tinggi: String?= "",
-    @SerializedName("ttl") var ttl : String?= ""
+    @SerializedName("ttl") var ttl : String?= "",
+    @SerializedName("nama_pelatih") var nama_pelatih : String?= ""
 ) : Parcelable
 
 @Keep
 @Parcelize
 data class Murid(
-    @SerializedName("Atlit_1") var atlit1 : String?= "",
-    @SerializedName("Atlit_2") var atlit2: String?= "",
-    @SerializedName("Atlit_3") var atlit3: String?= ""
+    @SerializedName("atlit1") var atlit1 : String?= "",
+    @SerializedName("atlit2") var atlit2: String?= "",
+    @SerializedName("atlit3") var atlit3: String?= ""
 ) : Parcelable
 
 @Keep

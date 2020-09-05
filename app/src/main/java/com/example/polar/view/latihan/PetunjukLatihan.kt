@@ -24,7 +24,7 @@ class PetunjukLatihan : AppCompatActivity() {
 
         btn_petunjuklanjut.setOnClickListener{
             startActivity(Intent(this, PetunjukPemanasan::class.java))
-//            CustomIntent.customType(this, "left-to-right")
+            CustomIntent.customType(this, "left-to-right")
         }
     }
 

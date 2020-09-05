@@ -53,7 +53,7 @@ class PetunjukPemanasan : AppCompatActivity() {
     var ppiDisposable: Disposable? = null
     var arrayHrData = ArrayList<Long>()
 
-    val timer = object: CountDownTimer(5000, 1000) {
+    val timer = object: CountDownTimer(60000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             txt_detik.setText(String.format("00:%02d", millisUntilFinished/1000 ))
             arrayHrData.add(txt_bpm.text.toString().toLong())
@@ -71,6 +71,7 @@ class PetunjukPemanasan : AppCompatActivity() {
             txt_bpm_rt.text = arrayHrData.average().toInt().toString()
             txt_lanjut.isEnabled = true
             txt_lanjut.setTextColor(Color.BLACK)
+            btn_mulai.isEnabled = true
             btn_mulai.background = ContextCompat.getDrawable(applicationContext, R.drawable.bg_blue_button)
         }
     }
@@ -236,8 +237,14 @@ class PetunjukPemanasan : AppCompatActivity() {
         api.shutDown()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        CustomIntent.customType(this, "left-to-right")
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
+        CustomIntent.customType(this, "left-to-right")
         return true
     }
 

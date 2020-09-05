@@ -14,6 +14,7 @@ import com.example.polar.model.DataLatihan
 import com.example.polar.support.KEY_DATA
 import com.example.polar.support.PATH_LATIHAN
 import com.example.polar.support.PATH_PROFILE
+import com.example.polar.support.dialog.DialogLoading
 import com.example.polar.support.requestDate
 import com.example.polar.view.hasillatihan.HasilLatihan
 import com.example.polar.view.home.Home
@@ -25,6 +26,8 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class SimpanHasil : AppCompatActivity() {
+
+    private val dialogLoading  by lazy { DialogLoading(this) }
 
     private lateinit var data : DataLatihan
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +51,7 @@ class SimpanHasil : AppCompatActivity() {
         }
     }
     fun simpanData(){
+        dialogLoading.show(true)
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
         val db = FirebaseFirestore.getInstance()
         val docRef = db.collection(uid).document(requestDate()+"_1")
@@ -66,35 +70,46 @@ class SimpanHasil : AppCompatActivity() {
                                         docRef.get().addOnSuccessListener { document ->
                                             if (document.exists()) {
                                                 showDialog()
+                                                dialogLoading.show(false)
                                                 //Toast.makeText(this, "Latihan maksimal 5x sehari!", Toast.LENGTH_LONG).show()
                                             } else {
                                                 docRef.set(data)
                                                     .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                                                     .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+                                                dialogLoading.show(false)
+                                                startActivity(Intent(this, Home::class.java))
                                             }
                                         }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
                                     } else {
                                         docRef.set(data)
                                             .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                                             .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+                                        dialogLoading.show(false)
+                                        startActivity(Intent(this, Home::class.java))
                                     }
                                 }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
                             } else {
                                 docRef.set(data)
                                     .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                                     .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+                                dialogLoading.show(false)
+                                startActivity(Intent(this, Home::class.java))
                             }
                         }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
                     } else {
                         docRef.set(data)
                             .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                             .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+                        dialogLoading.show(false)
+                        startActivity(Intent(this, Home::class.java))
                     }
                 }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
             } else {
                 docRef.set(data)
                     .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                     .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+                dialogLoading.show(false)
+                startActivity(Intent(this, Home::class.java))
             }
         }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
     }
@@ -114,7 +129,6 @@ class SimpanHasil : AppCompatActivity() {
         yesBtn.setOnClickListener {
             //dialog.dismiss()
             startActivity(Intent(this, Home::class.java))
-            CustomIntent.customType(this, "left-to-right")
         }
         dialog.show()
 

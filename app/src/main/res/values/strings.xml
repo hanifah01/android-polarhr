@@ -25,6 +25,7 @@
     <string name="intruksi4">Hasil dari deteksi nadi istirahat akan menjadi batas minimum performa fisik anda, apabila denyut nadi berada setara atau dibawah denyut nadi istirahat maka akan terhitung sebagai aktifitas istirahat.</string>
     <string name="pilih_jenis_olahraga">Pilih jenis olahraga</string>
     <string name="pilih_pengguna">Pilih pengguna</string>
+    <string name="pilih_nama_pelatih">Pilih nama pelatih</string>
     <string name="field_kosong">Field ada yang kosong!</string>
     <string name="pelatih">Pelatih</string>
 

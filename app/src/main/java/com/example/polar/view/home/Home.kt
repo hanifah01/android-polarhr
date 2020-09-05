@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -21,6 +22,7 @@ import com.example.polar.view.hasillatihan.HasilLatihan
 import com.example.polar.view.landingpage.LandingPage
 import com.example.polar.view.latihan.PetunjukLatihan
 import com.example.polar.view.login.Login
+import com.example.polar.view.pelatih.HomePelatih
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,6 +32,7 @@ import org.json.JSONObject
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
+import kotlin.system.exitProcess
 
 class Home : AppCompatActivity() {
     private lateinit var database: DatabaseReference
@@ -61,24 +64,22 @@ class Home : AppCompatActivity() {
 
         database = FirebaseDatabase.getInstance().reference
         getData()
+
     }
 
-    fun getData(){
+    @SuppressLint("SetTextI18n")
+    private fun getData(){
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
         val db = FirebaseFirestore.getInstance()
         val docRef = db.collection(uid).document(PATH_PROFILE)
         docRef.get().addOnSuccessListener { document ->
             if (document.exists()) {
                 val data = JSONObject(document.data).toObject(Profil::class.java)
-                if (data.pengguna == PATH_PELATIH){
-
-                }
-                else {
-                    atlit_name.text = "Halo, " + data.nama
-                    tv_tb.text = data.tinggi + " cm"
-                    tv_bb.text = data.berat + " kg"
-                    calculateAge(data.ttl)
-                }
+                atlit_name.text = "Halo, ${data.nama}"
+                tv_tb.text = "${data.tinggi} cm"
+                tv_bb.text = "${data.berat} kg"
+                tv_pelatih.text = data.nama_pelatih
+                calculateAge(data.ttl)
             } else {
                 Log.d("TAG", "No such document")
             }
@@ -93,9 +94,9 @@ class Home : AppCompatActivity() {
         calculateHrMax(difference)
     }
 
-    fun calculateHrMax(age: Long){
+    private fun calculateHrMax(age: Long){
         val hrmax = 220 - age
-        tv_hrmax.text = hrmax.toString() + " bpm"
+        tv_hrmax.text = "$hrmax bpm"
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -106,10 +107,28 @@ class Home : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.logout -> {
             startActivity(Intent(this, Login::class.java))
-            Toast.makeText(this, "Keluar", Toast.LENGTH_LONG).show()
-            tinydb.putBoolean("login", true)
+            Toast.makeText(this, "Logout Berhasil", Toast.LENGTH_LONG).show()
+            tinydb.putBoolean("login", false)
             true
         }
         else -> super.onOptionsItemSelected(item)
+    }
+
+    private var doubleBackToExitPressedOnce = false
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
+            moveTaskToBack(true)
+            exitProcess(-1)
+            finish()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "Press back button again to exit", Toast.LENGTH_SHORT).show()
+
+        Handler().postDelayed(Runnable {
+            doubleBackToExitPressedOnce = false
+        }, 2000)
     }
 }

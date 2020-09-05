@@ -73,11 +73,11 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/xxxklarge"
+                android:layout_height="wrap_content"
                 android:hint="Email"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/black"
-                android:textSize="@dimen/font_medium"
+                android:textSize="@dimen/font_small"
                 android:inputType="textEmailAddress"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -93,12 +93,12 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_pass"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/xxxklarge"
+                android:layout_height="wrap_content"
                 android:hint="Password"
                 android:fontFamily="@font/montserrat"
                 android:inputType="textPassword"
                 android:textColor="@color/black"
-                android:textSize="@dimen/font_medium" />
+                android:textSize="@dimen/font_small" />
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
