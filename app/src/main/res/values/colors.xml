@@ -4,9 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="ic_launcher2_background">#0096FE</color>
+    <color name="ic_launcher3_background">#000000</color>
 
-    <color name="black">#252525</color>
-    <color name="white">#FFFFFF</color>
     <color name="grey">#969393</color>
     <color name="red">#dd2c00</color>
     <color name="green">#21bf73</color>
@@ -17,4 +16,14 @@
     <color name="light2_blue">#d0f5fc</color>
     <color name="medium_blue">#9debff</color>
     <color name="dark_blue">#0079CC</color>
+
+    <color name="black">#252525</color>
+    <color name="black_polar">#2a2a2a</color>
+    <color name="black_theme">#070707</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red_polar">#c30a00</color>
+    <color name="blue_polar">#0d00fe</color>
+
+    <color name="mtrl_textinput_default_box_stroke_color">#fff</color>
+
 </resources>

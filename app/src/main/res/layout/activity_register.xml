@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_polar"
     tools:context=".view.register.Register">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -38,7 +39,7 @@
                 android:text="@string/register"
                 android:textSize="@dimen/font_xx_large"
                 android:fontFamily="@font/montserrat_bold"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 />
 
             <ImageView
@@ -46,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/ic_line"
+                android:src="@drawable/ic_line_red"
                 />
             <TextView
                 android:id="@+id/txt_subjudul"
@@ -54,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/register_message"
                 android:textSize="@dimen/font_medium"
+                android:textColor="@color/white"
                 android:fontFamily="@font/montserrat"
                 android:layout_marginTop="10dp" />
         </LinearLayout>
@@ -77,7 +79,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:id="@+id/spinner_pelatih_atlit"
-                    android:paddingStart="3dp">
+                    android:paddingStart="3dp"
+                    app:backgroundTint="@color/white">
                 </androidx.appcompat.widget.AppCompatSpinner>
             </LinearLayout>
 
@@ -85,8 +88,11 @@
                 android:id="@+id/textInputLayout1"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/grey"
+                app:boxStrokeColor="@color/white"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_nama"
@@ -96,8 +102,10 @@
                     android:hint="Nama"
                     android:singleLine="true"
                     android:imeOptions="actionNext"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/font_small" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_small"
+                    app:boxStrokeColor="@color/white"
+                    android:textColorHint="@color/white"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -118,7 +126,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="52dp"
                         android:id="@+id/spinner_nama_pelatih"
-                        android:paddingStart="3dp">
+                        android:paddingStart="3dp"
+                        app:backgroundTint="@color/white">
                     </androidx.appcompat.widget.AppCompatSpinner>
                 </LinearLayout>
 
@@ -137,12 +146,12 @@
                         android:id="@+id/img_calendar"
                         android:layout_width="@dimen/xxlarge"
                         android:layout_height="@dimen/xxlarge"
-                        android:background="@drawable/bg_blue_line"
+                        android:background="@drawable/bg_red_line"
                         android:elevation="@dimen/tiny"
-                        android:src="@drawable/ic_calendar"
+                        android:src="@drawable/ic_date_white_24dp"
                         android:padding="@dimen/semi_small"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/small" />
+                        android:layout_marginLeft="@dimen/small"/>
 
                     <TextView
                         android:id="@+id/txt_edt_birthdate"
@@ -150,7 +159,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/medium"
                         android:text="Tanggal lahir : "
-                        android:textColor="@color/grey"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/font_small"/>
 
                     <TextView
@@ -158,7 +167,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/edt_birthdate"
                         android:text=""
-                        android:textColor="@color/grey"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/font_medium"/>
                 </LinearLayout>
 
@@ -175,7 +184,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:textColorHint="@color/grey"
+                        app:boxStrokeColor="@color/white"
+                        android:orientation="horizontal">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_height"
@@ -184,9 +196,11 @@
                             android:hint="Tinggi(cm)"
                             android:imeOptions="actionNext"
                             android:fontFamily="@font/montserrat"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/font_small"
-                            android:inputType="number"/>
+                            android:inputType="number"
+                            app:boxStrokeColor="@color/white"
+                            android:textColorHint="@color/white"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -196,7 +210,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginLeft="5dp">
+                        android:layout_marginLeft="5dp"
+                        android:textColorHint="@color/grey"
+                        app:boxStrokeColor="@color/white"
+                        android:orientation="horizontal">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_weight"
@@ -205,9 +222,11 @@
                             android:hint="Berat Badan(kg)"
                             android:imeOptions="actionNext"
                             android:fontFamily="@font/montserrat"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/font_small"
-                            android:inputType="number"/>
+                            android:inputType="number"
+                            app:boxStrokeColor="@color/white"
+                            android:textColorHint="@color/white"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -223,7 +242,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="52dp"
                         android:id="@+id/spinner_olahraga"
-                        android:paddingStart="3dp">
+                        android:paddingStart="3dp"
+                        app:backgroundTint="@color/white">
                     </androidx.appcompat.widget.AppCompatSpinner>
                 </LinearLayout>
             </LinearLayout>
@@ -232,16 +252,20 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/grey"
+                app:boxStrokeColor="@color/white">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/montserrat"
                     android:textSize="@dimen/font_small"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress"
+                    app:boxStrokeColor="@color/white"
+                    android:textColorHint="@color/white"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -249,7 +273,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="true"
+                android:textColorHint="@color/grey"
+                app:boxStrokeColor="@color/white"
+                app:passwordToggleTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_pass"
@@ -258,8 +285,10 @@
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:fontFamily="@font/montserrat"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/font_small" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_small"
+                    app:boxStrokeColor="@color/white"
+                    android:textColorHint="@color/white"/>
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -278,7 +307,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/bg_blue_button"
+                android:background="@drawable/bg_red_button"
                 android:text="@string/register"
                 android:textAllCaps="false"
                 android:fontFamily="@font/montserrat"

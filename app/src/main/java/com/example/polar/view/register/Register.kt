@@ -62,8 +62,8 @@ class Register : AppCompatActivity(){
         auth = FirebaseAuth.getInstance()
         img_calendar.setOnClickListener{
             dateDialog(edt_birthdate, this)
-            txt_edt_birthdate.setTextColor(ContextCompat.getColor(this, R.color.black))
-            edt_birthdate.setTextColor(ContextCompat.getColor(this, R.color.black))
+            txt_edt_birthdate.setTextColor(ContextCompat.getColor(this, R.color.white))
+            edt_birthdate.setTextColor(ContextCompat.getColor(this, R.color.white))
         }
         getPelatih()
         val adapterPengguna: ArrayAdapter<String> = ArrayAdapter(this, R.layout.spinner_item, item_sebagai)

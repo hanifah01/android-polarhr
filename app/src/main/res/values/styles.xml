@@ -19,10 +19,20 @@
         <item name="android:statusBarColor" tools:targetApi="lollipop">@color/dark_blue</item>
     </style>
 
+    <style name="AppThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/black_polar</item>
+        <item name="colorPrimaryDark">@color/black_polar</item>
+        <item name="colorAccent">@color/grey</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/black_polar</item>
+    </style>
+
+
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/bg_root</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
-        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/blue</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/black_theme</item>
     </style>
 
 </resources>
