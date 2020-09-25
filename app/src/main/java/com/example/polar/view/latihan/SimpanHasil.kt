@@ -2,6 +2,7 @@ package com.example.polar.view.latihan
 
 import android.app.Dialog
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.polar.R
 import com.example.polar.model.DataLatihan
 import com.example.polar.support.KEY_DATA
@@ -30,6 +32,7 @@ class SimpanHasil : AppCompatActivity() {
     private val dialogLoading  by lazy { DialogLoading(this) }
 
     private lateinit var data : DataLatihan
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_simpan_hasil)

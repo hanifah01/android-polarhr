@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_polar"
     tools:context=".view.latihan.SimpanHasil">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_simpanhasil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/ToolbarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hasil Latihan"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/font_large"
             android:fontFamily="@font/montserrat_bold" />
         <TextView
@@ -38,7 +40,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="Rabu, 21 Mei 2020"
-            android:textColor="@color/grey"
+            android:textColor="@color/white"
             android:textSize="@dimen/font_medium" />
         <TextView
             android:id="@+id/tv_jam_latihan"
@@ -47,336 +49,371 @@
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="09:00 - 20 :00"
-            android:textColor="@color/grey"
+            android:textColor="@color/white"
             android:textSize="@dimen/font_medium" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/lyt_total_durasi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_judul">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/ic_timer_24dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="Total Durasi"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/font_medium" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/tv_total_durasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_light"
-        android:text="120 menit"
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_medium"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lyt_total_durasi" />
-    <LinearLayout
-        android:id="@+id/lyt_durasi_aktif"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_total_durasi">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/ic_timer_24dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="Durasi Aktif"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/font_medium" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/tv_durasi_aktif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_light"
-        android:text="120 menit"
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_medium"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lyt_durasi_aktif" />
-    <LinearLayout
-        android:id="@+id/lyt_durasi_istirahat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_durasi_aktif">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/ic_timer_24dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="Durasi Istirahat"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/font_medium" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/tv_durasi_istirahat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_light"
-        android:text="120 menit"
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_medium"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lyt_durasi_istirahat" />
-    <LinearLayout
-        android:id="@+id/lyt_intensitas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_durasi_istirahat">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/ic_intensity"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="Intesitas"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/font_medium" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/tv_intensitas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_light"
-        android:text="min 55% - max 90%"
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_medium"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lyt_intensitas" />
-    <LinearLayout
-        android:id="@+id/lyt_peak_hrp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_intensitas">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/ic_dot_graph"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="Peak HRP"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/font_medium" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/tv_peak_hrp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_light"
-        android:text="185 Bpm "
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_medium"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lyt_peak_hrp" />
-    <LinearLayout
-        android:id="@+id/lyt_hrr"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_peak_hrp">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/ic_heart_rate"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="Heart Rate Reserve"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/font_medium" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/tv_hrr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_light"
-        android:text="185 Bpm "
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_medium"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lyt_hrr" />
-
-    <LinearLayout
-        android:id="@+id/tv_dosis_pelatihan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:orientation="vertical"
-
-        app:layout_constraintBottom_toTopOf="@+id/btn_simpan_hasil"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_hrr">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/montserrat_light"
-                android:gravity="center"
-                android:text="Dosis Latihan"
-                android:textColor="@color/blue"
-                android:textSize="@dimen/font_medium" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/montserrat_light"
-                android:gravity="center"
-                android:text="Kualitas Pelatihan"
-                android:textColor="@color/blue"
-                android:textSize="@dimen/font_medium" />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/montserrat_light"
-                android:gravity="center"
-                android:text="Parsial Intensitas"
-                android:textColor="@color/blue"
-                android:textSize="@dimen/font_medium" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
-
-            <TextView
-                android:id="@+id/tv_dosis_pelatihan2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/montserrat_bold"
-                android:gravity="center"
-                android:text="65%"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_large" />
-
-            <TextView
-                android:id="@+id/tv_kualitas_pelatihan2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/montserrat_bold"
-                android:gravity="center"
-                android:text="65%"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_large" />
-            <TextView
-                android:id="@+id/tv_parsial_intensitas"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/montserrat_bold"
-                android:gravity="center"
-                android:text="65%"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_large" />
-        </TableRow>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_simpan_hasil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/bg_blue_button"
-        android:text="Simpan"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@+id/tv_judul">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_darkgrey"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_timer_24dp"/>
+                <LinearLayout
+                    android:id="@+id/lyt_total_durasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Total Durasi"
+                        android:textColor="@color/bright_red"
+                        android:textSize="@dimen/font_medium" />
+                    <TextView
+                        android:id="@+id/tv_total_durasi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="120 menit"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_medium"
+
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_darkgrey"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_timer_24dp"/>
+                <LinearLayout
+                    android:id="@+id/lyt_durasi_aktif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Durasi Aktif"
+                        android:textColor="@color/bright_red"
+                        android:textSize="@dimen/font_medium" />
+                    <TextView
+                        android:id="@+id/tv_durasi_aktif"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="120 menit"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_medium"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_darkgrey"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_timer_24dp"/>
+                <LinearLayout
+                    android:id="@+id/lyt_durasi_istirahat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Durasi Istirahat"
+                        android:textColor="@color/bright_red"
+                        android:textSize="@dimen/font_medium" />
+                    <TextView
+                        android:id="@+id/tv_durasi_istirahat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="120 menit"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_medium"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_darkgrey"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_intensity"/>
+                <LinearLayout
+                    android:id="@+id/lyt_intensitas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Intesitas"
+                        android:textColor="@color/bright_red"
+                        android:textSize="@dimen/font_medium" />
+                    <TextView
+                        android:id="@+id/tv_intensitas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="120 menit"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_medium"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_darkgrey"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_dot_graph"/>
+                <LinearLayout
+                    android:id="@+id/lyt_peak_hrp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Peak HRP"
+                        android:textColor="@color/bright_red"
+                        android:textSize="@dimen/font_medium" />
+                    <TextView
+                        android:id="@+id/tv_peak_hrp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="120 menit"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_medium"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_darkgrey"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_heart_rate"/>
+                <LinearLayout
+                    android:id="@+id/lyt_hrr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Heart Rate Reserve"
+                        android:textColor="@color/bright_red"
+                        android:textSize="@dimen/font_medium" />
+                    <TextView
+                        android:id="@+id/tv_hrr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="120 menit"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_medium"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tv_dosis_pelatihan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:weightSum="3"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="10dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_darkgrey">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="Dosis Latihan"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/bright_red"
+                        android:textSize="@dimen/font_medium" />
+                    <TextView
+                        android:id="@+id/tv_dosis_pelatihan2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:gravity="center"
+                        android:text="65%"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_large" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="10dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_darkgrey">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="Kualitas Pelatihan"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/bright_red"
+                        android:textSize="@dimen/font_medium" />
+                    <TextView
+                        android:id="@+id/tv_kualitas_pelatihan2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:gravity="center"
+                        android:text="65%"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_large" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="10dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_darkgrey">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="Parsial Intensitas"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/bright_red"
+                        android:textSize="@dimen/font_medium" />
+                    <TextView
+                        android:id="@+id/tv_parsial_intensitas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:gravity="center"
+                        android:text="65%"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_large" />
+                </LinearLayout>
 
 
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_simpan_hasil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_red_button"
+                android:text="Simpan"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
