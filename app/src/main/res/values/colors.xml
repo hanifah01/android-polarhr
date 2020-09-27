@@ -23,6 +23,7 @@
     <color name="white">#FFFFFF</color>
     <color name="red_polar">#c30a00</color>
     <color name="bright_red">#ff1919</color>
+    <color name="bright_grey">#d8d8d8</color>
     <color name="blue_polar">#0d00fe</color>
     <color name="dark_grey">#3c3c3c</color>
 

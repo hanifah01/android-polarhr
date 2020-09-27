@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_polar"
     tools:context=".view.latihan.Latihan">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_latihan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/ToolbarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +24,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat"
         android:text="Informasi perangkat :"
-        android:textColor="@color/grey"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_latihan" />
@@ -33,9 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/montserrat"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Device"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/txt_deviceinfo"
@@ -58,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_deviceinfo"
-        android:background="@drawable/bg_white"
+        android:background="@drawable/bg_white_line"
         android:layout_marginTop="16dp"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
@@ -80,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_light"
                 android:text="Dimulai pukul"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="15dp" />
 
             <TextView
@@ -90,7 +92,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="00:00"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="18dp" />
         </LinearLayout>
 
@@ -108,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_light"
                 android:text="Berakhir pukul"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="15dp" />
 
             <TextView
@@ -118,7 +120,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="00:00"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="18dp" />
         </LinearLayout>
     </LinearLayout>
@@ -128,12 +130,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@drawable/bg_verylight_blue"
+        android:background="@drawable/bg_white_line"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="25dp"
+        android:padding="20dp"
         app:layout_constraintEnd_toStartOf="@+id/lyt_waktu_istirahat"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lyt_jam_latihan">
 
@@ -142,7 +143,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
             android:text="Durasi latihan"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15dp" />
 
         <TextView
@@ -152,7 +153,7 @@
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="00:00"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18dp" />
     </LinearLayout>
 
@@ -161,12 +162,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@drawable/bg_verylight_blue"
+        android:background="@drawable/bg_white_line"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="25dp"
+        android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/lyt_waktu_latihan"
         app:layout_constraintTop_toBottomOf="@+id/lyt_jam_latihan">
 
@@ -175,7 +175,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
             android:text="Durasi istirahat"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15dp" />
 
         <TextView
@@ -185,7 +185,7 @@
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="00:00"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18dp" />
     </LinearLayout>
 
@@ -199,7 +199,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:padding="15dp"
-        android:background="@drawable/bg_mediumlight_blue"
+        android:background="@drawable/bg_white_line"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lyt_waktu_latihan">
         <TextView
@@ -207,7 +207,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
             android:text="Total durasi pelatihan"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15dp" />
 
         <TextView
@@ -217,7 +217,7 @@
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="00:00"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18dp" />
     </LinearLayout>
     <LinearLayout
@@ -230,7 +230,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:padding="15dp"
-        android:background="@drawable/bg_white"
+        android:background="@drawable/bg_white_line"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lyt_durasi_pelatihan">
         <TextView
@@ -239,7 +239,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
             android:text="Batas : "
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15dp" />
 
         <TextView
@@ -248,7 +248,7 @@
             android:fontFamily="@font/montserrat_light"
             android:layout_marginLeft="@dimen/semi_large"
             android:text="Detak jantung : "
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15dp" />
 
         <TextView
@@ -257,7 +257,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
             android:text="0"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15dp" />
 
         <TextView
@@ -265,7 +265,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
             android:text=" bpm"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15dp" />
 
 
@@ -278,7 +278,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/bg_blue_button"
+        android:background="@drawable/bg_red_button"
         android:text="Mulai"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -291,7 +291,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/xxklarge"
-        android:background="@color/grey"
+        android:background="@drawable/bg_red_line"
         android:text="Selesai"
         android:textAllCaps="false"
         android:textColor="@color/white"

@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_polar"
     tools:context=".view.hasillatihan.DetailLatihan">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_detail_latihan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/ToolbarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,6 +23,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar_detail_latihan"
         android:layout_margin="30dp"
         android:text="Latihan"
+        android:textColor="@color/white"
         android:fontFamily="@font/montserrat_light"
         android:textSize="@dimen/font_medium"/>
     <TextView
@@ -31,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_detail_1"
         android:layout_marginLeft="30dp"
         android:text="10 Juni 2020"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="@dimen/font_large"
         android:fontFamily="@font/montserrat_bold"/>
 
@@ -42,6 +45,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
+        app:cardBackgroundColor="@color/bright_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_tgl_latihan">
@@ -62,8 +66,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_bold"
                     android:textSize="@dimen/font_medium"
+                    android:text="hjhjhjh"
                     android:textAlignment="center" />
                 <TextView
                     android:id="@+id/detail_kualitas_latihan"
@@ -71,7 +76,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_bold"
                     android:textSize="@dimen/font_medium"
                     android:textAlignment="center" />
             </TableRow>
@@ -86,7 +91,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/dosis_latihan"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_light"
                     android:textSize="@dimen/font_semi_medium"
                     android:textAlignment="center" />
@@ -95,7 +100,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/kualitas_latihan"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_light"
                     android:textSize="@dimen/font_semi_medium"
                     android:textAlignment="center" />
@@ -111,6 +116,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
+        app:cardBackgroundColor="@color/bright_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv1">
@@ -131,7 +137,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_bold"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_medium" />
@@ -142,7 +148,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_bold"
                     android:textSize="@dimen/font_medium"
                     android:textAlignment="center" />
             </TableRow>
@@ -157,7 +163,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/hrr"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_light"
                     android:textSize="@dimen/font_semi_medium"
                     android:textAlignment="center" />
@@ -166,7 +172,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/peak_hrp"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_light"
                     android:textSize="@dimen/font_semi_medium"
                     android:textAlignment="center" />
@@ -180,6 +186,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
+        app:cardBackgroundColor="@color/bright_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv2">
@@ -200,7 +207,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_bold"
                     android:textSize="@dimen/font_medium"
                     android:textAlignment="center" />
                 <TextView
@@ -209,7 +216,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_bold"
                     android:textSize="@dimen/font_medium"
                     android:textAlignment="center" />
             </TableRow>
@@ -224,7 +231,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/jam_mulai"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_light"
                     android:textSize="@dimen/font_semi_medium"
                     android:textAlignment="center" />
@@ -233,7 +240,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/jam_selesai"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_light"
                     android:textSize="@dimen/font_semi_medium"
                     android:textAlignment="center" />
@@ -247,6 +254,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
+        app:cardBackgroundColor="@color/bright_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv3">
@@ -267,7 +275,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_bold"
                     android:textSize="@dimen/font_medium"
                     android:textAlignment="center" />
                 <TextView
@@ -276,7 +284,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_bold"
                     android:textSize="@dimen/font_medium"
                     android:textAlignment="center" />
                 <TextView
@@ -285,7 +293,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_bold"
                     android:textSize="@dimen/font_medium"
                     android:textAlignment="center" />
             </TableRow>
@@ -300,7 +308,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/durasi_aktif"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_light"
                     android:textSize="@dimen/font_semi_medium"
                     android:textAlignment="center" />
@@ -309,7 +317,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/durasi_istirahat"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_light"
                     android:textSize="@dimen/font_semi_medium"
                     android:textAlignment="center" />
@@ -318,7 +326,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/durasi_total"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_light"
                     android:textSize="@dimen/font_semi_medium"
                     android:textAlignment="center" />

@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.location.LocationManager
 import android.os.Build
@@ -53,15 +54,16 @@ class PetunjukPemanasan : AppCompatActivity() {
     var ppiDisposable: Disposable? = null
     var arrayHrData = ArrayList<Long>()
 
-    val timer = object: CountDownTimer(60000, 1000) {
+    val timer = object: CountDownTimer(10000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             txt_detik.setText(String.format("00:%02d", millisUntilFinished/1000 ))
             arrayHrData.add(txt_bpm.text.toString().toLong())
             markButtonDisable(btn_mulai)
             pg_detik.progress = (millisUntilFinished/1000).toInt()
             txt_infobpm.text = "Detak jantung"
-            txt_lanjut.isEnabled = false
-            txt_lanjut.setTextColor(Color.GRAY)
+            btn_lanjut.visibility = View.GONE
+            /*btn_lanjut.isEnabled = false
+            btn_lanjut.setTextColor(Color.GRAY)*/
         }
 
         override fun onFinish() {
@@ -69,10 +71,11 @@ class PetunjukPemanasan : AppCompatActivity() {
             lyt_prog.visibility = View.GONE
             txt_infobpm.text = "Rata-rata detak jantung"
             txt_bpm_rt.text = arrayHrData.average().toInt().toString()
-            txt_lanjut.isEnabled = true
-            txt_lanjut.setTextColor(Color.BLACK)
+            txt_bpm.setTextColor(Color.WHITE)
+            btn_lanjut.visibility = View.VISIBLE
+            btn_lanjut.isEnabled = true
             btn_mulai.isEnabled = true
-            btn_mulai.background = ContextCompat.getDrawable(applicationContext, R.drawable.bg_blue_button)
+            btn_mulai.background = ContextCompat.getDrawable(applicationContext, R.drawable.bg_red_button)
         }
     }
 
@@ -169,11 +172,12 @@ class PetunjukPemanasan : AppCompatActivity() {
 
 
         btn_mulai.setOnClickListener {
-            if (txt_device.text.toString().equals("Device")){
+            timer.start()
+            /*if (txt_device.text.toString().equals("Device")){
                 Toast.makeText(this, "Koneksikan dengan perangkat terlebih dahulu!", Toast.LENGTH_SHORT).show()
             }else{
                 timer.start()
-            }
+            }*/
         }
 
         setSupportActionBar(toolbar_petunjukpemanasan)
@@ -183,7 +187,7 @@ class PetunjukPemanasan : AppCompatActivity() {
             supportActionBar!!.setDisplayShowHomeEnabled(true)
         }
 
-        txt_lanjut.setOnClickListener{
+        btn_lanjut.setOnClickListener{
             router.toLatihan(this, txt_bpm_rt.text.toString())
         }
     }
