@@ -31,12 +31,16 @@ data class DataLatihan(
     @SerializedName("tanggal_latihan") var tanggal_latihan: String?= "",
     @SerializedName("jam_mulai") var jam_mulai: String?= "",
     @SerializedName("jam_selesai") var jam_selesai: String?= "",
-    @SerializedName("durasi_aktif") var durasi_aktif: String?= "",
-    @SerializedName("durasi_istirahat") var durasi_istirahat : String?= "",
-    @SerializedName("durasi_total") var durasi_total: String?= "",
-    @SerializedName("intensitas") var intensitas : String?= "",
+    @SerializedName("durasi_aktif") var durasi_aktif: String?= "0",
+    @SerializedName("durasi_istirahat") var durasi_istirahat : String?= "0",
+    @SerializedName("durasi_total") var durasi_total: String?= "0",
+    @SerializedName("partial_intensity") var partial_intensity : String?= "0",
+    @SerializedName("dn_vl") var dn_vl : String?= "0",
     @SerializedName("peak_hrp") var peak_hrp: String?= "",
     @SerializedName("heart_rate_reserve") var heart_rate_reserve: String?= "",
-    @SerializedName("dosis_latihan") var dosis_latihan : String?= "",
-    @SerializedName("kualitas_pelatihan") var kualitas_pelatihan: String?= ""
+    @SerializedName("heart_rate_latihan") var heart_rate_latihan: String?= "",
+    @SerializedName("heart_rate_max") var heart_rate_max: String?= "",
+    @SerializedName("absolute_density") var absolute_density : String?= "0",
+    @SerializedName("overal_intensity") var overal_intensity: String?= "0",
+    @SerializedName("iod") var i_od: String?= "0"
 ) : Parcelable

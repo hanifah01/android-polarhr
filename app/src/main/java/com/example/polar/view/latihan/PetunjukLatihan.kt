@@ -15,6 +15,8 @@ class PetunjukLatihan : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_petunjuk_latihan)
 
+
+        val data = intent?.extras?.getString("hrr")!!
         setSupportActionBar(toolbar_petunjuklatihan)
         if (supportActionBar != null) {
             supportActionBar!!.title = "Latihan"
@@ -23,7 +25,7 @@ class PetunjukLatihan : AppCompatActivity() {
         }
 
         btn_petunjuklanjut.setOnClickListener{
-            startActivity(Intent(this, PetunjukPemanasan::class.java))
+            startActivity(Intent(this, PetunjukPemanasan::class.java).putExtra("hrr", data))
             CustomIntent.customType(this, "left-to-right")
         }
     }

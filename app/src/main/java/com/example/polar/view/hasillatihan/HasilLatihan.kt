@@ -32,6 +32,7 @@ class HasilLatihan : AppCompatActivity() {
     private var data3 = DataLatihan()
     private var data4 = DataLatihan()
     private var data5 = DataLatihan()
+    var dataList = ArrayList<DataLatihan>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +40,7 @@ class HasilLatihan : AppCompatActivity() {
 
         setSupportActionBar(toolbar_hasil_latihan)
         if (supportActionBar != null) {
-            supportActionBar!!.setTitle("Hasil Latihan")
+            supportActionBar!!.title = "Hasil Latihan"
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             supportActionBar!!.setDisplayShowHomeEnabled(true)
         }
@@ -53,14 +54,18 @@ class HasilLatihan : AppCompatActivity() {
         img_calendar_latihan.setOnClickListener{
             dateDialogHasil(edt_calendar, this)
         }
+        dataList.clear()
         tampilData(requestDate())
         tampilkan.setOnClickListener{
             if (edt_calendar.text.toString() == ""){
                 Toast.makeText(this, "Tanggal belum dipilih!", Toast.LENGTH_LONG).show()
             }else{
+                dataList.clear()
                 tampilData(edt_calendar.text.toString())
+
             }
         }
+
 
         cardview1.setOnClickListener {
             router.toDetailHasil(this, data1)
@@ -99,7 +104,12 @@ class HasilLatihan : AppCompatActivity() {
         lat1.get().addOnSuccessListener { document ->
             if (document.exists()) {
                 data1 = JSONObject(document.data).toObject(DataLatihan::class.java)
-                tv_hasil_durasi1.text = data1.durasi_aktif
+                dataList.add(data1)
+                getTotal(dataList)
+                Log.d("cek", data1.toString())
+                tv_hasil_durasi1.text = "${data1.durasi_aktif} menit"
+                tv_hasil_dosis1.text = "${data1.i_od}%"
+                tv_hasil_kualitas1.text = "${data1.absolute_density}%"
                 lyt_cardview.visibility = View.VISIBLE
                 data_kosong.visibility = View.GONE
                 getData2(date)
@@ -110,7 +120,6 @@ class HasilLatihan : AppCompatActivity() {
             }
         }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
 
-
     }
 
     private fun getData2(date: String) {
@@ -119,8 +128,12 @@ class HasilLatihan : AppCompatActivity() {
         lat2.get().addOnSuccessListener { document ->
             if (document.exists()) {
                 data2 = JSONObject(document.data).toObject(DataLatihan::class.java)
+                dataList.add(data2)
+                getTotal(dataList)
                 cardview2.visibility = View.VISIBLE
-                tv_hasil_durasi2.text = data2.durasi_aktif
+                tv_hasil_durasi2.text = "${data2.durasi_aktif} menit"
+                tv_hasil_dosis2.text = "${data2.i_od}%"
+                tv_hasil_kualitas2.text = "${data2.absolute_density}%"
                 getData3(date)
             } else {
                 cardview2.visibility = View.GONE
@@ -138,8 +151,12 @@ class HasilLatihan : AppCompatActivity() {
         lat3.get().addOnSuccessListener { document ->
             if (document.exists()) {
                 data3 = JSONObject(document.data).toObject(DataLatihan::class.java)
+                dataList.add(data3)
+                getTotal(dataList)
                 cardview3.visibility = View.VISIBLE
-                tv_hasil_durasi3.text = data3.durasi_aktif
+                tv_hasil_durasi3.text = "${data3.durasi_aktif} menit"
+                tv_hasil_dosis2.text = "${data3.i_od}%"
+                tv_hasil_kualitas2.text = "${data3.absolute_density}%"
                 getData4(date)
             } else {
                 cardview3.visibility = View.GONE
@@ -156,8 +173,12 @@ class HasilLatihan : AppCompatActivity() {
         lat4.get().addOnSuccessListener { document ->
             if (document.exists()) {
                 data4 = JSONObject(document.data).toObject(DataLatihan::class.java)
+                dataList.add(data4)
+                getTotal(dataList)
                 cardview4.visibility = View.VISIBLE
-                tv_hasil_durasi4.text = data4.durasi_aktif
+                tv_hasil_durasi4.text = "${data4.durasi_aktif} menit"
+                tv_hasil_dosis2.text = "${data4.i_od}%"
+                tv_hasil_kualitas2.text = "${data4.absolute_density}%"
                 getData5(date)
             } else {
                 cardview4.visibility = View.GONE
@@ -173,8 +194,12 @@ class HasilLatihan : AppCompatActivity() {
         lat5.get().addOnSuccessListener { document ->
             if (document.exists()) {
                 data5 = JSONObject(document.data).toObject(DataLatihan::class.java)
+                dataList.add(data5)
+                getTotal(dataList)
                 cardview5.visibility = View.VISIBLE
-                tv_hasil_durasi5.text = data5.durasi_aktif
+                tv_hasil_durasi5.text = "${data5.durasi_aktif} menit"
+                tv_hasil_dosis2.text = "${data5.i_od}%"
+                tv_hasil_kualitas2.text = "${data5.absolute_density}%"
                 dialogLoading.show(false)
             } else {
                 cardview5.visibility = View.GONE
@@ -183,8 +208,22 @@ class HasilLatihan : AppCompatActivity() {
         }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
     }
 
+    private fun getTotal(dataList: ArrayList<DataLatihan>){
+        val durasiTotal =(data1.durasi_total!!.toInt() + data2.durasi_total!!.toInt() + data3.durasi_total!!.toInt() + data4.durasi_total!!.toInt() + data5.durasi_total!!.toInt())/dataList.size
+        val durasiAktif = (data1.durasi_aktif!!.toInt() + data2.durasi_aktif!!.toInt() + data3.durasi_aktif!!.toInt() + data4.durasi_aktif!!.toInt() + data5.durasi_aktif!!.toInt())/dataList.size
+        val durasiIstirahat = (data1.durasi_istirahat!!.toInt() + data2.durasi_istirahat!!.toInt() + data3.durasi_istirahat!!.toInt() + data4.durasi_istirahat!!.toInt() + data5.durasi_istirahat!!.toInt())/dataList.size
+        val kuatlitas = (data1.absolute_density!!.toFloat() + data2.absolute_density!!.toFloat() + data3.absolute_density!!.toFloat() + data4.absolute_density!!.toFloat() + data5.absolute_density!!.toFloat())/dataList.size
+        val iod = (data1.i_od!!.toFloat() + data2.i_od!!.toFloat() + data3.i_od!!.toFloat() + data4.i_od!!.toFloat() + data5.i_od!!.toFloat())/dataList.size
+
+        hasil_total_aktif.text = "${durasiAktif} menit"
+        hasil_total_durasi.text = "${durasiTotal} menit"
+        hasil_total_isirahat.text = "${durasiIstirahat} menit"
+        hasil_total_kualitas.text = "${kuatlitas}%"
+        hasil_total_iod.text = "${iod}%"
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
-//        CustomIntent.customType(this, "right-to-left")
+        CustomIntent.customType(this, "right-to-left")
     }
 }

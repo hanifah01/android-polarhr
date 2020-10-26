@@ -275,7 +275,6 @@
         app:layout_constraintTop_toBottomOf="@+id/lyt_hrr" />
 
     <LinearLayout
-        android:id="@+id/tv_dosis_pelatihan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -328,7 +327,7 @@
             android:layout_marginBottom="5dp">
 
             <TextView
-                android:id="@+id/tv_dosis_pelatihan2"
+                android:id="@+id/tv_dosis_pelatihan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -339,7 +338,7 @@
                 android:textSize="@dimen/font_large" />
 
             <TextView
-                android:id="@+id/tv_kualitas_pelatihan2"
+                android:id="@+id/tv_kualitas_pelatihan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

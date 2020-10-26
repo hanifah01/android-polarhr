@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,24 +17,26 @@
         android:roundIcon="@mipmap/ic_launcher2_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".view.pelatih.DetailLatihanPelatih"></activity>
+        <activity android:name=".view.pelatih.HasilLatihanPelatih" />
         <activity
             android:name=".view.hasillatihan.DetailLatihan"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".view.pelatih.HomePelatih"
-            android:theme="@style/AppThemeBlue"
             android:screenOrientation="portrait"
+            android:theme="@style/AppThemeBlue"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".view.home.Home"
-            android:theme="@style/AppThemeBlue"
             android:screenOrientation="portrait"
+            android:theme="@style/AppThemeBlue"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".view.hasillatihan.HasilLatihan"
-            android:theme="@style/AppThemeBlue"
             android:screenOrientation="portrait"
+            android:theme="@style/AppThemeBlue"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".view.latihan.PetunjukPemanasan"
@@ -65,8 +69,8 @@
         <activity
             android:name=".view.splashscreen.Splashscreen"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

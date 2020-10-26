@@ -41,10 +41,11 @@ import java.util.*
 class PetunjukPemanasan : AppCompatActivity() {
     private val router by lazy { Router() }
     private val dialogLoading  by lazy { DialogLoading(this) }
-    val bAdapter = BluetoothAdapter.getDefaultAdapter();
+    val bAdapter = BluetoothAdapter.getDefaultAdapter()
 
     private val TAG = PetunjukPemanasan::class.java.simpleName
     lateinit var api: PolarBleApi
+    private var data = ""
     var DEVICE_ID = "218DDA23" // or bt address like F5:A7:B8:EF:7A:D1 //
     var broadcastDisposable: Disposable? = null
     var ecgDisposable: Disposable? = null
@@ -53,9 +54,9 @@ class PetunjukPemanasan : AppCompatActivity() {
     var ppiDisposable: Disposable? = null
     var arrayHrData = ArrayList<Long>()
 
-    val timer = object: CountDownTimer(60000, 1000) {
+    val timer = object: CountDownTimer(5000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
-            txt_detik.setText(String.format("00:%02d", millisUntilFinished/1000 ))
+            txt_detik.text = String.format("00:%02d", millisUntilFinished/1000 )
             arrayHrData.add(txt_bpm.text.toString().toLong())
             markButtonDisable(btn_mulai)
             pg_detik.progress = (millisUntilFinished/1000).toInt()
@@ -73,6 +74,8 @@ class PetunjukPemanasan : AppCompatActivity() {
             txt_lanjut.setTextColor(Color.BLACK)
             btn_mulai.isEnabled = true
             btn_mulai.background = ContextCompat.getDrawable(applicationContext, R.drawable.bg_blue_button)
+//            router.toLatihan(this@PetunjukPemanasan, txt_bpm_rt.text.toString(), data)
+            router.toLatihan(this@PetunjukPemanasan, txt_bpm_rt.text.toString(), data)
         }
     }
 
@@ -83,6 +86,7 @@ class PetunjukPemanasan : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && savedInstanceState == null) {
             requestPermissions(
                 arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ), 1
@@ -167,6 +171,7 @@ class PetunjukPemanasan : AppCompatActivity() {
         })
 
 
+        data = intent?.extras?.getString("hrr")!!
 
         btn_mulai.setOnClickListener {
             if (txt_device.text.toString().equals("Device")){
@@ -178,14 +183,21 @@ class PetunjukPemanasan : AppCompatActivity() {
 
         setSupportActionBar(toolbar_petunjukpemanasan)
         if (supportActionBar != null) {
-            supportActionBar!!.setTitle("Latihan")
+            supportActionBar!!.title = "Latihan"
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             supportActionBar!!.setDisplayShowHomeEnabled(true)
         }
 
         txt_lanjut.setOnClickListener{
-            router.toLatihan(this, txt_bpm_rt.text.toString())
+            router.toLatihan(this, txt_bpm_rt.text.toString(), data)
         }
+
+//        if(!bAdapter.isEnabled){
+//            startActivityForResult(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),1)
+//            cekGps()
+//        }else{
+//            cekGps()
+//        }
     }
 
     private fun connect(){
@@ -258,10 +270,10 @@ class PetunjukPemanasan : AppCompatActivity() {
             dialogLoading.show(true)
             if(bAdapter == null)
             {
-                Toast.makeText(getApplicationContext(),"Bluetooth Not Supported",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,"Bluetooth Not Supported",Toast.LENGTH_SHORT).show()
             }
             else{
-                if(!bAdapter.isEnabled()){
+                if(!bAdapter.isEnabled){
                     startActivityForResult(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),1)
                     cekGps()
                 }else{

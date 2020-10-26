@@ -1,5 +1,6 @@
 package com.example.polar.view.hasillatihan
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.polar.R
@@ -41,17 +42,18 @@ class DetailLatihan : AppCompatActivity() {
         CustomIntent.customType(this, "right-to-left")
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showData() {
 
         data = intent?.extras?.getParcelable(KEY_DATA)!!
-        detail_dosis_latihan.text = "90%"
-        detail_kualitas_latihan.text = "80%"
-        detail_hrr.text = "100 bpm"
-        detail_peak_hrp.text = "100 bpm"
+        detail_dosis_latihan.text = "${data.absolute_density}%"
+        detail_kualitas_latihan.text = "${data.i_od}%"
+        detail_hrr.text = "${data.heart_rate_latihan} bpm"
+        detail_peak_hrp.text = "${data.peak_hrp} bpm"
         detail_jam_mulai.text = data.jam_mulai
         detail_jam_selesai.text = data.jam_selesai
-        detail_durasi_aktif.text = data.durasi_aktif
-        detail_durasi_istirahat.text = data.durasi_istirahat
-        detail_durasi_total.text = data.durasi_total
+        detail_durasi_aktif.text = "${data.durasi_aktif} menit"
+        detail_durasi_istirahat.text = "${data.durasi_istirahat} menit"
+        detail_durasi_total.text = "${data.durasi_total} menit"
     }
 }

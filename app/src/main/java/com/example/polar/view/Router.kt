@@ -10,13 +10,19 @@ import com.example.polar.view.latihan.SimpanHasil
 import maes.tech.intentanim.CustomIntent
 
 class Router {
-    fun toHasil(context: Context?, data: DataLatihan) {
-        context?.startActivity(context.intent(SimpanHasil::class.java).apply { putExtra(KEY_DATA, data) })
+    fun toHasil(context: Context?, data: DataLatihan, arrayList: ArrayList<String>) {
+        context?.startActivity(context.intent(SimpanHasil::class.java).apply {
+            putExtra(KEY_DATA, data)
+            putExtra("array", arrayList)
+        })
         CustomIntent.customType(context, "left-to-right")
     }
 
-    fun toLatihan(context: Context?, data: String) {
-        context?.startActivity(context.intent(Latihan::class.java).apply { putExtra(KEY_DATA, data) })
+    fun toLatihan(context: Context?, data: String, hrr: String) {
+        context?.startActivity(context.intent(Latihan::class.java).apply {
+            putExtra(KEY_DATA, data)
+            putExtra("hrr", hrr)
+        })
         CustomIntent.customType(context, "left-to-right")
     }
 

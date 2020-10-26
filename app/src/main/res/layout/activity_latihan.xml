@@ -151,7 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="00:00"
+            android:text="00:00:00"
             android:textColor="@color/black"
             android:textSize="18dp" />
     </LinearLayout>
@@ -184,7 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="00:00"
+            android:text="00:00:00"
             android:textColor="@color/black"
             android:textSize="18dp" />
     </LinearLayout>
@@ -216,7 +216,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="00:00"
+            android:text="00:00:00"
             android:textColor="@color/black"
             android:textSize="18dp" />
     </LinearLayout>

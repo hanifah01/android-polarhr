@@ -38,7 +38,7 @@ import kotlin.collections.ArrayList
 class Latihan : AppCompatActivity() {
     private val router by lazy { Router() }
     private val dialogLoading  by lazy { DialogLoading(this) }
-    private val bAdapter = BluetoothAdapter.getDefaultAdapter();
+    private val bAdapter = BluetoothAdapter.getDefaultAdapter()
     private val TAG = Latihan::class.java.simpleName
     lateinit var api: PolarBleApi
     var DEVICE_ID = "218DDA23" // or bt address like F5:A7:B8:EF:7A:D1 //
@@ -47,33 +47,29 @@ class Latihan : AppCompatActivity() {
     var accDisposable: Disposable? = null
     var ppgDisposable: Disposable? = null
     var ppiDisposable: Disposable? = null
-    var arrayHrData = ArrayList<Long>()
+    var arrayHrData = ArrayList<Int>()
+    var arrayHrData2 = ArrayList<String>()
     var timeBuffBreak = 0L
     var timeBuffLat = 0L
 
-    var totalSeconds = 3600000L
+    var totalSeconds = 28800000
 
-    val timerAll= object: CountDownTimer(3600000, 1000) {
+    val timerAll= object: CountDownTimer(28800000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
-            val waktu = String.format("%02d:%02d", ((totalSeconds - millisUntilFinished)/(1000*60))%60, ((totalSeconds - millisUntilFinished)/1000)%60)
+            val waktu = String.format("%02d:%02d:%02d", ((totalSeconds - millisUntilFinished)/(1000*60*60)) % 24, ((totalSeconds - millisUntilFinished)/(1000*60))%60, ((totalSeconds - millisUntilFinished)/1000)%60 )
             txt_total_durasi.text = waktu
             if (txt_bpm.text.toString().toInt() < txt_batas.text.toString().toInt()){
-                if (timeBuffLat != 0L){
-                    timeBuffBreak = (millisUntilFinished - timeBuffLat)
-                }else{
-                    timeBuffBreak = millisUntilFinished
-                }
-                val waktu = String.format("%02d:%02d", ((totalSeconds - timeBuffBreak)/(1000*60))%60, ((totalSeconds - timeBuffBreak)/1000)%60)
-                txt_durasi_istirahat.text = waktu
+                timeBuffBreak = (totalSeconds - millisUntilFinished) - timeBuffLat
+                val waktu2 = String.format("%02d:%02d:%02d", (timeBuffBreak/(1000*60*60)) % 24, (timeBuffBreak/(1000*60))%60, (timeBuffBreak/1000)%60 )
+                txt_durasi_istirahat.text = waktu2
             }else{
-                if (timeBuffBreak != 0L){
-                    timeBuffLat = (millisUntilFinished - timeBuffBreak)
-                }else{
-                    timeBuffLat = millisUntilFinished
-                }
-                val waktu = String.format("%02d:%02d", ((totalSeconds - timeBuffLat)/(1000*60))%60, ((totalSeconds - timeBuffLat)/1000)%60)
-                txt_durasi_latihan.text = waktu
+                timeBuffLat = (totalSeconds - millisUntilFinished) - timeBuffBreak
+                 val waktu1 = String.format("%02d:%02d:%02d", (timeBuffLat/(1000*60*60)) % 24, (timeBuffLat/(1000*60))%60, (timeBuffLat/1000)%60 )
+                txt_durasi_latihan.text = waktu1
             }
+            Log.d("cek", timeBuffBreak.toString() + " , " + timeBuffLat.toString())
+            arrayHrData.add(txt_bpm.text.toString().toInt())
+            arrayHrData2.add(txt_bpm.text.toString()+"-")
         }
 
         override fun onFinish() {
@@ -88,6 +84,7 @@ class Latihan : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && savedInstanceState == null) {
             requestPermissions(
                 arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ), 1
@@ -97,7 +94,8 @@ class Latihan : AppCompatActivity() {
     }
 
     private fun setupView() {
-        txt_batas.text = intent?.extras?.getString(KEY_DATA)!!
+        val hrr = intent?.extras?.getString(KEY_DATA)!!
+        txt_batas.text = hrr
         api = PolarBleApiDefaultImpl.defaultImplementation(this, PolarBleApi.ALL_FEATURES)
         api.setPolarFilter(false)
         api.setApiLogger { s -> Log.d(TAG, s) }
@@ -172,6 +170,7 @@ class Latihan : AppCompatActivity() {
             }
         })
 
+        val hrMax = intent?.extras?.getString("hrr")!!
         btn_mulai.setOnClickListener {
             if (btn_mulai.text.toString().equals("Mulai")){
                 if (txt_device.text.toString().equals("Device")){
@@ -185,14 +184,29 @@ class Latihan : AppCompatActivity() {
                     txt_jam_mulai.text = jam
                 }
             }else{
+                /*val hasilData = DataLatihan().apply {
+                    jam_mulai = txt_jam_mulai.text.toString()
+                    jam_selesai = txt_jam_selesai.text.toString()
+                    durasi_istirahat = txt_durasi_istirahat.text.toString()
+                    durasi_aktif = txt_durasi_latihan.text.toString()
+                    durasi_total = txt_total_durasi.text.toString()
+                    heart_rate_reserve = hrr
+                    heart_rate_latihan = arrayHrData.average().toInt().toString()
+                    peak_hrp = Collections.max(arrayHrData).toString()
+                    heart_rate_max = hrMax
+                }*/
                 val hasilData = DataLatihan().apply {
                     jam_mulai = txt_jam_mulai.text.toString()
                     jam_selesai = txt_jam_selesai.text.toString()
                     durasi_istirahat = txt_durasi_istirahat.text.toString()
                     durasi_aktif = txt_durasi_latihan.text.toString()
                     durasi_total = txt_total_durasi.text.toString()
+                    heart_rate_reserve = hrr
+                    heart_rate_latihan = arrayHrData.average().toInt().toString()
+                    peak_hrp = Collections.max(arrayHrData).toString()
+                    heart_rate_max = hrMax
                 }
-                router.toHasil(this, hasilData)
+                router.toHasil(this, hasilData, arrayHrData2)
             }
         }
 
@@ -204,14 +218,35 @@ class Latihan : AppCompatActivity() {
             val jam = mtformat.format(tempDate)
             txt_jam_selesai.text = jam
             btn_mulai.text = "Lanjut"
+
+            val hasilData = DataLatihan().apply {
+                jam_mulai = txt_jam_mulai.text.toString()
+                jam_selesai = txt_jam_selesai.text.toString()
+                durasi_istirahat = txt_durasi_istirahat.text.toString()
+                durasi_aktif = txt_durasi_latihan.text.toString()
+                durasi_total = txt_total_durasi.text.toString()
+                heart_rate_reserve = hrr
+                heart_rate_latihan = arrayHrData.average().toInt().toString()
+                peak_hrp = Collections.max(arrayHrData).toString()
+                heart_rate_max = hrMax
+            }
+            router.toHasil(this, hasilData, arrayHrData2)
         }
 
         setSupportActionBar(toolbar_latihan)
         if (supportActionBar != null) {
-            supportActionBar!!.setTitle("Latihan")
+            supportActionBar!!.title = "Latihan"
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             supportActionBar!!.setDisplayShowHomeEnabled(true)
         }
+
+        if(!bAdapter.isEnabled){
+            startActivityForResult(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),1)
+            cekGps()
+        }else{
+            cekGps()
+        }
+
     }
 
     private fun connect(){
@@ -249,6 +284,12 @@ class Latihan : AppCompatActivity() {
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        CustomIntent.customType(this, "left-to-right")
+        return true
+    }
+
     override fun onPause() {
         super.onPause()
         api.backgroundEntered()
@@ -274,10 +315,10 @@ class Latihan : AppCompatActivity() {
             dialogLoading.show(true)
             if(bAdapter == null)
             {
-                Toast.makeText(getApplicationContext(),"Bluetooth Not Supported",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,"Bluetooth Not Supported",Toast.LENGTH_SHORT).show()
             }
             else{
-                if(!bAdapter.isEnabled()){
+                if(!bAdapter.isEnabled){
                     startActivityForResult(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),1)
                     cekGps()
                 }else{

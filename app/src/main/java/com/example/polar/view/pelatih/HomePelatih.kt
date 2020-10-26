@@ -41,6 +41,10 @@ class HomePelatih : AppCompatActivity() {
         }
 
         getData()
+
+        menu_monitoring_pelatihan.setOnClickListener {
+
+        }
     }
 
     private fun getData() {

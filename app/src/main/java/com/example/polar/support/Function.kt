@@ -53,6 +53,12 @@ fun requestDate(): String {
     return mdformat.format(Date(unixTime))
 }
 
+fun requestDate2(): String {
+    val unixTime = System.currentTimeMillis()
+    val mdformat = SimpleDateFormat("yyyy-MM-dd")
+    return mdformat.format(Date(unixTime))
+}
+
 fun Context.intent(toClass: Class<*>) = Intent(this, toClass)
 
 fun <T> JSONObject.toObject(classOfT: Class<T>): T = Gson().fromJson(this.toString(), classOfT)
