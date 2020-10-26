@@ -63,11 +63,6 @@ class PetunjukPemanasan : AppCompatActivity() {
             pg_detik.progress = (millisUntilFinished/1000).toInt()
             txt_infobpm.text = "Detak jantung"
             btn_lanjut.visibility = View.GONE
-<<<<<<< HEAD
-=======
-            /*btn_lanjut.isEnabled = false
-            btn_lanjut.setTextColor(Color.GRAY)*/
->>>>>>> afdb40fc81654e5568bbad0d7571ae2c2c93b025
         }
 
         override fun onFinish() {
@@ -80,10 +75,7 @@ class PetunjukPemanasan : AppCompatActivity() {
             btn_lanjut.isEnabled = true
             btn_mulai.isEnabled = true
             btn_mulai.background = ContextCompat.getDrawable(applicationContext, R.drawable.bg_red_button)
-<<<<<<< HEAD
             router.toLatihan(this@PetunjukPemanasan, txt_bpm_rt.text.toString(), data)
-=======
->>>>>>> afdb40fc81654e5568bbad0d7571ae2c2c93b025
         }
     }
 
@@ -198,11 +190,7 @@ class PetunjukPemanasan : AppCompatActivity() {
         }
 
         btn_lanjut.setOnClickListener{
-<<<<<<< HEAD
             router.toLatihan(this, txt_bpm_rt.text.toString(), data)
-=======
-            router.toLatihan(this, txt_bpm_rt.text.toString())
->>>>>>> afdb40fc81654e5568bbad0d7571ae2c2c93b025
         }
 
 //        if(!bAdapter.isEnabled){
