@@ -78,7 +78,7 @@
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
+                android:hint="Email / Username / No.Hp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_small"
@@ -96,7 +96,6 @@
             android:layout_marginTop="15dp"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/white"
-            app:boxStrokeColor="@color/white"
             android:textColorHint="@color/grey">
 
             <com.google.android.material.textfield.TextInputEditText

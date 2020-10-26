@@ -9,6 +9,10 @@ import android.os.Environment
 import android.util.Log
 import android.view.Window
 import android.widget.TextView
+<<<<<<< HEAD
+=======
+import android.widget.Toast
+>>>>>>> afdb40fc81654e5568bbad0d7571ae2c2c93b025
 import androidx.annotation.RequiresApi
 import com.example.polar.R
 import com.example.polar.model.DataLatihan
@@ -30,7 +34,10 @@ class SimpanHasil : AppCompatActivity() {
     private val dialogLoading  by lazy { DialogLoading(this) }
 
     private lateinit var data : DataLatihan
+<<<<<<< HEAD
     var arrayHrData = ArrayList<String>()
+=======
+>>>>>>> afdb40fc81654e5568bbad0d7571ae2c2c93b025
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

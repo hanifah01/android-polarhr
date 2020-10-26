@@ -236,7 +236,7 @@ class Latihan : AppCompatActivity() {
                 heart_rate_max = hrMax
             }
             router.toHasil(this, hasilData, arrayHrData2)
-            btn_mulai.setBackgroundResource(drawable.bg_red_button)
+            btn_mulai.setBackgroundResource(R.drawable.bg_red_button)
         }
 
         setSupportActionBar(toolbar_latihan)
