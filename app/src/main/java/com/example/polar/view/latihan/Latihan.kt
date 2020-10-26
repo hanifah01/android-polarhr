@@ -17,6 +17,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.polar.R
+import com.example.polar.R.drawable
 import com.example.polar.model.DataLatihan
 import com.example.polar.support.KEY_DATA
 import com.example.polar.support.dialog.DialogLoading
@@ -24,6 +25,11 @@ import com.example.polar.support.mtformat
 import com.example.polar.view.Router
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_latihan.*
+import kotlinx.android.synthetic.main.activity_latihan.btn_mulai
+import kotlinx.android.synthetic.main.activity_latihan.img_cek
+import kotlinx.android.synthetic.main.activity_latihan.txt_bpm
+import kotlinx.android.synthetic.main.activity_latihan.txt_device
+import kotlinx.android.synthetic.main.activity_petunjuk_pemanasan.*
 import maes.tech.intentanim.CustomIntent
 import polar.com.sdk.api.PolarBleApi
 import polar.com.sdk.api.PolarBleApiCallback
@@ -218,7 +224,6 @@ class Latihan : AppCompatActivity() {
             val jam = mtformat.format(tempDate)
             txt_jam_selesai.text = jam
             btn_mulai.text = "Lanjut"
-
             val hasilData = DataLatihan().apply {
                 jam_mulai = txt_jam_mulai.text.toString()
                 jam_selesai = txt_jam_selesai.text.toString()
@@ -231,6 +236,7 @@ class Latihan : AppCompatActivity() {
                 heart_rate_max = hrMax
             }
             router.toHasil(this, hasilData, arrayHrData2)
+            btn_mulai.setBackgroundResource(drawable.bg_red_button)
         }
 
         setSupportActionBar(toolbar_latihan)
@@ -259,7 +265,7 @@ class Latihan : AppCompatActivity() {
                             txt_device.text = polarBroadcastData.polarDeviceInfo.deviceId
                             txt_bpm.text = polarBroadcastData.hr.toString()
                             dialogLoading.show(false)
-                            img_cek.setImageDrawable(getDrawable(R.drawable.ic_check))
+                            img_cek.setImageDrawable(getDrawable(drawable.ic_check))
                             Log.d(TAG, "HR BROADCAST " + polarBroadcastData.polarDeviceInfo.deviceId + " HR: " + polarBroadcastData.hr + " batt: " + polarBroadcastData.batteryStatus)
                         }, { throwable -> Log.e(TAG, "" + throwable.localizedMessage) }
                     ) { Log.d(TAG, "complete") }
@@ -278,16 +284,16 @@ class Latihan : AppCompatActivity() {
         super.onBackPressed()
         CustomIntent.customType(this, "left-to-right")
     }
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode == 1) {
-            Log.d(TAG, "bt ready")
-        }
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         CustomIntent.customType(this, "left-to-right")
         return true
+    }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == 1) {
+            Log.d(TAG, "bt ready")
+        }
     }
 
     override fun onPause() {
@@ -350,13 +356,13 @@ class Latihan : AppCompatActivity() {
     }
 
 
-    fun markButtonDisable(button: Button) {
+    private fun markButtonDisable(button: Button) {
         button.isEnabled = false
         button.background = getDrawable(R.color.grey)
     }
 
-    fun markButtonEnable(button: Button) {
+    private fun markButtonEnable(button: Button) {
         button.isEnabled = true
-        button.background = getDrawable(R.drawable.bg_blue_button)
+        button.background = getDrawable(drawable.bg_red_button)
     }
 }

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_polar"
     tools:context=".view.hasillatihan.HasilLatihan">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_hasil_latihan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleTextColor="@color/white"
-        android:background="@color/dark_blue"
+        android:theme="@style/ToolbarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,93 +19,76 @@
         android:id="@+id/lyt_pilihtanggal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/dark_blue"
+        android:background="@color/black_polar"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_hasil_latihan">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Pilih tanggal"
+            android:textSize="@dimen/font_small"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+            <ImageView
+                android:id="@+id/img_calendar_latihan"
+                android:layout_width="@dimen/xxklarge"
+                android:layout_height="@dimen/xxklarge"
+                android:background="@drawable/bg_red_line"
+                android:elevation="@dimen/small"
+                android:src="@drawable/ic_date_white_24dp"
+                android:padding="@dimen/semi_small"
+                android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_transparent"
+                android:layout_marginLeft="@dimen/semi_small"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:text="Pilih tanggal : "
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="Pilih tanggal"
-                android:textSize="@dimen/font_small"
-                android:fontFamily="@font/montserrat_medium"
-                android:layout_marginTop="@dimen/small"
-                android:layout_marginLeft="30dp"/>
+                <TextView
+                    android:id="@+id/edt_calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:text="-"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/tiny"/>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/btn_bulan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="Pilih bulan"
-                android:textSize="@dimen/font_small"
-                android:fontFamily="@font/montserrat_medium"
-                android:layout_marginTop="@dimen/small"
-                android:layout_marginLeft="30dp"/>
         </LinearLayout>
-
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal"
-           android:gravity="center_vertical"
-           android:layout_marginTop="10dp"
-           android:layout_marginLeft="30dp"
-           android:layout_marginRight="30dp">
-           <ImageView
-               android:id="@+id/img_calendar_latihan"
-               android:layout_width="@dimen/xxklarge"
-               android:layout_height="@dimen/xxklarge"
-               android:background="@drawable/bg_blue_line"
-               android:elevation="@dimen/small"
-               android:src="@drawable/ic_calendar"
-               android:padding="@dimen/semi_small"
-               android:layout_gravity="center"/>
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:background="@drawable/bg_transparent"
-               android:layout_marginLeft="@dimen/semi_small"
-               android:orientation="horizontal">
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="match_parent"
-                   android:textSize="15sp"
-                   android:text="Pilih tanggal : "
-                   android:textColor="@color/white"
-                   android:fontFamily="@font/montserrat_medium"
-                   android:gravity="center_vertical"
-                   android:paddingLeft="15dp" />
-
-               <TextView
-                   android:id="@+id/edt_calendar"
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:textSize="15sp"
-                   android:text="-"
-                   android:textColor="@color/white"
-                   android:fontFamily="@font/montserrat_medium"
-                   android:gravity="center_vertical"
-                   android:layout_marginLeft="@dimen/tiny"/>
-           </LinearLayout>
-
-       </LinearLayout>
         <TextView
             android:id="@+id/tampilkan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tampilkan"
-            android:padding="8dp"
-            android:background="@drawable/bg_white"
-            android:textColor="@color/black"
+            android:padding="10dp"
+            android:background="@drawable/bg_red_button"
+            android:textColor="@color/white"
             android:fontFamily="@font/montserrat_medium"
             android:gravity="center"
             android:layout_marginRight="30dp"
@@ -135,6 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
+                android:textColor="@color/white"
                 android:fontFamily="@font/montserrat_light"
                 android:text="Tidak ada data yang di tampilkan"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -312,7 +296,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1.3"
+                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Dosis Pelatihan : "
@@ -338,7 +322,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1.3"
+                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Kualitas : "
@@ -357,7 +341,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Klik untuk detail"
-                                android:textColor="@color/blue"
+                                android:textColor="@color/bright_red"
                                 android:textSize="10sp"
                                 android:textAlignment="viewEnd"
                                 android:fontFamily="@font/montserrat_medium"/>
@@ -396,7 +380,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1.3"
+                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Dosis Pelatihan : "
@@ -422,7 +406,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1.3"
+                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Kualitas : "
@@ -441,7 +425,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Klik untuk detail"
-                                android:textColor="@color/blue"
+                                android:textColor="@color/bright_red"
                                 android:textSize="10sp"
                                 android:textAlignment="viewEnd"
                                 android:fontFamily="@font/montserrat_medium"/>
@@ -480,7 +464,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1.3"
+                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Dosis Pelatihan : "
@@ -506,7 +490,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1.3"
+                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Kualitas : "
@@ -525,7 +509,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Klik untuk detail"
-                                android:textColor="@color/blue"
+                                android:textColor="@color/bright_red"
                                 android:textSize="10sp"
                                 android:textAlignment="viewEnd"
                                 android:fontFamily="@font/montserrat_medium"/>
@@ -564,7 +548,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1.3"
+                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Dosis Pelatihan : "
@@ -590,7 +574,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1.3"
+                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Kualitas : "
@@ -609,7 +593,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Klik untuk detail"
-                                android:textColor="@color/blue"
+                                android:textColor="@color/bright_red"
                                 android:textSize="10sp"
                                 android:textAlignment="viewEnd"
                                 android:fontFamily="@font/montserrat_medium"/>
@@ -649,7 +633,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1.3"
+                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Dosis Pelatihan : "
@@ -675,7 +659,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1.3"
+                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Kualitas : "
@@ -694,7 +678,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Klik untuk detail"
-                                android:textColor="@color/blue"
+                                android:textColor="@color/bright_red"
                                 android:textSize="10sp"
                                 android:textAlignment="viewEnd"
                                 android:fontFamily="@font/montserrat_medium"/>
