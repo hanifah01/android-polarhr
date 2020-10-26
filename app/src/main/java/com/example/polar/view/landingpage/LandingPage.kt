@@ -32,6 +32,22 @@ class LandingPage : AppCompatActivity() {
         }
     }
 
+    private var doubleBackToExitPressedOnce = false
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
+            moveTaskToBack(true)
+            exitProcess(-1)
+            finish()
+            return
+        }
 
+        this.doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "Press back button again to exit", Toast.LENGTH_SHORT).show()
+
+        Handler().postDelayed(Runnable {
+            doubleBackToExitPressedOnce = false
+        }, 2000)
+    }
 
 }
