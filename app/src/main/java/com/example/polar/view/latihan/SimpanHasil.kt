@@ -3,13 +3,14 @@ package com.example.polar.view.latihan
 import android.app.Dialog
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.view.Window
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.example.polar.R
 import com.example.polar.model.DataLatihan
 import com.example.polar.support.KEY_DATA
@@ -24,6 +25,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
+
 
 class SimpanHasil : AppCompatActivity() {
 
@@ -89,7 +91,11 @@ class SimpanHasil : AppCompatActivity() {
 
 
         btn_simpan_hasil.setOnClickListener {
-            simpanData()
+            if (tv_dosis_pelatihan.text.toString() == "NaN" || tv_parsial_intensitas.text.toString() == "NaN" || tv_kualitas_pelatihan.text.toString() == "NaN"){
+                Toast.makeText(this, "Data tidak valid, tidak bisa disimpan", Toast.LENGTH_SHORT).show()
+            }else{
+                simpanData()
+            }
         }
 
     }
@@ -97,62 +103,97 @@ class SimpanHasil : AppCompatActivity() {
         dialogLoading.show(true)
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
         val db = FirebaseFirestore.getInstance()
-        val docRef = db.collection(uid).document(requestDate()+"_1")
+        val docRef = db.collection(uid).document(requestDate() + "_1")
         docRef.get().addOnSuccessListener { document ->
             if (document.exists()) {
-                val docRef = db.collection(uid).document(requestDate()+"_2")
+                val docRef = db.collection(uid).document(requestDate() + "_2")
                 docRef.get().addOnSuccessListener { document ->
                     if (document.exists()) {
-                        val docRef = db.collection(uid).document(requestDate()+"_3")
+                        val docRef = db.collection(uid).document(requestDate() + "_3")
                         docRef.get().addOnSuccessListener { document ->
                             if (document.exists()) {
-                                val docRef = db.collection(uid).document(requestDate()+"_4")
+                                val docRef = db.collection(uid).document(requestDate() + "_4")
                                 docRef.get().addOnSuccessListener { document ->
                                     if (document.exists()) {
-                                        val docRef = db.collection(uid).document(requestDate()+"_5")
+                                        val docRef = db.collection(uid).document(requestDate() + "_5")
                                         docRef.get().addOnSuccessListener { document ->
                                             if (document.exists()) {
                                                 showDialog()
                                                 dialogLoading.show(false)
-                                                //Toast.makeText(this, "Latihan maksimal 5x sehari!", Toast.LENGTH_LONG).show()
                                             } else {
-                                                saveArrayList(arrayHrData, requestDate()+"_5")
+                                                saveArrayList(arrayHrData, requestDate() + "_5")
                                                 docRef.set(data)
-                                                    .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                                                    .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+                                                    .addOnSuccessListener { Log.d(
+                                                        "TAG",
+                                                        "DocumentSnapshot successfully written!"
+                                                    ) }
+                                                    .addOnFailureListener { e -> Log.w(
+                                                        "TAG",
+                                                        "Error writing document",
+                                                        e
+                                                    ) }
                                                 dialogLoading.show(false)
                                                 startActivity(Intent(this, Home::class.java))
                                             }
-                                        }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
+                                        }.addOnFailureListener { exception -> Log.e(
+                                            "TAG",
+                                            "get failed with ",
+                                            exception
+                                        ) }
                                     } else {
-                                        saveArrayList(arrayHrData, requestDate()+"_4")
+                                        saveArrayList(arrayHrData, requestDate() + "_4")
                                         docRef.set(data)
-                                            .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                                            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+                                            .addOnSuccessListener { Log.d(
+                                                "TAG",
+                                                "DocumentSnapshot successfully written!"
+                                            ) }
+                                            .addOnFailureListener { e -> Log.w(
+                                                "TAG",
+                                                "Error writing document",
+                                                e
+                                            ) }
                                         dialogLoading.show(false)
                                         startActivity(Intent(this, Home::class.java))
                                     }
-                                }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
+                                }.addOnFailureListener { exception -> Log.e(
+                                    "TAG",
+                                    "get failed with ",
+                                    exception
+                                ) }
                             } else {
-                                saveArrayList(arrayHrData, requestDate()+"_3")
+                                saveArrayList(arrayHrData, requestDate() + "_3")
                                 docRef.set(data)
-                                    .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-                                    .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+                                    .addOnSuccessListener { Log.d(
+                                        "TAG",
+                                        "DocumentSnapshot successfully written!"
+                                    ) }
+                                    .addOnFailureListener { e -> Log.w(
+                                        "TAG",
+                                        "Error writing document",
+                                        e
+                                    ) }
                                 dialogLoading.show(false)
                                 startActivity(Intent(this, Home::class.java))
                             }
-                        }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
+                        }.addOnFailureListener { exception -> Log.e(
+                            "TAG",
+                            "get failed with ",
+                            exception
+                        ) }
                     } else {
-                        saveArrayList(arrayHrData, requestDate()+"_2")
+                        saveArrayList(arrayHrData, requestDate() + "_2")
                         docRef.set(data)
-                            .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
+                            .addOnSuccessListener { Log.d(
+                                "TAG",
+                                "DocumentSnapshot successfully written!"
+                            ) }
                             .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
                         dialogLoading.show(false)
                         startActivity(Intent(this, Home::class.java))
                     }
                 }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
             } else {
-                saveArrayList(arrayHrData, requestDate()+"_1")
+                saveArrayList(arrayHrData, requestDate() + "_1")
                 docRef.set(data)
                     .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                     .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
@@ -192,12 +233,14 @@ class SimpanHasil : AppCompatActivity() {
 
     @Suppress("DEPRECATION")
     private fun saveArrayList(arrayList: java.util.ArrayList<String>, filename: String) {
-        val sdcard: File = Environment.getExternalStorageDirectory()
-        val dir = File(sdcard.absolutePath + "/Iod/")
-        dir.mkdir()
-        val file = File(dir, "${filename}.txt")
-        var os: FileOutputStream? = null
         try {
+            val sdcard: File = Environment.getExternalStorageDirectory()
+            val dir = File(sdcard.absolutePath + "/Iod")
+            if (!dir.exists()){
+                dir.mkdir()
+            }
+            val file = File(dir, "${filename}.txt")
+            var os: FileOutputStream? = null
             os = FileOutputStream(file)
             for (i in 0 until arrayList.size){
                 os.write(arrayList[i].toByteArray())

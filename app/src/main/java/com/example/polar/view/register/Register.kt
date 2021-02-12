@@ -110,16 +110,15 @@ class Register : AppCompatActivity(){
             else {
                 auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
-
                         val uid = FirebaseAuth.getInstance().currentUser!!.uid
                         val db = FirebaseFirestore.getInstance()
 
                         if (userValue == PATH_ATLIT){
                             val colAtlit1 = db.collection(PATH_PELATIH).document(namaPelatih!!)
                             colAtlit1.get().addOnSuccessListener { document ->
-                                if (document.getString("atlit1") != null) {
-                                    if (document.getString("atlit2") != null){
-                                        if (document.getString("atlit3") != null){
+                                if (document.getString("atlit1") != "") {
+                                    if (document.getString("atlit2") != ""){
+                                        if (document.getString("atlit3") != ""){
                                             Toast.makeText(this, "Atlit sudah penuh pada pelatih ini!", Toast.LENGTH_SHORT).show()
                                             dialogLoading.show(false)
                                         }else{
@@ -147,7 +146,6 @@ class Register : AppCompatActivity(){
                                             CustomIntent.customType(this, "right-to-left")
                                             Toast.makeText(this, REGISTER_BERHASIL, Toast.LENGTH_LONG).show()
                                             dialogLoading.show(false)
-
                                             tinydb.putBoolean("login", false)
                                         }
                                     }else{
@@ -175,15 +173,13 @@ class Register : AppCompatActivity(){
                                         CustomIntent.customType(this, "right-to-left")
                                         Toast.makeText(this, REGISTER_BERHASIL, Toast.LENGTH_LONG).show()
                                         dialogLoading.show(false)
-
-
                                         tinydb.putBoolean("login", false)
                                     }
                                 } else {
                                     val data: HashMap<String, Any> = HashMap()
                                     data["atlit1"] = uid
                                     val docRef = db.collection(PATH_PELATIH).document(namaPelatih!!)
-                                    docRef.set(data)
+                                    docRef.update(data)
                                         .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
                                         .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
                                     val docRefProfil = db.collection(uid).document(PATH_PROFILE)
@@ -219,14 +215,23 @@ class Register : AppCompatActivity(){
                                 nama_pelatih = namaPelatih
                             }
                             docRefProfil.set(profile)
-                                .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
+                                .addOnSuccessListener {
+                                    Log.d("TAG", "DocumentSnapshot successfully written!")
+                                    val docPelatih = db.collection(PATH_PELATIH).document(name)
+                                    val murid = Murid()
+                                    docPelatih.set(murid)
+                                        .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
+                                        .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+                                }
                                 .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+
+
+
                             startActivity(Intent(this, Login::class.java))
                             CustomIntent.customType(this, "right-to-left")
                             Toast.makeText(this, REGISTER_BERHASIL, Toast.LENGTH_LONG).show()
                             dialogLoading.show(false)
                         }
-
                     } else {
                         Toast.makeText(this, REGISTER_GAGAL, Toast.LENGTH_LONG).show()
                         dialogLoading.show(false)

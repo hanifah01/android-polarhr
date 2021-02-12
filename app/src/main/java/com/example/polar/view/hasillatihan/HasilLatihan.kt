@@ -3,13 +3,12 @@ package com.example.polar.view.hasillatihan
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.polar.R
 import com.example.polar.model.DataLatihan
-import com.example.polar.model.Profil
-import com.example.polar.support.dateDialog
 import com.example.polar.support.dateDialogHasil
 import com.example.polar.support.dialog.DialogLoading
 import com.example.polar.support.requestDate
@@ -20,6 +19,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_hasil_latihan.*
 import maes.tech.intentanim.CustomIntent
 import org.json.JSONObject
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 class HasilLatihan : AppCompatActivity() {
 
@@ -86,6 +88,9 @@ class HasilLatihan : AppCompatActivity() {
         cardview5.setOnClickListener {
             router.toDetailHasil(this, data5)
         }
+        img_save.setOnClickListener {
+            saveData("Resume, ${edt_calendar.text}")
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -106,12 +111,18 @@ class HasilLatihan : AppCompatActivity() {
                 data1 = JSONObject(document.data).toObject(DataLatihan::class.java)
                 dataList.add(data1)
                 getTotal(dataList)
-                Log.d("cek", data1.toString())
+//                Log.d("cek", data1.toString())
                 tv_hasil_durasi1.text = "${data1.durasi_aktif} menit"
-                tv_hasil_dosis1.text = "${data1.i_od}%"
+                if (data1.i_od == "NaN"){
+                    tv_hasil_dosis1.text = "${data1.i_od}%"
+                }else{
+                    val iod = data1.i_od?.toDouble()
+                    tv_hasil_dosis1.text = "${iod}%"
+                }
                 tv_hasil_kualitas1.text = "${data1.absolute_density}%"
                 lyt_cardview.visibility = View.VISIBLE
                 data_kosong.visibility = View.GONE
+                img_save.visibility = View.VISIBLE
                 getData2(date)
             } else {
                 lyt_cardview.visibility = View.GONE
@@ -132,7 +143,12 @@ class HasilLatihan : AppCompatActivity() {
                 getTotal(dataList)
                 cardview2.visibility = View.VISIBLE
                 tv_hasil_durasi2.text = "${data2.durasi_aktif} menit"
-                tv_hasil_dosis2.text = "${data2.i_od}%"
+                if (data2.i_od == "NaN"){
+                    tv_hasil_dosis2.text = "${data2.i_od}%"
+                }else{
+                    val iod = data2.i_od?.toDouble()
+                    tv_hasil_dosis2.text = "${iod}%"
+                }
                 tv_hasil_kualitas2.text = "${data2.absolute_density}%"
                 getData3(date)
             } else {
@@ -155,8 +171,13 @@ class HasilLatihan : AppCompatActivity() {
                 getTotal(dataList)
                 cardview3.visibility = View.VISIBLE
                 tv_hasil_durasi3.text = "${data3.durasi_aktif} menit"
-                tv_hasil_dosis2.text = "${data3.i_od}%"
-                tv_hasil_kualitas2.text = "${data3.absolute_density}%"
+                if (data3.i_od == "NaN"){
+                    tv_hasil_dosis3.text = "${data3.i_od}%"
+                }else{
+                    val iod = data3.i_od?.toDouble()
+                    tv_hasil_dosis3.text = "${iod}%"
+                }
+                tv_hasil_kualitas3.text = "${data3.absolute_density}%"
                 getData4(date)
             } else {
                 cardview3.visibility = View.GONE
@@ -177,8 +198,13 @@ class HasilLatihan : AppCompatActivity() {
                 getTotal(dataList)
                 cardview4.visibility = View.VISIBLE
                 tv_hasil_durasi4.text = "${data4.durasi_aktif} menit"
-                tv_hasil_dosis2.text = "${data4.i_od}%"
-                tv_hasil_kualitas2.text = "${data4.absolute_density}%"
+                if (data4.i_od == "NaN"){
+                    tv_hasil_dosis4.text = "${data4.i_od}%"
+                }else{
+                    val iod = data4.i_od?.toDouble()
+                    tv_hasil_dosis4.text = "${iod}%"
+                }
+                tv_hasil_kualitas4.text = "${data4.absolute_density}%"
                 getData5(date)
             } else {
                 cardview4.visibility = View.GONE
@@ -198,8 +224,13 @@ class HasilLatihan : AppCompatActivity() {
                 getTotal(dataList)
                 cardview5.visibility = View.VISIBLE
                 tv_hasil_durasi5.text = "${data5.durasi_aktif} menit"
-                tv_hasil_dosis2.text = "${data5.i_od}%"
-                tv_hasil_kualitas2.text = "${data5.absolute_density}%"
+                if (data5.i_od == "NaN"){
+                    tv_hasil_dosis5.text = "${data5.i_od}%"
+                }else{
+                    val iod = data5.i_od?.toDouble()
+                    tv_hasil_dosis5.text = "${iod}%"
+                }
+                tv_hasil_kualitas5.text = "${data5.absolute_density}%"
                 dialogLoading.show(false)
             } else {
                 cardview5.visibility = View.GONE
@@ -225,5 +256,35 @@ class HasilLatihan : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         CustomIntent.customType(this, "right-to-left")
+    }
+
+    @Suppress("DEPRECATION")
+    private fun saveData(filename: String) {
+        try {
+            val sdcard: File = Environment.getExternalStorageDirectory()
+            val dir = File(sdcard.absolutePath + "/Iod")
+            if (!dir.exists()){
+                dir.mkdir()
+            }
+            val file = File(dir, "${filename}.txt")
+            var os: FileOutputStream? = null
+            os = FileOutputStream(file)
+            os.write("${hasil_total_durasi.text}".toByteArray())
+            os.write("\n".toByteArray())
+            os.write("${hasil_total_aktif.text}".toByteArray())
+            os.write("\n".toByteArray())
+            os.write("${hasil_total_isirahat.text}".toByteArray())
+            os.write("\n".toByteArray())
+            os.write("${hasil_total_kualitas.text}".toByteArray())
+            os.write("\n".toByteArray())
+            os.write("${hasil_total_iod.text}".toByteArray())
+            os.write("\n".toByteArray())
+            os.close()
+
+            Toast.makeText(this, "Resume latihan berhasil disimpan", Toast.LENGTH_SHORT).show()
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
+        }
     }
 }

@@ -11,11 +11,11 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.polar.R
+import com.example.polar.model.DataLatihan
 import com.example.polar.model.Profil
-import com.example.polar.support.PATH_PROFILE
-import com.example.polar.support.TinyDB
-import com.example.polar.support.requestDate2
-import com.example.polar.support.toObject
+import com.example.polar.support.*
+import com.example.polar.support.dialog.DialogLoading
+import com.example.polar.view.Router
 import com.example.polar.view.hasillatihan.HasilLatihan
 import com.example.polar.view.latihan.PetunjukLatihan
 import com.example.polar.view.login.Login
@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_home.*
+import maes.tech.intentanim.CustomIntent
 import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
@@ -36,7 +37,10 @@ import kotlin.system.exitProcess
 
 @Suppress("DEPRECATION")
 class Home : AppCompatActivity() {
+
+    private val router by lazy { Router() }
     private lateinit var database: DatabaseReference
+    private val dialogLoading  by lazy { DialogLoading(this) }
     lateinit var tinydb: TinyDB
     var arrayHrData = ArrayList<String>()
 
@@ -58,7 +62,7 @@ class Home : AppCompatActivity() {
         arrayHrData.add("makan")
 
         latihan.setOnClickListener {
-            startActivity(Intent(this, PetunjukLatihan::class.java).putExtra("hrr", tv_hrmax.text.toString()))
+            startActivity(Intent(this, PetunjukLatihan::class.java).putExtra(KEY_HRMAX, tv_hrmax.text.toString()))
 //            CustomIntent.customType(this, "left-to-right")
         }
         menu_hasil_latihan.setOnClickListener {
@@ -73,6 +77,7 @@ class Home : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun getData(){
+        dialogLoading.show(true)
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
         val db = FirebaseFirestore.getInstance()
         val docRef = db.collection(uid).document(PATH_PROFILE)
@@ -84,10 +89,21 @@ class Home : AppCompatActivity() {
                 tv_bb.text = "${data.berat} kg"
                 tv_pelatih.text = data.nama_pelatih
                 calculateAge(data.ttl)
+
+                dialogLoading.show(false)
             } else {
                 Log.d("TAG", "No such document")
+                startActivity(Intent(this, Login::class.java))
+                CustomIntent.customType(this, "right-to-left")
+                tinydb.putBoolean("login", false)
+
+                dialogLoading.show(false)
+
             }
-        }.addOnFailureListener { exception -> Log.e("TAG", "get failed with ", exception) }
+        }.addOnFailureListener {
+                exception -> Log.e("TAG", "get failed with ", exception)
+            dialogLoading.show(false)
+        }
 
     }
 

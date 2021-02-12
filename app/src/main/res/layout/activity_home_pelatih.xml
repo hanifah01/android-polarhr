@@ -75,20 +75,46 @@
             android:layout_height="wrap_content"
             android:padding="25dp"
             android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/menu_monitoring_pelatihan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="center" >
+                <ImageView
+                    android:id="@+id/iv_resume"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_clipboard" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="Monitoring Pelatihan"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
+                android:layout_marginTop="@dimen/medium">
                 <ImageView
                     android:layout_width="5dp"
                     android:layout_height="5dp"
-                    android:src="@drawable/circle_blue"
+                    android:src="@drawable/circle_red"
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"/>
                 <TextView
                     android:id="@+id/nama_atlit_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/small"
                     android:fontFamily="@font/montserrat_light"
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_small" />
@@ -96,24 +122,24 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/dark_blue"
-                android:layout_marginBottom="8dp"
+                android:background="@color/red_polar"
+                android:layout_marginBottom="@dimen/large"
                 android:layout_marginLeft="15dp"
                 />
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
+                android:layout_height="wrap_content">
                 <ImageView
                     android:layout_width="5dp"
                     android:layout_height="5dp"
-                    android:src="@drawable/circle_blue"
+                    android:src="@drawable/circle_red"
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"/>
                 <TextView
                     android:id="@+id/nama_atlit_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/small"
                     android:fontFamily="@font/montserrat_light"
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_small" />
@@ -121,56 +147,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/dark_blue"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="15dp"/>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
-                <ImageView
-                    android:layout_width="5dp"
-                    android:layout_height="5dp"
-                    android:src="@drawable/circle_blue"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="10dp"/>
-                <TextView
-                    android:id="@+id/nama_atlit_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_light"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/font_small" />
-            </TableRow>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/dark_blue"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="15dp"/>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
-                <ImageView
-                    android:layout_width="5dp"
-                    android:layout_height="5dp"
-                    android:src="@drawable/circle_blue"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="10dp"/>
-                <TextView
-                    android:id="@+id/nama_atlit_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_light"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/font_small" />
-            </TableRow>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/dark_blue"
-                android:layout_marginBottom="8dp"
+                android:background="@color/red_polar"
+                android:layout_marginBottom="@dimen/large"
                 android:layout_marginLeft="15dp"/>
             <TableRow
                 android:layout_width="match_parent"
@@ -178,63 +156,80 @@
                 <ImageView
                     android:layout_width="5dp"
                     android:layout_height="5dp"
-                    android:src="@drawable/circle_blue"
+                    android:src="@drawable/circle_red"
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"/>
                 <TextView
-                    android:id="@+id/nama_atlit_5"
+                    android:id="@+id/nama_atlit_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/small"
                     android:fontFamily="@font/montserrat_light"
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_small" />
             </TableRow>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/red_polar"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="15dp"/>
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Menu"
-        android:textColor="@color/black"
-        android:layout_marginTop="30dp"
-        android:textSize="20dp"
-        android:layout_marginLeft="20dp"
-        android:fontFamily="@font/montserrat_bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lyt_daftar_atlit" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" >
-        <LinearLayout
-            android:id="@+id/menu_monitoring_pelatihan"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="20dp"
-            android:gravity="center" >
-            <ImageView
-                android:id="@+id/iv_resume"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_clipboard" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="Monitoring Pelatihan"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-        </LinearLayout>
+                android:gravity="center"
+                android:layout_marginTop="@dimen/large"
+                android:text="Klik nama atlit untuk melihat hasil latihan"
+                android:textSize="@dimen/font_verysmall"/>
 
+
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView6"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Menu"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:textSize="20dp"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:fontFamily="@font/montserrat_bold"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/lyt_daftar_atlit" />-->
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="20dp"-->
+<!--        app:cardCornerRadius="20dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView6" >-->
+<!--        <LinearLayout-->
+<!--            android:id="@+id/menu_monitoring_pelatihan"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical"-->
+<!--            android:padding="20dp"-->
+<!--            android:gravity="center" >-->
+<!--            <ImageView-->
+<!--                android:id="@+id/iv_resume"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:src="@drawable/ic_clipboard" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:fontFamily="@font/montserrat_medium"-->
+<!--                android:text="Monitoring Pelatihan"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="15dp" />-->
+<!--        </LinearLayout>-->
+
+<!--    </androidx.cardview.widget.CardView>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

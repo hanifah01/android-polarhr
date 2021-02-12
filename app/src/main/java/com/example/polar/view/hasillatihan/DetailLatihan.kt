@@ -3,12 +3,16 @@ package com.example.polar.view.hasillatihan
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import com.example.polar.R
 import com.example.polar.model.DataLatihan
 import com.example.polar.support.KEY_DATA
 import kotlinx.android.synthetic.main.activity_detail_latihan.*
 import kotlinx.android.synthetic.main.activity_latihan.*
 import maes.tech.intentanim.CustomIntent
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 class DetailLatihan : AppCompatActivity() {
 
@@ -23,7 +27,7 @@ class DetailLatihan : AppCompatActivity() {
     private fun setupView() {
         setSupportActionBar(toolbar_detail_latihan)
         if (supportActionBar != null) {
-            supportActionBar!!.setTitle("Hasil Latihan")
+            supportActionBar!!.title = "Hasil Latihan"
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             supportActionBar!!.setDisplayShowHomeEnabled(true)
         }
@@ -55,5 +59,26 @@ class DetailLatihan : AppCompatActivity() {
         detail_durasi_aktif.text = "${data.durasi_aktif} menit"
         detail_durasi_istirahat.text = "${data.durasi_istirahat} menit"
         detail_durasi_total.text = "${data.durasi_total} menit"
+    }
+
+    @Suppress("DEPRECATION")
+    private fun saveArrayList(arrayList: java.util.ArrayList<String>, filename: String) {
+        try {
+            val sdcard: File = Environment.getExternalStorageDirectory()
+            val dir = File(sdcard.absolutePath + "/Iod")
+            if (!dir.exists()){
+                dir.mkdir()
+            }
+            val file = File(dir, "${filename}.txt")
+            var os: FileOutputStream? = null
+            os = FileOutputStream(file)
+            for (i in 0 until arrayList.size){
+                os.write(arrayList[i].toByteArray())
+                os.write("\n".toByteArray())
+            }
+            os.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
 }

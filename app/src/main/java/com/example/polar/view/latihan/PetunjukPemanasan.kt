@@ -23,6 +23,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.polar.R
 import com.example.polar.R.color.grey
+import com.example.polar.support.KEY_HRMAX
+import com.example.polar.support.KEY_HRR
 import com.example.polar.support.dialog.DialogLoading
 import com.example.polar.view.Router
 import com.google.firebase.database.FirebaseDatabase
@@ -46,7 +48,7 @@ class PetunjukPemanasan : AppCompatActivity() {
 
     private val TAG = PetunjukPemanasan::class.java.simpleName
     lateinit var api: PolarBleApi
-    private var data = ""
+    private var hrMax = ""
     var DEVICE_ID = "218DDA23" // or bt address like F5:A7:B8:EF:7A:D1 //
     var broadcastDisposable: Disposable? = null
     var ecgDisposable: Disposable? = null
@@ -75,7 +77,8 @@ class PetunjukPemanasan : AppCompatActivity() {
             btn_lanjut.isEnabled = true
             btn_mulai.isEnabled = true
             btn_mulai.background = ContextCompat.getDrawable(applicationContext, R.drawable.bg_red_button)
-            router.toLatihan(this@PetunjukPemanasan, txt_bpm_rt.text.toString(), data)
+            bAdapter.cancelDiscovery()
+            router.toLatihan(this@PetunjukPemanasan, hrMax, txt_bpm_rt.text.toString())
         }
     }
 
@@ -92,6 +95,7 @@ class PetunjukPemanasan : AppCompatActivity() {
                 ), 1
             )
         }
+        bAdapter.cancelDiscovery()
         setupView()
     }
 
@@ -171,15 +175,15 @@ class PetunjukPemanasan : AppCompatActivity() {
         })
 
 
-        data = intent?.extras?.getString("hrr")!!
+        hrMax = intent?.extras?.getString(KEY_HRMAX)!!
 
         btn_mulai.setOnClickListener {
-            timer.start()
-            /*if (txt_device.text.toString().equals("Device")){
+//            timer.start()
+            if (txt_device.text.toString().equals("Device")){
                 Toast.makeText(this, "Koneksikan dengan perangkat terlebih dahulu!", Toast.LENGTH_SHORT).show()
             }else{
                 timer.start()
-            }*/
+            }
         }
 
         setSupportActionBar(toolbar_petunjukpemanasan)
@@ -190,7 +194,8 @@ class PetunjukPemanasan : AppCompatActivity() {
         }
 
         btn_lanjut.setOnClickListener{
-            router.toLatihan(this, txt_bpm_rt.text.toString(), data)
+            router.toLatihan(this, txt_bpm_rt.text.toString(), hrMax)
+            bAdapter.cancelDiscovery()
         }
 
 //        if(!bAdapter.isEnabled){
@@ -203,6 +208,8 @@ class PetunjukPemanasan : AppCompatActivity() {
 
     private fun connect(){
         try {
+            dialogLoading.show(true)
+            bAdapter.startDiscovery()
             api.connectToDevice(DEVICE_ID)
             broadcastDisposable =
                 if (broadcastDisposable == null) {
@@ -252,12 +259,12 @@ class PetunjukPemanasan : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        CustomIntent.customType(this, "left-to-right")
+        CustomIntent.customType(this, "right-to-left")
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
-        CustomIntent.customType(this, "left-to-right")
+        CustomIntent.customType(this, "right-to-left")
         return true
     }
 
@@ -309,5 +316,6 @@ class PetunjukPemanasan : AppCompatActivity() {
         button.isEnabled = false
         button.background = getDrawable(grey)
     }
+
 
 }

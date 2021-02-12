@@ -6,6 +6,8 @@ const val REGISTER_BERHASIL =  "Register Berhasil"
 const val REGISTER_GAGAL =  "Register Gagal"
 
 const val KEY_DATA = "data"
+const val KEY_HRR = "hrr"
+const val KEY_HRMAX = "hrmax"
 
 const val PATH_PROFILE = "profile"
 const val PATH_LATIHAN = "latihan"

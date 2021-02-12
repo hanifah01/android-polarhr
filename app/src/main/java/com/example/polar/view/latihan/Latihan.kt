@@ -20,6 +20,8 @@ import com.example.polar.R
 import com.example.polar.R.drawable
 import com.example.polar.model.DataLatihan
 import com.example.polar.support.KEY_DATA
+import com.example.polar.support.KEY_HRMAX
+import com.example.polar.support.KEY_HRR
 import com.example.polar.support.dialog.DialogLoading
 import com.example.polar.support.mtformat
 import com.example.polar.view.Router
@@ -60,7 +62,7 @@ class Latihan : AppCompatActivity() {
 
     var totalSeconds = 28800000
 
-    val timerAll= object: CountDownTimer(28800000, 1000) {
+    private val timerAll= object: CountDownTimer(28800000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             val waktu = String.format("%02d:%02d:%02d", ((totalSeconds - millisUntilFinished)/(1000*60*60)) % 24, ((totalSeconds - millisUntilFinished)/(1000*60))%60, ((totalSeconds - millisUntilFinished)/1000)%60 )
             txt_total_durasi.text = waktu
@@ -73,9 +75,9 @@ class Latihan : AppCompatActivity() {
                  val waktu1 = String.format("%02d:%02d:%02d", (timeBuffLat/(1000*60*60)) % 24, (timeBuffLat/(1000*60))%60, (timeBuffLat/1000)%60 )
                 txt_durasi_latihan.text = waktu1
             }
-            Log.d("cek", timeBuffBreak.toString() + " , " + timeBuffLat.toString())
+//            Log.d("cek", timeBuffBreak.toString() + " , " + timeBuffLat.toString())
             arrayHrData.add(txt_bpm.text.toString().toInt())
-            arrayHrData2.add(txt_bpm.text.toString()+"-")
+            arrayHrData2.add(txt_bpm.text.toString())
         }
 
         override fun onFinish() {
@@ -96,11 +98,14 @@ class Latihan : AppCompatActivity() {
                 ), 1
             )
         }
+
+        bAdapter.cancelDiscovery()
         setupView()
     }
 
     private fun setupView() {
-        val hrr = intent?.extras?.getString(KEY_DATA)!!
+        val hrr = intent?.extras?.getString(KEY_HRR)!!
+        val hrMax = intent?.extras?.getString(KEY_HRMAX)!!
         txt_batas.text = hrr
         api = PolarBleApiDefaultImpl.defaultImplementation(this, PolarBleApi.ALL_FEATURES)
         api.setPolarFilter(false)
@@ -176,7 +181,6 @@ class Latihan : AppCompatActivity() {
             }
         })
 
-        val hrMax = intent?.extras?.getString("hrr")!!
         btn_mulai.setOnClickListener {
             if (btn_mulai.text.toString().equals("Mulai")){
                 if (txt_device.text.toString().equals("Device")){
@@ -212,6 +216,7 @@ class Latihan : AppCompatActivity() {
                     peak_hrp = Collections.max(arrayHrData).toString()
                     heart_rate_max = hrMax
                 }
+                bAdapter.cancelDiscovery()
                 router.toHasil(this, hasilData, arrayHrData2)
             }
         }
@@ -235,8 +240,9 @@ class Latihan : AppCompatActivity() {
                 peak_hrp = Collections.max(arrayHrData).toString()
                 heart_rate_max = hrMax
             }
+//            btn_mulai.setBackgroundResource(R.drawable.bg_red_button)
+            bAdapter.cancelDiscovery()
             router.toHasil(this, hasilData, arrayHrData2)
-            btn_mulai.setBackgroundResource(R.drawable.bg_red_button)
         }
 
         setSupportActionBar(toolbar_latihan)
@@ -257,6 +263,8 @@ class Latihan : AppCompatActivity() {
 
     private fun connect(){
         try {
+            dialogLoading.show(true)
+            bAdapter.startDiscovery()
             api.connectToDevice(DEVICE_ID)
             broadcastDisposable =
                 if (broadcastDisposable == null) {
@@ -280,16 +288,17 @@ class Latihan : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        CustomIntent.customType(this, "left-to-right")
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
-        CustomIntent.customType(this, "left-to-right")
+        CustomIntent.customType(this, "right-to-left")
         return true
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        CustomIntent.customType(this, "right-to-left")
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == 1) {
             Log.d(TAG, "bt ready")
@@ -365,4 +374,6 @@ class Latihan : AppCompatActivity() {
         button.isEnabled = true
         button.background = getDrawable(drawable.bg_red_button)
     }
+
+
 }

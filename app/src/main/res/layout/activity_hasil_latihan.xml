@@ -93,8 +93,8 @@
             android:gravity="center"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="25dp" />
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -142,129 +142,153 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"
                     android:layout_marginLeft="30dp">
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:weightSum="3"
-                        android:padding="15dp">
-                        <TableRow
+                        android:layout_height="wrap_content">
+
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp">
-                            <TextView
-                                android:id="@+id/txt_resume_tanggal"
+                            android:orientation="vertical"
+                            android:weightSum="3"
+                            android:padding="15dp">
+                            <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Resume latihan -"
-                                android:textSize="15sp"
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/montserrat_bold"/>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp">
-                            <TextView
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="Durasi Total : "
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/montserrat_light"/>
-                            <TextView
-                                android:id="@+id/hasil_total_durasi"
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/montserrat_medium"/>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp">
-                            <TextView
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="Durasi Istirahat : "
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/montserrat_light"/>
-                            <TextView
-                                android:id="@+id/hasil_total_isirahat"
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/montserrat_medium"/>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp">
-                            <TextView
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="Durasi Aktif : "
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/montserrat_light"/>
-                            <TextView
-                                android:id="@+id/hasil_total_aktif"
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/montserrat_medium"/>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp">
-                            <TextView
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="Kualitas : "
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/montserrat_light"/>
-                            <TextView
-                                android:id="@+id/hasil_total_kualitas"
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/montserrat_medium"/>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp">
-                            <TextView
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="IOD : "
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/montserrat_light"/>
-                            <TextView
-                                android:id="@+id/hasil_total_iod"
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/montserrat_medium"/>
-                        </TableRow>
+                                android:layout_marginBottom="5dp">
+                                <TextView
+                                    android:id="@+id/txt_resume_tanggal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Resume latihan -"
+                                    android:textSize="15sp"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/montserrat_bold"/>
 
-                    </LinearLayout>
+
+                            </RelativeLayout>
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp">
+                                <TextView
+                                    android:layout_weight="1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Durasi Total : "
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/montserrat_light"/>
+                                <TextView
+                                    android:id="@+id/hasil_total_durasi"
+                                    android:layout_weight="1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/montserrat_medium"/>
+                            </TableRow>
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp">
+                                <TextView
+                                    android:layout_weight="1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Durasi Istirahat : "
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/montserrat_light"/>
+                                <TextView
+                                    android:id="@+id/hasil_total_isirahat"
+                                    android:layout_weight="1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/montserrat_medium"/>
+                            </TableRow>
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp">
+                                <TextView
+                                    android:layout_weight="1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Durasi Aktif : "
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/montserrat_light"/>
+                                <TextView
+                                    android:id="@+id/hasil_total_aktif"
+                                    android:layout_weight="1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/montserrat_medium"/>
+                            </TableRow>
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp">
+                                <TextView
+                                    android:layout_weight="1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Kualitas : "
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/montserrat_light"/>
+                                <TextView
+                                    android:id="@+id/hasil_total_kualitas"
+                                    android:layout_weight="1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/montserrat_medium"/>
+                            </TableRow>
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp">
+                                <TextView
+                                    android:layout_weight="1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="IOD : "
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/montserrat_light"/>
+                                <TextView
+                                    android:id="@+id/hasil_total_iod"
+                                    android:layout_weight="1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/montserrat_medium"/>
+                            </TableRow>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:visibility="gone"
+                            android:id="@+id/img_save"
+                            android:layout_width="@dimen/xxklarge"
+                            android:layout_height="@dimen/xxklarge"
+                            android:layout_margin="@dimen/small"
+                            android:layout_alignParentEnd="true"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:src="@drawable/ic_download"
+                            android:padding="@dimen/medium"/>
+
+                    </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
+
+
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardview1"
                     android:layout_width="match_parent"
@@ -296,33 +320,34 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="1.2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Dosis Pelatihan : "
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_light"/>
                             <TextView
-                                android:id="@+id/tv_hasil_durasi1"
-                                android:layout_weight="1"
+                                android:id="@+id/tv_hasil_dosis1"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
-                                android:id="@+id/tv_hasil_dosis1"
-                                android:layout_weight="1"
+                                android:id="@+id/tv_hasil_durasi1"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
+
                         </TableRow>
                         <TableRow
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="1.2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Kualitas : "
@@ -330,14 +355,14 @@
                                 android:fontFamily="@font/montserrat_light"/>
                             <TextView
                                 android:id="@+id/tv_hasil_kualitas1"
-                                android:layout_weight="1"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Klik untuk detail"
@@ -380,22 +405,22 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="1.2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Dosis Pelatihan : "
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_light"/>
                             <TextView
-                                android:id="@+id/tv_hasil_durasi2"
-                                android:layout_weight="1"
+                                android:id="@+id/tv_hasil_dosis2"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
-                                android:id="@+id/tv_hasil_dosis2"
-                                android:layout_weight="1"
+                                android:id="@+id/tv_hasil_durasi2"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
@@ -406,7 +431,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="1.2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Kualitas : "
@@ -414,14 +439,14 @@
                                 android:fontFamily="@font/montserrat_light"/>
                             <TextView
                                 android:id="@+id/tv_hasil_kualitas2"
-                                android:layout_weight="1"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Klik untuk detail"
@@ -464,22 +489,22 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="1.2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Dosis Pelatihan : "
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_light"/>
                             <TextView
-                                android:id="@+id/tv_hasil_durasi3"
-                                android:layout_weight="1"
+                                android:id="@+id/tv_hasil_dosis3"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
-                                android:id="@+id/tv_hasil_dosis3"
-                                android:layout_weight="1"
+                                android:id="@+id/tv_hasil_durasi3"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
@@ -490,7 +515,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="1.2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Kualitas : "
@@ -498,14 +523,14 @@
                                 android:fontFamily="@font/montserrat_light"/>
                             <TextView
                                 android:id="@+id/tv_hasil_kualitas3"
-                                android:layout_weight="1"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Klik untuk detail"
@@ -548,22 +573,22 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="1.2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Dosis Pelatihan : "
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_light"/>
                             <TextView
-                                android:id="@+id/tv_hasil_durasi4"
-                                android:layout_weight="1"
+                                android:id="@+id/tv_hasil_dosis4"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
-                                android:id="@+id/tv_hasil_dosis4"
-                                android:layout_weight="1"
+                                android:id="@+id/tv_hasil_durasi4"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
@@ -574,7 +599,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="1.2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Kualitas : "
@@ -582,14 +607,14 @@
                                 android:fontFamily="@font/montserrat_light"/>
                             <TextView
                                 android:id="@+id/tv_hasil_kualitas4"
-                                android:layout_weight="1"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Klik untuk detail"
@@ -633,22 +658,22 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="1.2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Dosis Pelatihan : "
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_light"/>
                             <TextView
-                                android:id="@+id/tv_hasil_durasi5"
-                                android:layout_weight="1"
+                                android:id="@+id/tv_hasil_dosis5"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
-                                android:id="@+id/tv_hasil_dosis5"
-                                android:layout_weight="1"
+                                android:id="@+id/tv_hasil_durasi5"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
@@ -659,7 +684,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="1.2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Kualitas : "
@@ -667,14 +692,14 @@
                                 android:fontFamily="@font/montserrat_light"/>
                             <TextView
                                 android:id="@+id/tv_hasil_kualitas5"
-                                android:layout_weight="1"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/montserrat_medium"/>
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="0.9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Klik untuk detail"
